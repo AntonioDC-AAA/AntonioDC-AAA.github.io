@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; on Blog</title>
+    <link>https://AntonioDC-AAA.github.io/tags/c&#43;&#43;/</link>
+    <description>Recent content in C&#43;&#43; on Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 18 Jan 2020 18:18:08 +0800</lastBuildDate>
+    
+	<atom:link href="https://AntonioDC-AAA.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>线程池和无锁队列实现并发</title>
+      <link>https://AntonioDC-AAA.github.io/post/%E5%B9%B6%E5%8F%91/</link>
+      <pubDate>Sat, 18 Jan 2020 18:18:08 +0800</pubDate>
+      
+      <guid>https://AntonioDC-AAA.github.io/post/%E5%B9%B6%E5%8F%91/</guid>
+      <description>通过一个在项目中使用的服务器编程的例子，记录一下怎样通过线程池和原子操作实现并发编程 原始模型是：一个生产者，一个缓存队列，两个消费者，一个条件变量。 线程池模型是：线程池中的线程做生产者，分别绑定一个缓存队列，每个缓存队列绑定两个消费者 工作过程：线程池中的线程将数据写入自己绑定的队列中，当缓存到达一半时，使用条件变量唤醒两个消费者，迅速将数据消费完 缓存队列的读写指针，使用C++11的原子变量，保证两个写者之间的同步。
+#define pack_max 512*1024*1024struct myatomic { atomic_int rd; atomic_int wd: }; struct myCmd { int cmd; char buf[50]; string ip; }; //共享变量 myatomic ato_rw1{0,0}; myCmd Buffer1[pack_max]; //生产者 void creator(string ip,int fd) { char buf1[50]; read(fd,buf1,len); myCmd inbuf; //填充inbuf 	//.</description>
+    </item>
+    
+  </channel>
+</rss>

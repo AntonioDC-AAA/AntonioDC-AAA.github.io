@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Blog</title>
+    <link>https://AntonioDC-AAA.github.io/tags/git/</link>
+    <description>Recent content in git on Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Feb 2020 18:02:14 +0800</lastBuildDate>
+    
+	<atom:link href="https://AntonioDC-AAA.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git instructions</title>
+      <link>https://AntonioDC-AAA.github.io/post/git/</link>
+      <pubDate>Tue, 18 Feb 2020 18:02:14 +0800</pubDate>
+      
+      <guid>https://AntonioDC-AAA.github.io/post/git/</guid>
+      <description>Git 集中式版本控制系统与分布式版本控制系统 集中式版本控制系统
+​	有一个包含文件所有修订版本的单一服务器，多个客户端可以从这个中心位置检索出文件
+优点：所有人都可以在一定程度上掌握其他人在项目中做了什么，管理员可以精细的掌控每个人的权限，
+缺点：集中式服务器带来的单点故障
+分布式版本控制系统
+​	客户端并非仅仅是检出文件的最新快照，而是对代码仓库进行完整的镜像，不管是那个服务器出现故障，任何一个客户端都可以使用自己的本地镜像来恢复服务器，每一次检出操作实际上都是对数据的一次完整备份。</description>
+    </item>
+    
+  </channel>
+</rss>

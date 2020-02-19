@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.65.0-DEV" />
+
+  <title>sorts &middot; Blog</title>
+
+  <meta name="description" content="" />
+
+  
+  <meta property="og:locale" content="en-us"/>
+
+  
+  <meta property="og:image" content="https://AntonioDC-AAA.github.ioimages/name.jpg">
+
+  
+  <meta property="og:site_name" content="Blog"/>
+  <meta property="og:title" content="sorts"/>
+  <meta property="og:description" content="冒泡排序 每次外循环都能确定数组的最大值
+func BubbleSort(nums []int){ if nums == nil || len(nums) &lt; 2{ return } for i:=len(nums)-1;i&gt;=0;i--{ for j:=0;j&lt;i;j&#43;&#43;{ if nums[j] &gt; nums[j&#43;1]{ nums[j],nums[j&#43;1] = nums[j&#43;1],nums[j] } } } fmt."/>
+  <meta property="og:url" content="https://AntonioDC-AAA.github.io/post/sorts/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2019-05-18T17:40:00&#43;0800"/>
+  <meta property="article:modified_time" content="2019-05-18T17:40:00&#43;0800"/>
+  <meta property="article:author" content="Antonio.D.C">
+  
+  
+  
+
+  <script type="application/ld+json">
+  {
+    "@context" : "http://schema.org",
+    "@type" : "Blog",
+    "name": "Blog",
+    "url" : "https://AntonioDC-AAA.github.io",
+    "image": "https://AntonioDC-AAA.github.ioimages/name.jpg",
+    "description": "You only live once !"
+  }
+  </script>
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "name": "sorts",
+    "headline": "sorts",
+    "datePublished": "2019-05-18T17:40:00\x2b0800",
+    "dateModified": "2019-05-18T17:40:00\x2b0800",
+    "author": {
+      "@type": "Person",
+      "name": "Antonio.D.C",
+      "url": "https://AntonioDC-AAA.github.io"
+    },
+    "image": "https://AntonioDC-AAA.github.ioimages/name.jpg",
+    "url": "https://AntonioDC-AAA.github.io/post/sorts/",
+    "description": "冒泡排序 每次外循环都能确定数组的最大值\nfunc BubbleSort(nums []int){ if nums == nil || len(nums) \x26lt; 2{ return } for i:=len(nums)-1;i\x26gt;=0;i--{ for j:=0;j\x26lt;i;j\x2b\x2b{ if nums[j] \x26gt; nums[j\x2b1]{ nums[j],nums[j\x2b1] = nums[j\x2b1],nums[j] } } } fmt."
+  }
+  </script>
+  
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://AntonioDC-AAA.github.iocss/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://AntonioDC-AAA.github.iocss/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://AntonioDC-AAA.github.iocss/hyde.css">
+
+  
+<style type="text/css">
+  .sidebar {
+    background-color: #fc21803;
+  }
+
+  .read-more-link a {
+    border-color: #fc21803;
+  }
+
+  footer a,
+  .content a,
+  .related-posts li a:hover {
+    color: #fc21803;
+  }
+</style>
+
+
+
+  <link type="text/css" rel="stylesheet" href="https://AntonioDC-AAA.github.iocss/blog.css">
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+        
+        <div class="author-image">
+          <img src="https://AntonioDC-AAA.github.ioimages/name.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+        </div>
+        
+      
+
+      <h1>Blog</h1>
+
+      
+      <p class="lead">You only live once !</p>
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://AntonioDC-AAA.github.io">Home</a>
+        </li>
+        <li>
+          <a href="/post/"> Posts </a>
+        </li><li>
+          <a href="/tags/"> Tags </a>
+        </li><li>
+          <a href="/about/"> About </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="https://github.com/" rel="me" title="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+      <a href="#" rel="me" title="Twitter">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1>sorts</h1>
+
+  <div class="post-date">
+    <time datetime="2019-05-18T17:40:00&#43;0800">May 18, 2019</time> · 3 min read
+  </div>
+
+  <h2 id="冒泡排序">冒泡排序</h2>
+<p>每次外循环都能确定数组的最大值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">BubbleSort</span>(<span style="color:#a6e22e">nums</span> []<span style="color:#66d9ef">int</span>){
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nums</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> len(<span style="color:#a6e22e">nums</span>) &lt; <span style="color:#ae81ff">2</span>{
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">:=</span>len(<span style="color:#a6e22e">nums</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">--</span>{
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">j</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">0</span>;<span style="color:#a6e22e">j</span>&lt;<span style="color:#a6e22e">i</span>;<span style="color:#a6e22e">j</span><span style="color:#f92672">++</span>{
+			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span>] &gt; <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]{
+				<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span>],<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>],<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span>]
+			}
+		}
+	}
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">nums</span>)
+}
+</code></pre></div><h2 id="选择排序">选择排序</h2>
+<p>每次外循环确定数组的最小值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">SelectSort</span>(<span style="color:#a6e22e">nums</span> []<span style="color:#66d9ef">int</span>){
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nums</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> len(<span style="color:#a6e22e">nums</span>) &lt; <span style="color:#ae81ff">2</span>{
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">0</span>;<span style="color:#a6e22e">i</span>&lt;len(<span style="color:#a6e22e">nums</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>{
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">j</span><span style="color:#f92672">:=</span><span style="color:#a6e22e">i</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;<span style="color:#a6e22e">j</span>&lt;len(<span style="color:#a6e22e">nums</span>);<span style="color:#a6e22e">j</span><span style="color:#f92672">++</span>{
+			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">i</span>] &gt; <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span>]{
+				<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">i</span>],<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span>] = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span>],<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">i</span>]
+			}
+		}
+	}
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">nums</span>)
+}
+</code></pre></div><h2 id="插入排序">插入排序</h2>
+<p>类似于扑克牌的插入，与数据状况有关，最大为o(N^2) 最小为o(N)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">InsertSort</span>(<span style="color:#a6e22e">nums</span> []<span style="color:#66d9ef">int</span>){
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">:=</span><span style="color:#ae81ff">1</span>;<span style="color:#a6e22e">i</span>&lt;len(<span style="color:#a6e22e">nums</span>);<span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>{
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">j</span><span style="color:#f92672">:=</span><span style="color:#a6e22e">i</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;<span style="color:#a6e22e">j</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>;<span style="color:#a6e22e">j</span><span style="color:#f92672">--</span>{
+			<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span>] &gt; <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]{
+				<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>],<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span>] = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span>],<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">j</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]
+			}
+		}
+	}
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">nums</span>)
+}
+</code></pre></div><h2 id="递归行为">递归行为</h2>
+<p>将函数压入系统栈，</p>
+<p>任何递归行为都可以转换为非递归</p>
+<p>T（N） = aT(n/b) + o(n^ d)</p>
+<p>log(b,a)  &gt; a -&gt;复杂度为O(N^ log(b,a))</p>
+<p>log(b,a)  = d -&gt; 复杂度为O(N^d * longN)</p>
+<p>log(b,a)  &lt; d -&gt; 复杂度为O(N^d)</p>
+<h2 id="归并排序">归并排序</h2>
+<p>左侧排序，右侧排序</p>
+<p>准备一个数组，用外排序</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">MergeSort</span>(<span style="color:#a6e22e">nums</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">left</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">right</span> <span style="color:#66d9ef">int</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">right</span> {
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#a6e22e">mid</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">left</span> <span style="color:#f92672">+</span> (<span style="color:#a6e22e">right</span><span style="color:#f92672">-</span><span style="color:#a6e22e">left</span>)<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+	<span style="color:#a6e22e">MergeSort</span>(<span style="color:#a6e22e">nums</span>, <span style="color:#a6e22e">left</span>, <span style="color:#a6e22e">mid</span>)			
+	<span style="color:#a6e22e">MergeSort</span>(<span style="color:#a6e22e">nums</span>, <span style="color:#a6e22e">mid</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">right</span>)
+	<span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">nums</span>, <span style="color:#a6e22e">left</span>, <span style="color:#a6e22e">right</span>, <span style="color:#a6e22e">mid</span>)
+}
+<span style="color:#75715e">//外排序
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">merge</span>(<span style="color:#a6e22e">nums</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">left</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">right</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">mid</span> <span style="color:#66d9ef">int</span>) {
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ans</span> []<span style="color:#66d9ef">int</span>
+	<span style="color:#a6e22e">ans</span> = make([]<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">right</span><span style="color:#f92672">-</span><span style="color:#a6e22e">left</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+	<span style="color:#a6e22e">p1</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+	<span style="color:#a6e22e">p2</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mid</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+	<span style="color:#a6e22e">p3</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">left</span>
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;the len is &#34;</span>, len(<span style="color:#a6e22e">ans</span>))
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">p3</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">mid</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">p2</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">right</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p3</span>] &lt; <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p2</span>] {
+			<span style="color:#a6e22e">ans</span>[<span style="color:#a6e22e">p1</span>] = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p3</span>]
+			<span style="color:#a6e22e">p3</span><span style="color:#f92672">++</span>
+			<span style="color:#a6e22e">p1</span><span style="color:#f92672">++</span>
+		} <span style="color:#66d9ef">else</span> {
+			<span style="color:#a6e22e">ans</span>[<span style="color:#a6e22e">p1</span>] = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p2</span>]
+			<span style="color:#a6e22e">p2</span><span style="color:#f92672">++</span>
+			<span style="color:#a6e22e">p1</span><span style="color:#f92672">++</span>
+		}
+	}
+
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">p3</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">mid</span> {
+		<span style="color:#a6e22e">ans</span>[<span style="color:#a6e22e">p1</span>] = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p3</span>]
+		<span style="color:#a6e22e">p3</span><span style="color:#f92672">++</span>
+		<span style="color:#a6e22e">p1</span><span style="color:#f92672">++</span>
+	}
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">p2</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">right</span> {
+		<span style="color:#a6e22e">ans</span>[<span style="color:#a6e22e">p1</span>] = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p2</span>]
+		<span style="color:#a6e22e">p2</span><span style="color:#f92672">++</span>
+		<span style="color:#a6e22e">p1</span><span style="color:#f92672">++</span>
+	}
+
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; len(<span style="color:#a6e22e">ans</span>); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">left</span><span style="color:#f92672">+</span><span style="color:#a6e22e">i</span>] = <span style="color:#a6e22e">ans</span>[<span style="color:#a6e22e">i</span>]
+	}
+}
+
+</code></pre></div><h2 id="快速排序">快速排序</h2>
+<h3 id="问题1">问题1</h3>
+<p>给定一个数组arr，和一个数num， 请把小于等于num的数放在数组的左边，大于num的数放在数组的右边</p>
+<h3 id="荷兰国旗问题">荷兰国旗问题</h3>
+<p>给定一个数组arr，和一个数num，请把小于num的数放在数组的左边，等于num的数字放在数组的中间，大于num的数放在数组的右边</p>
+<p><strong>利用双指针法解决</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">//荷兰国旗的先导   本质是双指针
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">padding</span>(<span style="color:#a6e22e">nums</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">target</span> <span style="color:#66d9ef">int</span>) {
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">t</span> <span style="color:#66d9ef">int</span>
+
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> &lt; len(<span style="color:#a6e22e">nums</span>); <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">i</span>] &lt; <span style="color:#a6e22e">target</span> {
+			<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">t</span>], <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">i</span>] = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">i</span>], <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">t</span>]
+			<span style="color:#a6e22e">t</span><span style="color:#f92672">++</span>
+		}
+	}
+
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">nums</span>)
+}
+
+<span style="color:#75715e">//荷兰国旗
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">flagHolland</span>(<span style="color:#a6e22e">nums</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">target</span> <span style="color:#66d9ef">int</span>) {
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">loc</span> <span style="color:#66d9ef">int</span>
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">more</span> <span style="color:#66d9ef">int</span> = len(<span style="color:#a6e22e">nums</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">less</span> <span style="color:#66d9ef">int</span>
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">loc</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">more</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">loc</span>] &lt; <span style="color:#a6e22e">target</span> {
+			<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">loc</span>], <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">less</span>] = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">less</span>], <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">loc</span>]
+			<span style="color:#a6e22e">loc</span><span style="color:#f92672">++</span>
+			<span style="color:#a6e22e">less</span><span style="color:#f92672">++</span>
+		} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">loc</span>] &gt; <span style="color:#a6e22e">target</span> {
+			<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">loc</span>], <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">more</span>] = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">more</span>], <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">loc</span>]
+			<span style="color:#a6e22e">more</span><span style="color:#f92672">--</span>
+		} <span style="color:#66d9ef">else</span> {
+			<span style="color:#a6e22e">loc</span><span style="color:#f92672">++</span>
+		}
+	}
+}
+</code></pre></div><p>经典快排</p>
+<p>一个数组最后一个元素为x</p>
+<p>把小于等于x的放左边，大于x的放在右边</p>
+<p>递归这个过程</p>
+<p>修改后的快排</p>
+<p>把小于x的放左边，大于x的放在右边，等于x的放在中间（荷兰国旗思想）</p>
+<p>这样数据量到达一定程度后会变成冒泡排序</p>
+<p>每次都是根据后面的元素进行快排的，加入随机因子，每次都是选择随机下标</p>
+<p>在工程上不允许递归函数</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">QuickSort</span>(<span style="color:#a6e22e">nums</span> []<span style="color:#66d9ef">int</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nums</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">||</span> len(<span style="color:#a6e22e">nums</span>) &lt; <span style="color:#ae81ff">2</span> {
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#a6e22e">quickSort</span>(<span style="color:#a6e22e">nums</span>, <span style="color:#ae81ff">0</span>, len(<span style="color:#a6e22e">nums</span>)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">quickSort</span>(<span style="color:#a6e22e">nums</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">start</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">end</span> <span style="color:#66d9ef">int</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">start</span> &lt; <span style="color:#a6e22e">end</span> {
+		<span style="color:#a6e22e">se</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">quickSortGetStartEnd</span>(<span style="color:#a6e22e">nums</span>, <span style="color:#a6e22e">start</span>, <span style="color:#a6e22e">end</span>)
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">se</span>)
+		<span style="color:#a6e22e">quickSort</span>(<span style="color:#a6e22e">nums</span>, <span style="color:#a6e22e">start</span>, <span style="color:#a6e22e">se</span>[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+		<span style="color:#a6e22e">quickSort</span>(<span style="color:#a6e22e">nums</span>, <span style="color:#a6e22e">se</span>[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">end</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+	}
+}
+
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">quickSortGetStartEnd</span>(<span style="color:#a6e22e">nums</span> []<span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">start</span> <span style="color:#66d9ef">int</span>, <span style="color:#a6e22e">end</span> <span style="color:#66d9ef">int</span>) []<span style="color:#66d9ef">int</span> {
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">p</span> <span style="color:#66d9ef">int</span>
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">target</span> <span style="color:#66d9ef">int</span> = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">end</span>]
+
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">p</span> <span style="color:#f92672">&lt;=</span> <span style="color:#a6e22e">end</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p</span>], <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">end</span>])
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p</span>] &lt; <span style="color:#a6e22e">target</span> { <span style="color:#75715e">//这个地方不能是nums[end]，因为每次end的时候都会变化
+</span><span style="color:#75715e"></span>			<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p</span>], <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">start</span>] = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">start</span>], <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p</span>]
+			<span style="color:#a6e22e">p</span><span style="color:#f92672">++</span>
+			<span style="color:#a6e22e">start</span><span style="color:#f92672">++</span>
+		} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p</span>] &gt; <span style="color:#a6e22e">target</span> {
+			<span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p</span>], <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">end</span>] = <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">end</span>], <span style="color:#a6e22e">nums</span>[<span style="color:#a6e22e">p</span>]
+			<span style="color:#a6e22e">end</span><span style="color:#f92672">--</span>
+		} <span style="color:#66d9ef">else</span> {
+			<span style="color:#a6e22e">p</span><span style="color:#f92672">++</span>
+		}
+	}
+	<span style="color:#66d9ef">return</span> []<span style="color:#66d9ef">int</span>{<span style="color:#a6e22e">start</span>, <span style="color:#a6e22e">end</span>}
+}
+
+</code></pre></div><h2 id="堆排序">堆排序</h2>
+<p>堆结构 &ndash;&gt; 完全二叉树</p>
+<p>满二叉树属于完全二叉树书</p>
+<p>堆结构可以用数组实现</p>
+<p>左节点 2*i+1</p>
+<p>右节点 2*i+2</p>
+<p>建立一个堆结构的复杂度为O(N)</p>
+<p>log1+log2+log3+&hellip;+logN-1 趋向于O（N）</p>
+<p>应用：获取流中的中位数，两个堆结构</p>
+<p>堆 几乎能 搞定所有的贪心</p>
+<p>堆叫优先级队列</p>
+<p>减堆的操作，只需要把堆顶与最后一个数交换</p>
+<h2 id="稳定性">*稳定性</h2>
+<p>冒泡排序为稳定排序</p>
+<p>插入排序为稳定排序</p>
+<p>选择排序为不稳定排序</p>
+<p>归并排序为稳定排序</p>
+<p>快速排序为不稳定排序</p>
+<p>堆排序为不稳定排序</p>
+<h2 id="工程中的排序">工程中的排序</h2>
+<p>如果数组长度很短，用插入排序</p>
+<p>因为常数量低</p>
+<p>如果数组中为基础数据类型，用快速排序</p>
+<p>基础值无差异，所以不在乎稳定性</p>
+<p>如果数组中为自定义数据类型，用归并排序</p>
+<h2 id="增强">增强</h2>
+<h3 id="归并排序-1">归并排序</h3>
+<p>复杂度可以变成o(1)</p>
+<p>归并排序 内部缓存法</p>
+<h3 id="快速排序-1">快速排序</h3>
+<p>01 stable sort</p>
+<p>有一道题目，是奇数放在数组左边，偶数放在数组的右边，还要求原始的相对次序保持不变，碰到这个问题，直接怼面试官，面试官非良人</p>
+<h2 id="比较器">比较器</h2>
+<p>C++中重载 比较号，就是比较器</p>
+<p>优先级队列 是堆</p>
+<h2 id="桶排序计数排序基数排序的介绍">桶排序、计数排序、基数排序的介绍</h2>
+<p>1.非基于比较的排序，与被排序的样本的实际数据状况很有关系，所以实际中并不经常使用</p>
+<p>2.时间复杂度为O（N），额外空间复杂度O（N）</p>
+<p>3.稳定的排序</p>
+<p>桶排序 是逻辑概念，桶排序又实现了计数排序和基数排序</p>
+<p>计数排序</p>
+<p>遍历元素，统计元素的次数</p>
+<p>基数排序</p>
+<p>问题：</p>
+<p>给定一个数组，求如果排序之后，相邻两数的最大差值，要求时间复杂度O（N），且要求不能用非基于比较的排序</p>
+<p>如果有N个数，准备N+1个桶，求maxV ,minV</p>
+<p>剩下的桶值均分</p>
+<p>有N个数，准备N+1个桶，必有一个桶为空</p>
+
+</div>
+
+
+  </main>
+
+  <footer>
+  <div class="copyright">
+    &copy; Antonio.D.C 2020 · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+  <script src="https://AntonioDC-AAA.github.iojs/blog.js"></script>
+
+  
+</body>
+</html>
