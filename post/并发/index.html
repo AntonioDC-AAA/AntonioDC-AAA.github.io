@@ -13,14 +13,14 @@
   <meta property="og:locale" content="en-us"/>
 
   
-  <meta property="og:image" content="https://AntonioDC-AAA.github.io/images/name.jpg">
+  <meta property="og:image" content="https://antoniodc-aaa.github.io/images/name.jpg">
 
   
   <meta property="og:site_name" content="Blog"/>
   <meta property="og:title" content="线程池和无锁队列实现并发"/>
   <meta property="og:description" content="通过一个在项目中使用的服务器编程的例子，记录一下怎样通过线程池和原子操作实现并发编程 原始模型是：一个生产者，一个缓存队列，两个消费者，一个条件变量。 线程池模型是：线程池中的线程做生产者，分别绑定一个缓存队列，每个缓存队列绑定两个消费者 工作过程：线程池中的线程将数据写入自己绑定的队列中，当缓存到达一半时，使用条件变量唤醒两个消费者，迅速将数据消费完 缓存队列的读写指针，使用C&#43;&#43;11的原子变量，保证两个写者之间的同步。
 #define pack_max 512*1024*1024struct myatomic { atomic_int rd; atomic_int wd: }; struct myCmd { int cmd; char buf[50]; string ip; }; //共享变量 myatomic ato_rw1{0,0}; myCmd Buffer1[pack_max]; //生产者 void creator(string ip,int fd) { char buf1[50]; read(fd,buf1,len); myCmd inbuf; //填充inbuf 	//."/>
-  <meta property="og:url" content="https://AntonioDC-AAA.github.io/post/%E5%B9%B6%E5%8F%91/"/>
+  <meta property="og:url" content="https://antoniodc-aaa.github.io/post/%E5%B9%B6%E5%8F%91/"/>
   <meta property="og:type" content="article"/>
   <meta property="article:published_time" content="2020-01-18T18:18:08&#43;0800"/>
   <meta property="article:modified_time" content="2020-01-18T18:18:08&#43;0800"/>
@@ -34,8 +34,8 @@
     "@context" : "http://schema.org",
     "@type" : "Blog",
     "name": "Blog",
-    "url" : "https://AntonioDC-AAA.github.io/",
-    "image": "https://AntonioDC-AAA.github.io/images/name.jpg",
+    "url" : "https://antoniodc-aaa.github.io/",
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
     "description": "You only live once !"
   }
   </script>
@@ -52,10 +52,10 @@
     "author": {
       "@type": "Person",
       "name": "Antonio.D.C",
-      "url": "https://AntonioDC-AAA.github.io/"
+      "url": "https://antoniodc-aaa.github.io/"
     },
-    "image": "https://AntonioDC-AAA.github.io/images/name.jpg",
-    "url": "https://AntonioDC-AAA.github.io/post/%E5%B9%B6%E5%8F%91/",
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "url": "https://antoniodc-aaa.github.io/post/%E5%B9%B6%E5%8F%91/",
     "description": "通过一个在项目中使用的服务器编程的例子，记录一下怎样通过线程池和原子操作实现并发编程 原始模型是：一个生产者，一个缓存队列，两个消费者，一个条件变量。 线程池模型是：线程池中的线程做生产者，分别绑定一个缓存队列，每个缓存队列绑定两个消费者 工作过程：线程池中的线程将数据写入自己绑定的队列中，当缓存到达一半时，使用条件变量唤醒两个消费者，迅速将数据消费完 缓存队列的读写指针，使用C\x2b\x2b11的原子变量，保证两个写者之间的同步。\n#define pack_max 512*1024*1024struct myatomic { atomic_int rd; atomic_int wd: }; struct myCmd { int cmd; char buf[50]; string ip; }; \/\/共享变量 myatomic ato_rw1{0,0}; myCmd Buffer1[pack_max]; \/\/生产者 void creator(string ip,int fd) { char buf1[50]; read(fd,buf1,len); myCmd inbuf; \/\/填充inbuf \t\/\/."
   }
   </script>
@@ -64,16 +64,16 @@
 
   <link type="text/css"
         rel="stylesheet"
-        href="https://AntonioDC-AAA.github.io/css/print.css"
+        href="https://antoniodc-aaa.github.io/css/print.css"
         media="print">
 
   <link type="text/css"
         rel="stylesheet"
-        href="https://AntonioDC-AAA.github.io/css/poole.css">
+        href="https://antoniodc-aaa.github.io/css/poole.css">
 
   <link type="text/css"
         rel="stylesheet"
-        href="https://AntonioDC-AAA.github.io/css/hyde.css">
+        href="https://antoniodc-aaa.github.io/css/hyde.css">
 
   
 <style type="text/css">
@@ -94,7 +94,7 @@
 
 
 
-  <link type="text/css" rel="stylesheet" href="https://AntonioDC-AAA.github.io/css/blog.css">
+  <link type="text/css" rel="stylesheet" href="https://antoniodc-aaa.github.io/css/blog.css">
 
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
@@ -119,7 +119,7 @@
       
         
         <div class="author-image">
-          <img src="https://AntonioDC-AAA.github.io/images/name.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+          <img src="https://antoniodc-aaa.github.io/images/name.jpg" class="img-circle img-headshot center" alt="Profile Picture">
         </div>
         
       
@@ -134,7 +134,7 @@
     <nav>
       <ul class="sidebar-nav">
         <li>
-          <a href="https://AntonioDC-AAA.github.io/">Home</a>
+          <a href="https://antoniodc-aaa.github.io/">Home</a>
         </li>
         <li>
           <a href="/post/"> Posts </a>
@@ -242,7 +242,7 @@ myCmd Buffer1[pack_max];
           integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
           crossorigin="anonymous"></script>
 
-  <script src="https://AntonioDC-AAA.github.io/js/blog.js"></script>
+  <script src="https://antoniodc-aaa.github.io/js/blog.js"></script>
 
   
 </body>
