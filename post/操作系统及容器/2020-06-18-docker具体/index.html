@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.65.0-DEV" />
+
+  <title>Docker具体 &middot; Blog</title>
+
+  <meta name="description" content="" />
+
+  
+  <meta property="og:locale" content="en-us"/>
+
+  
+  <meta property="og:image" content="https://antoniodc-aaa.github.io/images/name.jpg">
+
+  
+  <meta property="og:site_name" content="Blog"/>
+  <meta property="og:title" content="Docker具体"/>
+  <meta property="og:description" content="一、环境搭建（Ubuntu 18.04） 本文前期Docker环境为：Windows10 1809 企业版 &#43; VMware Workstation 15 Pro &#43; Ubuntu 18."/>
+  <meta property="og:url" content="https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/2020-06-18-docker%E5%85%B7%E4%BD%93/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2020-06-18T18:02:14&#43;0800"/>
+  <meta property="article:modified_time" content="2020-06-18T18:02:14&#43;0800"/>
+  <meta property="article:author" content="Antonio.D.C">
+  
+  
+  
+
+  <script type="application/ld+json">
+  {
+    "@context" : "http://schema.org",
+    "@type" : "Blog",
+    "name": "Blog",
+    "url" : "https://antoniodc-aaa.github.io/",
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "description": "You only live once !"
+  }
+  </script>
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "name": "Docker具体",
+    "headline": "Docker具体",
+    "datePublished": "2020-06-18T18:02:14\x2b0800",
+    "dateModified": "2020-06-18T18:02:14\x2b0800",
+    "author": {
+      "@type": "Person",
+      "name": "Antonio.D.C",
+      "url": "https://antoniodc-aaa.github.io/"
+    },
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "url": "https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/2020-06-18-docker%E5%85%B7%E4%BD%93/",
+    "description": "一、环境搭建（Ubuntu 18.04） 本文前期Docker环境为：Windows10 1809 企业版 \x2b VMware Workstation 15 Pro \x2b Ubuntu 18."
+  }
+  </script>
+  
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/hyde.css">
+
+  
+<style type="text/css">
+  .sidebar {
+    background-color: #fc21803;
+  }
+
+  .read-more-link a {
+    border-color: #fc21803;
+  }
+
+  footer a,
+  .content a,
+  .related-posts li a:hover {
+    color: #fc21803;
+  }
+</style>
+
+
+
+  <link type="text/css" rel="stylesheet" href="https://antoniodc-aaa.github.io/css/blog.css">
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+        
+        <div class="author-image">
+          <img src="https://antoniodc-aaa.github.io/images/name.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+        </div>
+        
+      
+
+      <h1>Blog</h1>
+
+      
+      <p class="lead">You only live once !</p>
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://antoniodc-aaa.github.io/">Home</a>
+        </li>
+        <li>
+          <a href="/post/"> Posts </a>
+        </li><li>
+          <a href="/tags/"> Tags </a>
+        </li><li>
+          <a href="/about/"> About </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="https://github.com/" rel="me" title="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1>Docker具体</h1>
+
+  <div class="post-date">
+    <time datetime="2020-06-18T18:02:14&#43;0800">Jun 18, 2020</time> · 16 min read
+  </div>
+
+  <h2 id="一环境搭建ubuntu-1804">一、环境搭建（Ubuntu 18.04）</h2>
+<p>本文前期Docker环境为：Windows10 1809 企业版 + VMware Workstation 15 Pro + Ubuntu 18.04.2LTS</p>
+<p>后期Kubernetes环境为：Windows10 1809 企业版 + Vagrant 2.2.7 + VirtualBox 6.1.4 + centos7/Ubuntu 18.04 LTS</p>
+<h3 id="vagrantvirtualbox">Vagrant+VirtualBox</h3>
+<p>下载Vagrant安装包：<a href="https://www.vagrantup.com/downloads.html">官网链接</a></p>
+<p>下载VirtualBox安装包：<a href="https://www.virtualbox.org/wiki/Downloads">官网链接</a>，不过VirtualBox下载需要梯子，可以通过<a href="https://mirror.tuna.tsinghua.edu.cn/help/virtualbox/">清华镜像</a>下载</p>
+<p>vagrant的相关image可以通过<a href="https://app.vagrantup.com/boxes/search">该网址</a>进行搜索</p>
+<p>上述两个软件均傻瓜式安装即可，可以通过下面的方法利用Vagrant在VirtualBox中创建虚拟机：</p>
+<p>Powershell</p>
+<pre><code>#查看Vagrant版本
+vagrant -v
+
+#创建目录
+mkdir centos7
+
+####################创建centos 7的镜像#############################
+#初始化一个centos7的Vagrant file（类似于makefile）
+vagrant init centos/7
+#创建centos7的虚拟机，此处会下载image，时间较久
+vagrant up
+
+####################创建ubuntu的镜像#############################
+#初始化一个Ubuntu 18.04 LTS的Vagrant file
+vagrant init ubuntu/bionic64
+#创建Ubuntu 18.04 LTS的虚拟机，此处会下载image，时间较久
+vagrant up
+
+####################国内镜像源 创建ubuntu的镜像#############################
+#初始化一个Ubuntu 18.04 LTS的Vagrant file
+vagrant init ubuntu/bionic64
+#采用清华镜像 
+vagrant box add https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cloud-images/bionic/current/bionic-server-cloudimg-amd64-vagrant.box --name ubuntu/bionic64
+#创建Ubuntu 18.04 LTS的虚拟机，此处会下载image，时间较久
+vagrant up
+</code></pre><ul>
+<li>
+<p>注意：如需换成其他镜像需要自己去<a href="https://mirrors.tuna.tsinghua.edu.cn/ubuntu-cloud-images/">清华镜像</a>（有可能没有）中查找对应的<code>box</code>文件</p>
+</li>
+<li>
+<p>也可以采取用其他方式下载<code>box</code>文件（如百度网盘），再通过命令行添加，详细方法即相关地址可以参考<a href="https://c4ys.com/archives/1230">这篇博客</a></p>
+</li>
+<li>
+<p>如果Windows用户名是中文，则可能在</p>
+<pre><code>vagrant up
+</code></pre><p>这一步报</p>
+<pre><code>incompatible character encodings: GBK and UTF-8 (Encoding::CompatibilityError)
+</code></pre><p>类似错误，具体方法详见</p>
+<p>这篇博客</p>
+<p>，概括为以下几步：</p>
+<ul>
+<li>设置环境变量VAGRANT_HOME为不包含中文的路径，该环境变量是用于保存Vagrant下载的<code>box</code>镜像文件（具体路径为<code>$(VAGRANT_HOME)/.vagrant.d</code>）</li>
+<li>修改VirtualBox中全局配置选项中的 默认虚拟电脑位置VirtualBox VMs的路径 ，不能包含中文名</li>
+</ul>
+</li>
+<li>
+<p>注意Vagrant和VirtualBox版本需要匹配，有的版本不匹配可能会报各种错误，本文中测试一切正常</p>
+</li>
+<li>
+<p>默认Vagrant当前配置为在启用</p>
+<pre><code>SharedFoldersEnableSymlinksCreate
+</code></pre><p>选项的情况下创建VirtualBox同步的文件夹。 如果不信任Vagrant访客，则可能要禁用此选项。 有关此选项的更多信息，请参考</p>
+<p>VirtualBox手册</p>
+<p>。</p>
+<ul>
+<li>可以通过环境变量全局禁用此选项：<code>VAGRANT_DISABLE_VBOXSYMLINKCREATE = 1</code></li>
+<li>在Vagrantfile中配置如下代码：<code>config.vm.synced_folder '/host/path', '/guest/path', SharedFoldersEnableSymlinksCreate: false</code></li>
+</ul>
+</li>
+</ul>
+<p>通过Vagrant命令进入centos7中的shell：</p>
+<p>Powershell</p>
+<pre><code>vagrant ssh
+</code></pre><p>如果想通过其他方式登录虚拟机（如：Xshell），可以通过如下命令获取hostname、port、IdentityFile三个配置信息：</p>
+<p>Powershell</p>
+<pre><code>E:\Ubuntu&gt;vagrant ssh-config
+Host default
+  HostName 127.0.0.1
+  User vagrant
+  Port 2222
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile E:/Ubuntu/.vagrant/machines/default/virtualbox/private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+</code></pre><p>其中：HostName为主机IP地址，Port为开放的端口，IdentityFile为Public Key秘钥文件的路径，依次填入其他软件的相应设置中即可访问该虚拟机</p>
+<p>另外，该虚拟机默认登录账号用户名为vagrant，密码为vagrant，root账号密码为vagrant。也有可能没有root密码，需要通过<code>sudo passwd</code>命令重设密码</p>
+<blockquote>
+<p>附：ubuntu18.04换清华源：</p>
+<p>编辑<code>/etc/apt/sources.list</code>文件，修改为以下内容</p>
+<p>Bash</p>
+<pre><code># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-backports main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restricted universe multiverse
+
+# 预发布软件源，不建议启用
+# deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
+</code></pre></blockquote>
+<h3 id="安装docker-engine---community">安装Docker Engine - Community</h3>
+<p>官方文档教程详见<a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/">这里</a></p>
+<p>设置源</p>
+<p>Bash</p>
+<pre><code>#更新
+sudo apt-get update
+#安装依赖
+sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+#添加Docker官方GPG秘钥
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+#添加Docker源
+sudo add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&quot;
+</code></pre><blockquote>
+<p>由于Docker官方源不稳定，推荐国内源：</p>
+<ul>
+<li>docker官方中国区 <code>https://registry.docker-cn.com</code></li>
+<li>网易 <code>http://hub-mirror.c.163.com</code></li>
+<li>ustc <code>http://docker.mirrors.ustc.edu.cn</code></li>
+<li>阿里云 <code>http://&lt;你的ID&gt;.mirror.aliyuncs.com</code></li>
+</ul>
+<p>ustc帮助文档：https://lug.ustc.edu.cn/wiki/mirrors/help/docker</p>
+<p>Bash</p>
+<pre><code>sudo vi /etc/docker/daemon.json
+#添加以下内容 注意不能是https 否则最后一点下载不下来
+{
+	&quot;registry-mirrors&quot;: [&quot;https://docker.mirrors.ustc.edu.cn/&quot;,&quot;https://hub-mirror.c.163.com&quot;,&quot;https://registry.docker-cn.com&quot;],
+	......
+}
+#重启docker服务
+service docker restart
+</code></pre></blockquote>
+<p>安装</p>
+<p>Bash</p>
+<pre><code>#安装Docker Engine - Community
+sudo apt-get update
+#安装最新版
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+#验证
+sudo docker version
+sudo docker run hello-world
+</code></pre><blockquote>
+<p>或者自己选择版本安装</p>
+<p>Bash</p>
+<pre><code>apt-cache madison docker-ce
+
+sudo apt-get install docker-ce=&lt;VERSION_STRING&gt; docker-ce-cli=&lt;VERSION_STRING&gt; containerd.io
+</code></pre></blockquote>
+<p>卸载Docker Engine - Community</p>
+<p>Bash</p>
+<pre><code>sudo apt-get purge docker-ce
+#删除所有镜像，容器和卷(volumes)：
+sudo rm -rf /var/lib/docker
+</code></pre><h2 id="二docker的镜像和容器">二、Docker的镜像和容器</h2>
+<h3 id="架构和底层">架构和底层</h3>
+<ul>
+<li>Docker是一个平台，提供一个开发、打包、运行app的平台</li>
+<li>把app和底层设备隔离开</li>
+</ul>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200204233756060.png" alt="Docker架构"></p>
+<p>Docker架构</p>
+<p>Docker Engine：</p>
+<ul>
+<li>后台进程（dockerd）
+<ul>
+<li>提供 REST API 的服务（Server）
+<ul>
+<li>提供 CLI（client，客户端）</li>
+</ul>
+</li>
+<li>C-S架构</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200204233846121.png" alt="Docker Engine"></p>
+<p>Docker Engine</p>
+<p>整体架构：</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200204234359788.png" alt="整体架构"></p>
+<p>整体架构</p>
+<ul>
+<li>Client：Docker提供的命令（可以和host在一台机器上）</li>
+<li>Docker Host：启动了dockerd的机器
+<ul>
+<li>images</li>
+<li>containers</li>
+</ul>
+</li>
+<li>Registry：库，类似于GitHub</li>
+</ul>
+<p>docker底层技术支持：</p>
+<ul>
+<li>Namespaces:隔离pid、net、ipc、mnt、uts</li>
+<li>Control groups:做资源限制</li>
+<li>Union file systems:Container和 nimage的分层</li>
+</ul>
+<h3 id="image">Image</h3>
+<p>官方命令手册：https://docs.docker.com/engine/reference/commandline/image/</p>
+<ul>
+<li>文件和 meta data的集合( root filesystem)</li>
+<li>分层的,并且每一层都可以添加改变删除文件,成为一个新的image</li>
+<li>不同的image可以共享相同的 layer</li>
+<li>Image本身是read-only的</li>
+</ul>
+<p>Dockerfile：通过该文件定义一个image并能够构建该image</p>
+<p>BaseImge：直接基于Linux的内核，在内核上制作的一个镜像（如各种Linux的发行版：ubuntu、centos等），可以在该镜像上在制作一个新的image</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200205000255254.png" alt="image-20200205000255254"></p>
+<p>image-20200205000255254</p>
+<p>常用命令</p>
+<p>Bash</p>
+<pre><code>#使docker前不需要加sudo
+sudo groupadd docker#新建一个组
+sudo gpasswd -a 用户名 组名#添加用户到组
+sudo service docker restart#重启docker
+
+#查看dockerhub上的镜像
+sudo docker search image名字
+#查看本机上的镜像
+sudo docker image ls
+sudo docker images
+#从Dockerhub上拉取
+sudo docker pull ubuntu:14.04
+#从Dockerhub上xxx处拉取（第三方）
+sudo docker pull ubuntu:14.04/XXX
+#运行docker
+sudo docker run image名字
+sudo docker run -d image名字#后台运行
+sudo docker run -d -e PENG=xxxx image名字#后台运行，且设置一个PENG的环境变量，值为xxxx
+#交互式的运行docker，并进入其控制台
+sudo docker run -it image名字
+exit #退出交互环境
+#查看本机上的在运行的容器（正在运行的，常驻内存）
+sudo docker container ls
+#查看本机上所有的容器（正在运行的和已经退出的）
+sudo docker container ls -a
+sudo docker container ls -aq#列出所有的id
+sudo docker ps -a
+#删除contaniner
+sudo docker container rm id
+sudo docker rm id
+sudo docker rm $(sudo docker container ls -aq)#删除所有
+#停止contaniner
+sudo docker container stop id
+sudo docker stop id
+#删除image
+sudo docker image rm id
+sudo docker rmi id
+
+#本机传输文件到docker container中
+sudo docker cp [OPTIONS] 本地文件 container的id:container中的目录
+#本机传输文件到docker container中
+sudo docker cp [OPTIONS] container的id:container中的目录 本地文件
+#将宿主机上的目录挂载到镜像中
+docker run -it -v /home/dock/Downloads:/usr/Downloads
+
+#显示容器的详细信息
+sudo docker inspect id
+#查看容器运行的输出log
+sudo docker logs id或--name指定的名字
+</code></pre><h3 id="container">Container</h3>
+<p>官方命令手册：https://docs.docker.com/engine/reference/commandline/container/</p>
+<ul>
+<li>通过image创建(copy)</li>
+<li>在image layer之上建立一个container layer(可读写)</li>
+<li>类比面向对象:类（image）和实例（container）</li>
+<li>Image负责app的存储和分发, Container负责运行app</li>
+</ul>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200205001054091.png" alt="Container"></p>
+<p>Container</p>
+<h3 id="构建自己的image">构建自己的image</h3>
+<p>Bash</p>
+<pre><code>#基于container(xxx,名字,name)创建一个image(yyy)  不提倡，不安全
+sudo docker container commit xxx yyy
+sudo docker commit xxx yyy
+#从dockerfile构建一个image
+sudo docker image build -t tag(docker的tag) .(基于那个目录构建)
+sudo docker build -t tag(docker的tag) .(基于那个目录构建)
+#例子
+sudo docker build -t dockerusernull/flask-hello-world /home/null/Code/docker/helloworld/
+</code></pre><p><strong>调试</strong></p>
+<p>每次构建的时候，在每一层都会生成临时容器并通过<code>--&gt;</code>显示出该容器的id，可以通过</p>
+<p>Bash</p>
+<pre><code>sudo docker run -it 临时容器id /bin/bash
+</code></pre><p><strong>运行</strong></p>
+<p>Bash</p>
+<pre><code>sudo docker run image名字
+sudo docker run -d image名字#后台运行
+sudo docker run -d --name=demo image名字#后台运行 并指定一个名字 否则会自动分配
+#停止contaniner
+sudo docker container stop id
+sudo docker stop id
+#启动contaniner
+sudo docker start id或名字
+#例子
+sudo docker run dockerusernull/flask-hello-world
+</code></pre><ul>
+<li><code>--name</code>指定的名字具有唯一性，可以替代id用于别的命令</li>
+<li><code>docker start</code>：只要不删除，该命令就能够重新启动stop的容器</li>
+</ul>
+<p><strong>exec</strong>：进运行中的容器内部，看具体的细节</p>
+<p>Bash</p>
+<pre><code>sudo docker exec -it 容器id /bin/bash#exec：对运行中的容器执行的命令(/bin/bash) -it：交互式的执行
+sudo docker exec -it 容器id ip a#打印运行中的容器的ip地址
+</code></pre><ul>
+<li>不止运行/bin/bash，还可运行其他命令，如：python等</li>
+</ul>
+<h3 id="dockerfile">DockerFile</h3>
+<p>官方文档：https://docs.docker.com/develop/develop-images/dockerfile_best-practices/</p>
+<ul>
+<li>
+<p><code>FROM</code>：选择base image，在该base image上构建新的image</p>
+<ul>
+<li><code>FROM scratch</code>：从头制作base image</li>
+<li>尽量使用官方的image作为 base image</li>
+</ul>
+</li>
+<li>
+<p><code>LABEL</code>：定义image的metadata（类似代码中的注释）</p>
+<ul>
+<li>
+<pre><code>  LABEL maintainer=&quot;xiaoquwl@gmail.com&quot;
+  LABEL version=&quot;1.0&quot;
+  LABEL description=&quot;This is description&quot;
+  &lt;!--￼14--&gt;
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p><code>WORKDIR</code>：设定当前工作目录（类似于cd）</p>
+<ul>
+<li>
+<pre><code>  WORKDIR /test#如果没有会自动创建test目录
+  WORKDIR demo
+  RUN pwd#输出结果应该是/test/demo
+  &lt;!--￼15--&gt;
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p><code>ENV</code>：设置一个环境变量或常量</p>
+<ul>
+<li>
+<p>尽量使用ENV增加可维护性</p>
+</li>
+<li>
+<pre><code>  ENV MYSQL_VERSION 5.6#设置常量
+  RUN apt-get install -y mysql-server=&quot;${MYSQL_VERSION}&quot; \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*#引用常量
+  &lt;!--￼16--&gt;
+    
+      	
+</code></pre></li>
+<li>
+<p>exec格式：需要根据特点的格式指出命令和参数</p>
+<ul>
+<li>
+<pre><code>  #XXX [&quot;命令&quot;,&quot;参数&quot;,...]
+  RUN [&quot;apt-get&quot;,&quot;install&quot;,&quot;-y&quot;,&quot;vim&quot;]
+  CMD [&quot;/bin/echo&quot;,&quot;hello docker&quot;]
+  ENTRYPOINT [&quot;/bin/echo&quot;,&quot;hello docker&quot;]
+  #以下两种输出结果不一样
+  ENV name Docker
+  ENTRYPOINT [&quot;/bin/echo&quot;,&quot;hello $name&quot;]#hello $name
+  ENTRYPOINT [&quot;/bin/bash&quot;,&quot;-c&quot;,&quot;echo hello $name&quot;]#hello Docker(-c表示后面的事bash的参数)
+  &lt;!--￼17--&gt;
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="发布镜像">发布镜像</h3>
+<p>直接发布镜像：</p>
+<ul>
+<li>在<a href="https://hub.docker.com/">DockerHub</a>网站上注册账号</li>
+<li><code>sudo docker login</code>，在本机上通过命令行登录DockerHub</li>
+<li><code>sudo docker push 账号名/image名字:tag</code>或<code>sudo push 账号名/image名字:tag</code>往DockerHub上推</li>
+</ul>
+<p>发布Dockerfile：</p>
+<ul>
+<li>在DockerHub上绑定Github账号</li>
+<li>在GitHub上分享Dockerfile</li>
+<li>DockerHub会自动从GitHub上克隆Dockerfile</li>
+<li>DockerHub后台服务器会自动根据Dockerfile构建image</li>
+</ul>
+<h3 id="容器资源限制">容器资源限制</h3>
+<p>不做限制的容器会尽最大可能占用物理机的资源，可以通过<code>docker run</code>命令指定对容器的限制</p>
+<ul>
+<li>
+<p>对memory的限制</p>
+<ul>
+<li>
+<pre><code>--memory
+</code></pre><p>：若只指定该参数，则swap memory也是同样大小，总共消耗内存为2*memory</p>
+<ul>
+<li>eg：sudo docker run &ndash;memory=200M 容器id</li>
+</ul>
+</li>
+<li>
+<p><code>--memory-swap</code>：指定swap memory参数</p>
+</li>
+</ul>
+</li>
+<li>
+<p>对cpu的限制</p>
+<ul>
+<li>
+<pre><code>--cpu-shares
+</code></pre><p>：限制相对权重，即每个容器根据该值来分配物理机上的cpu算力</p>
+<ul>
+<li>sudo docker run &ndash;cpu-shares=10 &ndash;name=test1 容器id &ndash;cpu 1</li>
+<li>sudo docker run &ndash;cpu-shares=5 &ndash;name=test2 容器id &ndash;cpu 1</li>
+<li>上述两个容器会按照test1：test2=2：1占用cpu</li>
+</ul>
+</li>
+<li>
+<p><code>--cpu</code>：利用编号指定运行的cpu</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="实战ubuntu上打包stress">实战——ubuntu上打包stress</h3>
+<h4 id="python常驻程序">python常驻程序</h4>
+<p>新建Dockerfile：</p>
+<p>Dockerfile</p>
+<pre><code>FROM python:2.7
+LABEL maintainer=&quot;NULL&quot;
+
+WORKDIR /pyapp
+
+RUN pip install flask
+COPY app.py /pyapp
+EXPOSE 5000
+CMD python app.py
+</code></pre><ul>
+<li><code>EXPOSE</code>：在此处代表要暴露出去的端口</li>
+<li><code>CMD</code>：此处用于表示之后一直运行的程序</li>
+</ul>
+<h4 id="ubuntu上打包stress">ubuntu上打包stress</h4>
+<p>新建Dockerfile：</p>
+<p>Dockerfile</p>
+<pre><code>FROM ubuntu
+RUN apt-get updata &amp;&amp; apt-get install -y stress
+ENTRYPOINT [&quot;/user/bin/stress&quot;]
+CMD []
+</code></pre><ul>
+<li>
+<p><code>ENTRYPOINT</code>：在此处代表要执行的命令</p>
+</li>
+<li>
+<pre><code>CMD
+</code></pre><p>：此处用于接受之后docker run后的参数，传递给</p>
+<pre><code>ENTRYPOINT
+</code></pre><p>指定的命令</p>
+<ul>
+<li>可以在<code>[]</code>中指定默认的参数</li>
+</ul>
+</li>
+</ul>
+<h2 id="三docker网络">三、docker网络</h2>
+<p>docker网络分类：</p>
+<ul>
+<li>单机网络
+<ul>
+<li><strong>Bridge Network</strong></li>
+<li>Host Network</li>
+<li>None Network</li>
+</ul>
+</li>
+<li>多机网络
+<ul>
+<li>Overlay Network</li>
+</ul>
+</li>
+</ul>
+<h3 id="基本概念">基本概念</h3>
+<p>整个网络的数据传输是通过<strong>数据包</strong>的形式来传输的</p>
+<p>数据包的打包有一个分层的概念，即ISO/OSI的七层模型和TCP/IP的五层模型：</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200209142623011.png" alt="网络分层"></p>
+<p>网络分层</p>
+<p>数据包到达另一台电脑或服务器，需要通过<strong>路由</strong></p>
+<p>IP地址：设备的标识</p>
+<ul>
+<li>公有IP：互联网上的唯一标识,可以访问 Internet</li>
+<li>私有IP：不可在互联网上使用,仅供机构内部使用</li>
+<li>ABC三类ip地址：https://blog.csdn.net/kzadmxz/article/details/73658168</li>
+</ul>
+<p>私有IP地址访问互联网，需要<strong>网络地址转换</strong>，即<strong>NAT</strong></p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200209150545483.png" alt="网络地址转换"></p>
+<p>网络地址转换</p>
+<p>Linux命令：</p>
+<ul>
+<li><code>ping</code>：<strong>检查ip的可达性</strong>，ping不通不能保证机器出问题了，可能是中间路由或者防火墙等其他某一环节出问题了</li>
+<li><code>telnet</code>：<strong>检查服务的可用性</strong></li>
+</ul>
+<h3 id="linux中network-namespace">Linux中network namespace</h3>
+<p>每创建一个container，会同时创建一个network namespace</p>
+<p>Bash</p>
+<pre><code>#查看本机network namespace
+sudo ip netns list
+#删除本机network namespace
+sudo ip netns delete xxxx
+#添加network namespace
+sudo ip netns add xxxx
+#在xxxx这个network namespace中执行命令
+sudo ip netns exec xxxx ip a
+sudo ip netns exec xxxx ip link
+sudo ip netns exec xxxx ip link set dev lo up#将xxxx中的lo网卡up
+</code></pre><p>其他相关命令和知识可以参考<a href="https://cizixs.com/2017/02/10/network-virtualization-network-namespace/">这篇博客</a>，如链接消失，可见我博客中的备份</p>
+<h3 id="docker-bridge0详解">Docker Bridge0详解</h3>
+<p>即bridge Network。</p>
+<p>建议参考上一小节中提到的博客</p>
+<p>Bash</p>
+<pre><code>#列出当前docker中有哪些网络
+sudo docker network ls
+#列出bridge的详细情况，通过Containers一栏可以看出哪个container连接上该bridge
+sudo docker network inspect bridge
+#列出本机上bridge的相关信息，可以通过该命令看出docker0网卡接上了那个veth接口
+brctl show
+</code></pre><p>两个容器之间相互通信的情况：</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200210150411463.png" alt="image-20200210150411463"></p>
+<p>image-20200210150411463</p>
+<ul>
+<li>蓝色框框为两个容器</li>
+<li>绿色的一对为veth（虚拟网络接口）</li>
+<li>docker容器中会连接到主机的docker0网卡上</li>
+</ul>
+<p>单个容器访问internet的情况：</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200210150701170.png" alt="image-20200210150701170"></p>
+<p>image-20200210150701170</p>
+<ul>
+<li>主机通过eth0访问外网</li>
+<li>docker0中的数据通过NAT（网络地址转换）转换到eth0中</li>
+<li>这里的NAT是通过iptables实现</li>
+</ul>
+<h3 id="docker之间的link">docker之间的link</h3>
+<p>即通过<code>link</code>指令，可以将一个容器只需指定对方容器名字就可以链接到另一个容器上，而无需指定IP地址及端口。注意，link指令含有方向，只能单向链接</p>
+<p>该指令实际使用不多</p>
+<p>直接上例子</p>
+<p>Bash</p>
+<pre><code>#创建busybox容器test1
+sudo docker run -d --name test1 busybox /bin/sh -c &quot;while true; do sleep 3600; done&quot;
+#创建busybox容器test2，并连接到test1
+sudo docker run -d --name test2 --link test1 busybox /bin/sh -c &quot;while true; do sleep 3600; done&quot;
+#进入test2中
+sudo docker exec -it test2 /bin/sh
+#在test2中ping test1(ip:172.17.0.3) 无论名字还是ip均可
+ping 172.17.0.3
+ping test1
+#反之，进入test1
+sudo docker exec -it test1 /bin/sh
+#在test1中ping test2(ip:172.17.0.2) 只有ip可以
+ping 172.17.0.2
+ping test2#ping不通
+ping 172.17.0.3
+ping test1
+</code></pre><p>创建一个新的Bridge并连接上Container：</p>
+<p>Bash</p>
+<pre><code>#创建一个新的bridge，叫my-bridge（-d：driver）
+sudo docker nerwork create -d bridge my-bridge
+#查看bridge
+sudo docker network ls
+brctl show#和上个命令一样
+#创建busybox容器test3，指定network为my-bridge
+sudo docker run -d --name test3 --network my-bridge busybox /bin/sh -c &quot;while true; do sleep 3600; done&quot;
+#显示bridge及连接的情况
+brctl show
+#显示bridge的详细信息
+sudo docker network inspect bridge的id(通过sudo docker network ls和brctl show可以查看)
+#将其他container连接到新建的bridge上
+sudo docker network connect my-bridge test2
+</code></pre><p>多个容器若都连接在了同一个用户自己创建的bridge上，则可以<strong>不需通过链接</strong>就能够通过名字直接访问</p>
+<p>Bash</p>
+<pre><code>#进入my-bridge绑定的test3中，可以直接通过名字ping通后来接入的test2(ip:192.18.0.3)
+sudo docker rxrc -it test3 /bin/sh
+ping 192.18.0.3
+ping test2
+</code></pre><h3 id="端口映射">端口映射</h3>
+<p>如果想要将docker中的端口转发给外部：</p>
+<p>Bash</p>
+<pre><code>#将容器中的80端口映射到本地的80端口
+sudo docker run --name web -d -p 80:80 nginx
+#查看映射的端口
+sudo docker ps
+#此时可以通过curl在外部（虚拟机上）直接访问容器内部的端口
+curl 192.168.205.10
+</code></pre><p>示意图：</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200211000724333.png" alt="image-20200211000724333"></p>
+<p>image-20200211000724333</p>
+<ul>
+<li>注：eth1到本地网卡上的端口转发是通过设置虚拟机修改而成的</li>
+</ul>
+<h3 id="host和none网络">host和none网络</h3>
+<p>none network：</p>
+<p>Bash</p>
+<pre><code>#创建busybox容器test1，指定network为none
+sudo docker run -d --name test1 --network none busybox /bin/sh -c &quot;while true; do sleep 3600; done&quot;
+#查看none上连接的container
+sudo docker network inspect none
+#进入container中
+sudo docker exec -it test1 /bin/sh
+#运行命令
+ip a#发现只有lo
+</code></pre><ul>
+<li>none network表示一种孤立的网络，除了<code>sudo docker exec -it</code>命令能够访问之外，不能通过其他方法访问</li>
+</ul>
+<p>host network：</p>
+<p>Bash</p>
+<pre><code>#创建busybox容器test1，指定network为host
+sudo docker run -d --name test1 --network host busybox /bin/sh -c &quot;while true; do sleep 3600; done&quot;
+#查看host上连接的container
+sudo docker network inspect host
+#进入container中
+sudo docker exec -it test1 /bin/sh
+#运行命令
+ip a#发现此处的网卡和Linux主机上的一样
+</code></pre><ul>
+<li>host network表示该容器没有自己独立的namespace，根Linux主机中的namespace network共享同一套</li>
+<li>可能会和Linux主机上的一些端口存在冲突</li>
+</ul>
+<h3 id="多机通信">多机通信</h3>
+<p>为实现如下效果：</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200211004225893.png" alt="多机通信"></p>
+<p>多机通信</p>
+<ul>
+<li>两个docker的ip地址需要不一样</li>
+<li>运用VXLAN技术</li>
+<li>通过overlay network实现，创建overlay与bridge、host、none一致</li>
+<li>需要用到分布式存储技术（采用etcd），用于在单机上占据ip地址</li>
+</ul>
+<h2 id="四docker的持久化存储和数据共享">四、Docker的持久化存储和数据共享</h2>
+<p>回顾之前讲的Container，Container具有可读可写的能力，image只具有可读的能力。但是在stop再rm Container之后，Container中的数据不会保存，Container中的数据相当于一个临时的数据</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200205001054091.png" alt="Container"></p>
+<p>Container</p>
+<p>docker持久化数据的方案分以下两种：</p>
+<ul>
+<li>基于<strong>本地文件系统</strong>的 Volume.可以在执行 Docker create或 Docker run时,通过<code>-v</code>参数将主机的目录作为容器的数据卷.这部分功能便是基于本地文件系统的 volume管理.</li>
+<li>基于<strong>plugin</strong>的 Volume,支持第三方的存储方案,比如NAS，aws</li>
+</ul>
+<p>Volume的类型：</p>
+<ul>
+<li>受管理的 data Volume,由 docker后台自动创建.</li>
+<li>绑定挂载的 Volume,具体挂载位置可以由用户指定.</li>
+</ul>
+<h3 id="data-volume">Data Volume</h3>
+<p>场景：一般来说有些容器自己会产生一些数据，我们需要保证这些数据的安全，不想随着container的消失而消失，比如说数据库等，通过Dockerfile中的<code>VOLUME</code>关键字实现。</p>
+<p>Bash</p>
+<pre><code>#创建mysql container(mysql的Dockerfile中有：VOLUME /var/lib/mysql),初始密码为空，将在/var/lib/mysql处产生的volume重命名为mysql(将mysql volume映射到container中的/var/lib/mysql目录)
+sudo docker run -d -v mysql:/var/lib/mysql --name mysql1 -e MYSQL_ALLOW_EMPTY_PASSWORD=true mysql
+sudo docker ps
+#查看volume
+sudo docker volume ls
+sudo docker volume 上一步命令查看的id   #会自动挂载到/var/lib/docker/volumes/xxxx(id)/_data
+#删除volume
+sudo docker volume rm id或者-v指定的名字
+</code></pre><h3 id="bind-mounting挂载宿主机目录">Bind Mounting（挂载宿主机目录）</h3>
+<p>bind Mounting不需要在Dockerfile中定义文件产生的路径，只需在命令行中指定即可：</p>
+<p>Bash</p>
+<pre><code>#创建容器，将当前目录$(pwd)映射到container中的/usr/share/nginx/html目录
+sudo docker run -d -v $(pwd):/usr/share/nginx/html id
+</code></pre><h2 id="五docker-compose多容器部署">五、Docker Compose多容器部署</h2>
+<p>官方链接：https://docs.docker.com/compose/、https://docs.docker.com/compose/compose-file/</p>
+<p>多容器的app会带来的缺点：</p>
+<ul>
+<li>要从 Dockerfile build image或者 Dockerhub拉取 image</li>
+<li>要创建多个 container</li>
+<li>要管理这些 container(启动、停止、删除)</li>
+</ul>
+<p>Docker Compose的诞生就是为了解决该问题，可以看成是批处理</p>
+<ul>
+<li>Docker Compose是一个命令行工具</li>
+<li>这个工具可以通过一个<code>yml</code>文件定义多容器的 docker应用</li>
+<li>通过一条命令就可以根据<code>yml</code>文件的定义去创建或者管理这多个容器</li>
+</ul>
+<p>yml文件默认名：<code>docker-compose.yml</code>，包含三个重要概念：Services、Networks、Volumes</p>
+<p>Services：</p>
+<ul>
+<li>
+<p>一个 service代表一个 container,这个 container可以从dockerhub的image来创建,或者从本地的 Dockerfile build出来的image来创建</p>
+</li>
+<li>
+<p>Service的启动类似 docker run,我们可以给其指定network和 volume,所以可以给 service指定 network和Volume的引用（service中的参数和docker run中的参数类似）</p>
+<p>Yaml</p>
+<pre><code>services:
+  db:#services名字
+    image:postgres:9.4#采用的image
+    volumes:
+      - “db-data:/var/lib/postgresql/data”
+    network:#新建的bridge
+     - back-tier
+</code></pre><p>Yaml</p>
+<pre><code>services:
+  worker:
+    build:./worker
+    links:#有了network，links可有可无
+      - db
+      - redis
+    network:
+     - back-tier
+</code></pre></li>
+</ul>
+<p>实例：</p>
+<p>Yaml</p>
+<pre><code>version: '3'
+
+services:
+
+  wordpress:
+    image: wordpress
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_PASSWORD: root
+    networks:
+      - my-bridge
+
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - my-bridge
+
+volumes:
+  mysql-data:
+
+networks:
+  my-bridge:
+    driver: bridge
+</code></pre><h3 id="安装和基本使用">安装和基本使用</h3>
+<p>安装：</p>
+<ul>
+<li>
+<p>docker for mac或windows 会自动安装</p>
+</li>
+<li>
+<p>Linux安装步骤：https://docs.docker.com/compose/install/</p>
+<p>Bash</p>
+<pre><code>#下载至/usr/local/bin/docker-compose
+sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+#添加可执行权限
+sudo chmod +x /usr/local/bin/docker-compose
+#查看版本信息 验证是否安装成功
+docker-compose --version
+</code></pre></li>
+</ul>
+<p>使用：</p>
+<p>docker Compose的使用大部分都会联合<code>yml</code>文件的使用</p>
+<p>Bash</p>
+<pre><code>#创建docker-compose.yml文件中的service
+docker-compose up
+docker-compose up -d#后台运行，但是不会打印log
+
+#查看docker-compose中的情况
+docker-compose ps
+docker-compose images#列出所定义的container以及使用的image
+#执行container中的命令
+docker-compose exec yml文件中定义的service container中的命令
+
+#停止docker-compose中的容器
+docker-compose stop
+#停止并删除docker-compose中的容器、bridge、volume
+docker-compose down
+</code></pre><h3 id="水平扩展和负载均衡">水平扩展和负载均衡</h3>
+<p>通过docker-compose命令的<code>--scale</code>参数</p>
+<p>Bash</p>
+<pre><code>#多开service中的container
+docker-compose up --sacle yml文件service中的某一个container=个数
+</code></pre><h2 id="六容器编排swarm-mode">六、容器编排Swarm mode</h2>
+<p>Swarm是一种集群的架构，其中含有节点，每一个节点中可以含有两种角色，即manager和worker</p>
+<ul>
+<li>manager：整个集群的大脑，至少需要2个及以上，所以需要同步，docker提供了一个内置的分布式的存储数据库，通过raft协议进行同步</li>
+<li>worker：节点比manager多，通过gossip网络进行同步</li>
+</ul>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200212235626905.png" alt="底层架构"></p>
+<p>底层架构</p>
+<p>重要概念：</p>
+<ul>
+<li>Service：与docker Compose中的service类似，但是最终运行在那台机器上是不确定的</li>
+<li>Replicas：横向扩展时，一个replicas就是一个容器</li>
+</ul>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200212235931699.png" alt="Service和Replicas"></p>
+<p>Service和Replicas</p>
+<p>注：此图产生了三个容器，会调度系统调度到不同的节点上去，即该service最终会运行在那些swarm节点上是不知道的</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200213000340881.png" alt="swarm上创建service时的调度过程"></p>
+<p>swarm上创建service时的调度过程</p>
+<p>例子：</p>
+<p>创建一个三节点的swarm集群：</p>
+<p>节点一：</p>
+<p>Bash</p>
+<pre><code>#初始化swarm并创建manager节点，同时指定manager的地址
+sudo docker swarm init --advertise-addr=192.168.205.10
+#查看swarm当前的节点
+sudo docker node ls
+</code></pre><p>借点二：</p>
+<p>Bash</p>
+<pre><code>#创建worker节点并加入该swarm集群（init后会提供该命令），用于将另一台机器加入称为worker
+sudo docker join --token xxxx(init后会提供) 192.168.205.10:端口号
+</code></pre><p>节点三：</p>
+<p>Bash</p>
+<pre><code>#创建worker节点并加入该swarm集群（init后会提供该命令），用于将另一台机器加入称为worker
+sudo docker join --token xxxx(init后会提供) 192.168.205.10:端口号
+</code></pre><h3 id="service的创建维护和水平扩展">Service的创建维护和水平扩展</h3>
+<p><code>docker service</code>命令类似于<code>docker run</code>，只是不是在本地上运行</p>
+<p>Bash</p>
+<pre><code>#创建一个busybox的service，叫demo
+sudo docker service create --name demo busybox sh -c &quot;while true; do sleep 3600;done&quot;
+#查看service
+sudo docker service ls
+sudo docker service ps service名字#查看service的详细情况（包括分布在那台机器/节点上）
+#横向扩展service
+sudo docker service scale service名字=扩展数#通过ls命令显示的REPLICAS栏可以查看
+#删除service
+sudo docker service rm demo#由于可能存在横向扩展，所以实际上会比较慢
+</code></pre><ul>
+<li>
+<pre><code>sudo docker service ls
+</code></pre><p>命令显示的REPLICAS栏：</p>
+<ul>
+<li>分母：创建时规定的横向扩展数量（scale）</li>
+<li>分子：有几个已经ready了</li>
+</ul>
+</li>
+<li>
+<p><code>scale</code>命令扩展时，如果有部分节点上的service失效了（退出、shutdown等），系统会在任意节点上再起一个直到达到scale规定的数目</p>
+</li>
+</ul>
+<h3 id="集群服务器通信routingmesh">集群服务器通信——RoutingMesh</h3>
+<p>RoutingMesh的两种体现：</p>
+<ul>
+<li>Internal：Container和Container之间的访问通过overlay网络（通过VIP虚拟IP）</li>
+<li>Ingress：如果服务有绑定接口，则此服务可以通过任意swarm节点的相应接口访问</li>
+</ul>
+<h4 id="internal">Internal</h4>
+<p>docker Compose在单机的情况下，不同的service可以通过对方的名字相互访问（底层通过DNS服务实现）。而在swarm class中，不同的service有可能在不同的节点上，不同的service之间也能通过service name通信，也有DNS服务。</p>
+<p>对于Swarm来说，有内置的DNS服务发现的功能，通过service命令创建service时，如果是连接到一个overlay的网络上，会为连接到overlay网络上的所有的service去增加一条DNS的记录，通过该记录就能知道IP地址（并不是实际上该service所在的容器的ip地址，而是虚拟的ip地址，即VIP，一旦service创建好后，VIP就不会改变，但是和具体的ip地址绑定是通过LVS（Linux Virtual Service）实现的），就可以访问其服务</p>
+<p>例子：</p>
+<p><code>swarm-manager</code>节点：</p>
+<p>Bash</p>
+<pre><code>#创建overlay网络，命名demo
+sudo docker network create -d overlay demo
+#创建一个whoami的service，提供web服务，如果访问8000端口会返回他的hostname
+sudo docker service create --name whoami -p 8000:8000 --network demo -d jwilder/whoami#将内部8000端口映射到本地8000端口
+#查看是否运行
+sudo docker service ls
+#查看运行在哪里
+sudo docker service ps whoami#swarm-manager
+#查看容器 是否映射出了8000
+sudo docker ps
+#查看8000端口
+curl 127.0.0.1:8000
+
+
+#创建第二个service，采用busybox，命名client
+sudo docker service create --name client -d --network demo busybox sh -c &quot;while true; do sleep 3600; done&quot;
+#查看是否运行
+sudo docker service ls
+#查看运行在哪里
+sudo docker service ps client#swarm-worker1
+#查看容器 是否映射出了8000
+sudo docker ps
+
+
+#扩展下whoami
+sudo docker service scale whoami=2
+#查看另一台在哪里
+sudo docker service ps whoami#swarm-manager、swarm-worker2
+</code></pre><p>进入<code>swarm-worker1</code>节点：</p>
+<p>Bash</p>
+<pre><code>#尚未扩展前：
+#查看service是否运行
+sudo docker ps
+#进入service中
+sudo docker exec -it service的id sh
+#直接ping另一台service
+ping whoami#能够ping通，能够发现实际上是ping10.0.0.7
+
+#横向扩展后：
+ping whoami#能够ping通，能够发现实际上是ping10.0.0.7
+
+#直接去查看swarm class中维护的dns服务器
+nslookup whoami
+#查看真正的容器地址
+nslookup tasks.whoami
+</code></pre><ul>
+<li>不管service有几个横向扩展，但是最后的VIP只有一个，而且访问这个VIP时，Swarm会自动做负载均衡，依次轮流访问这几个横向扩展的service</li>
+<li>上述的负载均衡以及VIP均通过LVS（Linux Virtual Service）实现</li>
+</ul>
+<h4 id="ingress">Ingress</h4>
+<ul>
+<li>外部访问的负载均衡</li>
+<li>服务端口被暴露到各个 swarm节点</li>
+<li>内部通过IPVS进行负载均衡</li>
+</ul>
+<p>当我们去任何一台Swarm节点上去访问端口服务的时候，会把该服务通过本地节点的IPVS（IP的virtual service），通过LVS把该服务负载均衡：</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200218173537430.png" alt="示意图"></p>
+<p>示意图</p>
+<ul>
+<li>当外部访问docker host3的8080端口时（该节点上没有对应service），IPVS会将该请求转发到另外两台具有service的节点上</li>
+</ul>
+<p>例子：</p>
+<p><code>swarm-manager</code>节点：</p>
+<p>Bash</p>
+<pre><code>#创建overlay网络，命名demo
+sudo docker network create -d overlay demo
+#创建一个whoami的service，提供web服务，如果访问8000端口会返回他的hostname
+sudo docker service create --name whoami -p 8000:8000 --network demo -d jwilder/whoami#将内部8000端口映射到本地8000端口
+#扩展下whoami
+sudo docker service scale whoami=2
+#查看运行情况
+suod docker service ps whoami#swarm-manager、swarm-worker2
+#不断获取，会依次返回两台不同节点机器的id(负载均衡)
+curl 127.0.0.1:8000
+curl 127.0.0.1:8000
+curl 127.0.0.1:8000
+...
+</code></pre><p>进入<code>swarm-worker1</code>节点：</p>
+<p>Bash</p>
+<pre><code>#获取，发现任可以访问
+curl 127.0.0.1:8000
+
+#查看本地转发规则
+iptables -nl -t nat
+</code></pre><h3 id="docker-stack部署swarm">docker stack部署swarm</h3>
+<p>利用Docker compose file，即<code>yml</code>文件，主要通过<code>deploy</code>命令，官方文档：https://docs.docker.com/compose/compose-file/#deploy</p>
+<p>注意：该处的docker compose file中不能利用build命令构建本地image，只能通过<strong>远程拉取</strong></p>
+<p>以下均为<code>deploy</code>下的子命令：</p>
+<ul>
+<li>
+<pre><code>endpoint_mode
+</code></pre><p>：</p>
+<ul>
+<li>vip（默认）：service之间通过vip互访（底层会通过LVS自动做均衡负载）</li>
+<li>dnsrr：直接使用service的ip地址互访，也会通过dnsrr（DNS round-robin）做均衡负载</li>
+</ul>
+</li>
+<li>
+<p><code>labels</code>：帮助信息</p>
+</li>
+<li>
+<pre><code>mode
+</code></pre><p>：</p>
+<ul>
+<li>global：不能通过scale命令做横向扩展，整个class中只有一个service</li>
+<li>replicated（默认）：可以横向扩展</li>
+</ul>
+</li>
+<li>
+<pre><code>placement
+</code></pre><p>：</p>
+<ul>
+<li>constraints：
+<ul>
+<li><code>- node.role==manager</code>：一定会部署到manager上</li>
+</ul>
+</li>
+<li>preferences：
+<ul>
+<li>详见：https://docs.docker.com/compose/compose-file/#placement</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<pre><code>replicas
+</code></pre><p>：</p>
+<ul>
+<li>当<code>mode</code>设置成replicated时，可以在初始化时就指定需要几个service</li>
+</ul>
+</li>
+<li>
+<pre><code>resources
+</code></pre><p>：资源的限制</p>
+<ul>
+<li>cpu：‘0.5’</li>
+<li>memory：20M</li>
+</ul>
+</li>
+<li>
+<pre><code>restart_policy
+</code></pre><p>：重启条件即参数设置</p>
+<ul>
+<li>delay：延时</li>
+<li>max_attempts：最大尝试次数</li>
+</ul>
+</li>
+<li>
+<pre><code>update_config
+</code></pre><p>：更新时要遵循的原则</p>
+<ul>
+<li>parallelism：并行数（最多能够同时更新几个service）</li>
+<li>delay：延时（每次更新的间隔时间）</li>
+</ul>
+</li>
+</ul>
+<p>例子：</p>
+<p>利用yml文件部署wordpress</p>
+<p>Yaml</p>
+<pre><code>version: '3'
+
+services:
+
+  web:
+    image: wordpress
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_PASSWORD: root
+    networks:
+      - my-network
+    depends_on:
+      - mysql
+    deploy:
+      mode: replicated
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - my-network
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+
+volumes:
+  mysql-data:
+
+networks:
+  my-network:
+    driver: overlay
+</code></pre><p>进入swarm manager节点：</p>
+<p>Bash</p>
+<pre><code>#语法：sudo docker stack deploy 自定义的名字 --compose-file=xxxx.yml
+sudo docker stack deploy wordpress --compose-file=docker-compose.yml
+
+#查看情况
+sudo docker stack ps wordpress
+#只查看service
+sudo docker stack services wordpress
+
+#删除所有container及网络
+sudo docker stack rm wordpress
+</code></pre><h3 id="密码管理">密码管理</h3>
+<p>docker compose file中有些是关于数据库的用户名和密码的，为了安全性考虑需要secret manager</p>
+<p>需要加密的部分：</p>
+<ul>
+<li>用户名密码</li>
+<li>SSH Key</li>
+<li>TLS认证</li>
+<li>任何不想让别人看到的数据</li>
+</ul>
+<p>docker secret management特点：</p>
+<ul>
+<li>存在 Swarm Manager节点 Raft database里（加密的）.
+<ul>
+<li>多个manager节点通过Raft database确保数据一致</li>
+</ul>
+</li>
+<li>Secret可以 assign给一个 service,这个 service就能看到这个 secret</li>
+<li>在 container内部 Secret看起来像文件,但是实际是在内存中</li>
+</ul>
+<p>使用例子：</p>
+<p>Bash</p>
+<pre><code>#创建secret
+#方法一：
+#从文件中创建secret，创建完成后最好删除掉该文件
+sudo docker secret create secret的名字 要加密的文件
+#查看
+sudo docker secret ls
+#方法二
+#从标准输入中创建secret
+echo &quot;admin&quot; | sudo docker secret create secret的名字 -
+#查看
+sudo docker secret ls
+
+#删除secret
+sudo docker secret rm secret的名字
+
+#使用secret
+#创建一个busybox的container，命名client（可以通过多次使用--secret传入几个secret）
+sudo docker service create --name client --secret secret的名字 busybox sh -c &quot;while true; do sleep 3600; done&quot;
+#进入container
+sudo docker exec -it 容器的id(可通过docker ps查看) sh
+cd /run/secrets#会存在一个secret名字的文件
+#可以直接查看secret的明文
+cat secret名字的文件
+</code></pre><p>最典型使用mysql时传入密码的例子：</p>
+<p>Bash</p>
+<pre><code>echo &quot;admin&quot; | sudo docker secret create my-pw -
+#通过MYSQL中的MYSQL_ROOT_PASSWORD_FILE环境变量指定密码
+sudo docker service create --name db --secret my-pw -e MYSQL_ROOT_PASSWORD_FILE=/run/secrets/my-pw mysql
+#进入container内部确认mysql密码
+sudo docker exec -it 容器的id(可通过docker ps查看) sh
+mysql -u root -p#之后输入密码：admin即可进入mysql的交互中
+</code></pre><h3 id="docker-stack中使用secret">docker stack中使用secret</h3>
+<p>通过<code>secret</code>指定使用哪个secret</p>
+<p>例子：</p>
+<p>利用yml文件部署wordpress</p>
+<p>Yaml</p>
+<pre><code>version: '3'
+
+services:
+
+  web:
+    image: wordpress
+    ports:
+      - 8080:80
+    secrets:
+      - my-pw
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/my-pw
+    networks:
+      - my-network
+    depends_on:
+      - mysql
+    deploy:
+      mode: replicated
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+
+  mysql:
+    image: mysql
+    secrets:
+      - my-pw
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/my-pw
+      MYSQL_DATABASE: wordpress
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - my-network
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+
+volumes:
+  mysql-data:
+
+networks:
+  my-network:
+    driver: overlay
+
+#
+# secrets:
+#   my-pw:
+#    file: ./password
+</code></pre><h3 id="service更新">service更新</h3>
+<p>注意：为保证service不会中断，需要保证scale&gt;=2</p>
+<p>对正在运行的service进行更新：</p>
+<p>Bash</p>
+<pre><code>#创建overlay网络，命名demo
+sudo docker network create -d overlay demo
+#创建一个whoami的service，提供web服务，将本地的5000映射到class中的8080端口
+sudo docker service create --name web -p 8080:5000 --network demo xiaopeng163/python-flask-demo:1.0
+#查看
+sudo docker service ps web
+#扩展下web
+sudo docker service scale web=2
+#查看运行情况
+curl 127.0.0.1:8080
+
+
+#更新image
+sudo docker service update --image xiaopeng163/python-flask-demo:2.0 web
+#再次查看，会发现1.0的已经被shutdown了，并重新开了两个2.0的container
+sudo docker service ps web
+
+
+#更新端口
+sudo service updata --publish-rm 8080:5000 --publish-add 8088:5000 web
+</code></pre><h2 id="七容器编排kubernetes">七、容器编排Kubernetes</h2>
+<p>kubernetes架构：</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200219235941920.png" alt="架构图"></p>
+<p>架构图</p>
+<p>其中Master节点架构：</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200220000101254.png" alt="Master节点架构"></p>
+<p>Master节点架构</p>
+<ul>
+<li>API Service：暴露给外界访问</li>
+<li>Scheduler：调度模块</li>
+<li>Controller：控制模块，对节点的控制</li>
+<li>etcd：分布式的存储，存储k8s的状态和配置</li>
+</ul>
+<p>node节点架构：</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200220000307417.png" alt="node节点架构"></p>
+<p>node节点架构</p>
+<ul>
+<li>Pod：在k8s中，是在容器中调度的最小单位，是具有相同的namespace（包含了所有namespace，如user namespace、network namespace）的一些Container组合</li>
+<li>Docker：容器技术之一（k8s中采用docker，还有其他容器技术）</li>
+<li>kubelet：类似于一个代理，受master节点控制，负责在node节点上创建、管理容器、network以及volume</li>
+<li>kube-proxy：端口的代理转发以及service的服务发现和负载均衡</li>
+<li>Flientd：日志的采集、存储、查询</li>
+<li>Optional Add-ons：插件</li>
+</ul>
+<h3 id="搭建k8s单节点环境">搭建k8s单节点环境</h3>
+<p>k8s首席构造师github：https://github.com/kelseyhightower</p>
+<p>常用工具介绍：</p>
+<ul>
+<li>
+<p><a href="https://github.com/kelseyhightower/kubernetes-the-hard-way">kubernetes-the-hard-way</a>：不借助任何脚本，从命令行去操作安装kubernetes</p>
+</li>
+<li>
+<p>minikube</p>
+<p>：本地快速创建一个节点的kubernetes集群</p>
+<ul>
+<li>通过利用virtualbox创建一台虚拟机，该虚拟机中会安装好kubernetes</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/kubernetes/kubeadm">kubeadm</a>：方便的本地搭建多节点的kubernetes集群</p>
+</li>
+<li>
+<p><a href="https://github.com/kubernetes/kops">kops</a>：在云上搭建kubernetes集群</p>
+</li>
+<li>
+<p><a href="https://cores.com/tectonic">tectonic</a>：少于10个节点免费</p>
+</li>
+<li>
+<p><a href="https://labs.play-with-k8s.com/">play with kubernetes</a>：网站上搭建，无需任何工作，四个小时保存时间</p>
+</li>
+</ul>
+<p>minikube安装（<a href="https://minikube.sigs.k8s.io/docs/start/">参考文档</a>）：</p>
+<ul>
+<li>
+<p>ubuntu上：</p>
+<p>Bash</p>
+<pre><code>curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_1.7.2-0_amd64.deb \
+ &amp;&amp; sudo dpkg -i minikube_1.7.2-0_amd64.deb
+#使用以下命令检查下
+egrep -q 'vmx|svm' /proc/cpuinfo &amp;&amp; echo yes || echo no
+#如果输出 no 且如本文一样使用Windows + VirtualBox + minikube，需要通过以下命令创建一个单节点的kubernetes集群（具体命令后文会细说）
+sudo minikube start --vm-driver=none#
+sudo minikube config set vm-driver none#
+</code></pre></li>
+<li>
+<p>需要安装依赖的<code>kubectl</code>（客户端的CLI，可看上面的架构图）</p>
+<p>Bash</p>
+<pre><code>#ubuntu上可以使用该命令安装：
+sudo snap install kubectl --classic
+#其余Linux发行版可以使用以下命令
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+</code></pre></li>
+<li>
+<p>虚拟化工具virtualbox</p>
+<p>Bash</p>
+<pre><code>#测试版本号
+minikube version
+kubectl version
+</code></pre></li>
+</ul>
+<p><code>kubectl</code>的上下文：一些配置信息或者认证信息，称之为context，即上下文</p>
+<p>kubectl的<a href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands">官方帮助文档</a></p>
+<p>命令：</p>
+<p>Bash</p>
+<pre><code>#创建一个单节点的kubernetes集群（适用于mac或Linux上直接装minikube+virtualbox用户）
+sudo minikube start --vm-driver=virtualbox
+#适用于本文中Windows+virtualbox，在virtualbox中的虚拟机中安装minikube用户，缺点是有可能会影响Linux虚拟机和不能使用minikube ssh等命令
+sudo minikube start --vm-driver=none
+#如果是国内，可以尝试如下命令
+sudo minikube start --vm-driver=none --image-mirror-country=cn
+sudo minikube start --vm-driver=none --image-mirror-country=cn --registry-mirror=https://registry.docker-cn.com --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
+#进入通过minikube创建的虚拟机中
+sudo minikube ssh
+#停止虚拟机
+sudo minikube stop
+
+#当前使用的config的基本情况
+sudo kubectl config view
+#查看当前使用的上下文
+sudo kubectl config get-contexts
+#当前的kubernetes的集群情况
+sudo kubectl cluster-info
+</code></pre><h4 id="kubectl命令行补全补丁">kubectl命令行补全补丁</h4>
+<p>kubectl自带命令行补全的脚本，通过命令：</p>
+<p>Bash</p>
+<pre><code>#Linux
+kubectl completion bash
+source &lt;(kubectl completion bash)
+</code></pre><p>进行打补丁补全。其他系统可以参考<a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">官方文档</a>最后一节<code>Optional kubectl configurations</code></p>
+<h3 id="最小调度单位pod">最小调度单位pod</h3>
+<p>Pod是k8s集群中运行部署应用或服务的最小单元，一个Pod由一个或多个容器组成，kubernetes中不对容器进行直接操作。在一个Pod中，容器共享网络和存储，并且在一个Node上运行。</p>
+<p>Kubernetes为每个Pod都分配了唯一的IP地址，称之为Pod IP，一个Pod里的多个容器共享Pod IP地址。Kubernetes要求底层网络支持集群内任意两个Pod之间的TCP/IP直接通信，这通常采用虚拟二层网络技术来实现，例如Flannel、Open vSwitch等。因此，在Kubernetes里，一个Pod里的容器与另外主机上的Pod容器能够直接通信。</p>
+<p>pod具有如下的一些特性：</p>
+<ul>
+<li>pod共享一个namespace（包含用户、网络、存储等）
+<ul>
+<li>如果一个pod中有两个Container，则这两个Container可以直接通过localhost进行通信，如同在本地一个Linux上运行的两个进程</li>
+</ul>
+</li>
+</ul>
+<p>基本操作例子：</p>
+<p>pod_nginx.yml文件（根据kubernetes提供的一个API格式定义一个资源，这里是pod）：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Pod #资源类型
+metadata:
+  name: nginx #pod名字
+  labels:
+    app: nginx
+spec: #pod中的关键部分
+  containers: #可以包含多个容器
+  - name: nginx #第一个Container Container名字
+    image: nginx
+    ports:
+    - containerPort: 80
+</code></pre><p>创建及基本管理：</p>
+<p>Bash</p>
+<pre><code>#查看kubernetes集群是否正常
+kubectl version
+
+#根据pod_nginx.yml创建pod
+kubectl create -f pod_nginx.yml
+#kubectl delete -f pod_nginx.yml#删除pod
+#查看pod
+kubectl get pods
+#显示pod的详细信息(包括容器的ip(172.17.0.4)、在那个节点上)
+kubectl get pods -o wide
+
+#进入minikube中的虚拟机中
+minikube ssh
+#查看虚拟机中container
+docker ps
+#进入容器内部
+docker exec -it 容器id sh
+#退出容器
+exit
+#查看bridge网络的详细情况 可以找到创建的iginx连接到了bridge网络上（ip:172.17.0.4/16）
+docker network inspect bridge
+exit#退出minikube
+
+#直接对pod进行可交互的操作，进入pod中的第一个容器内部（可以通过-c指定进入那个容器内部，默认第一个） 执行sh
+kubectl exec -it nginx(pod名字) sh
+#具体描述一个pod
+kubectl desrcibe pods nginx(pod名字)
+
+#将minikube中的80端口暴露出来为8080端口
+kubectl port-forward nginx8080:80#一旦停止，端口映射就会停止
+</code></pre><h3 id="横向扩展">横向扩展</h3>
+<p><strong>ReplicationController</strong>种类：</p>
+<p>rc_nginx.yml文件：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: ReplicationController 
+metadata:
+  name: nginx
+spec:
+  replicas: 3 #3个横向扩展
+  selector:
+    app: nginx
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+</code></pre><ul>
+<li>通过ReplicationController创建的pod，kubernetes能够自动帮我们维持对应数量的pods</li>
+</ul>
+<p>创建：</p>
+<p>Bash</p>
+<pre><code>#根据rc_nginx.yml创建pod
+kubectl create -f rc_nginx.yml
+
+#查看 ReplicationController 情况
+kubectl get rc
+#查看pod(可以发现有3个pod)
+kubectl get pods
+
+#尝试删除一个pod
+kubectl delete pods pod的id(通过get pods查询)
+#再次查看pod(发现仍有3个pod)
+kubectl get pods
+
+
+#横向扩展 修改为2
+kubectl scale rc nginx(名字) --replicas=2
+kubectl get pods#查看后只有两个
+kubectl get rc
+</code></pre><p><strong>ReplicaSet</strong>种类：</p>
+<p>rs_nginx.yml文件：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx
+  labels:
+    tier: frontend
+spec:
+  replicas: 3 #3个横向扩展
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      name: nginx
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+</code></pre><ul>
+<li>ReplicaSet是ReplicationController的升级版，ReplicaSet支持new set-based selector</li>
+</ul>
+<p>创建：</p>
+<p>Bash</p>
+<pre><code>#根据rs_nginx.yml创建pod
+kubectl create -f rs_nginx.yml
+
+#查看 ReplicaSet 情况
+kubectl get rs
+#查看pod(可以发现有3个pod)
+kubectl get pods
+
+#横向扩展 修改为2
+kubectl scale rs nginx(名字) --replicas=2
+kubectl get pods#查看后只有两个
+kubectl get rs
+</code></pre><h3 id="deployments">Deployments</h3>
+<p>官方文档：https://kubernetes.io/docs/concepts/workloads/controllers/deployment/</p>
+<p>Deployments控制器提供了Pod和ReplicaSets的声明性更新。即Deployments会描述一种希望的状态，如有三个扩展（–replicas=3）、pod中的具体的docker image版本以及相关的更新，Deployments controller都会努力使该声明实现（Deployments会通过创建ReplicaSet进而来创建pods）</p>
+<p>注意：不能独立对 通过Deployments创建的Pod和ReplicaSets 进行操作（尤其是删除操作）</p>
+<h4 id="创建和管理">创建和管理</h4>
+<p>deployment_nginx.yml文件：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: apps/v1
+kind: Deployment #类型为Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3  #此处其实就是ReplicaSet 保证pod的数量
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:  #指定pod需要的Container
+      containers:
+      - name: nginx  #Container名字
+        image: nginx:1.12.2  #Container image
+        ports:
+        - containerPort: 80
+</code></pre><p>创建：</p>
+<p>Bash</p>
+<pre><code>#根据deployment_nginx.yml创建Deployment
+kubectl create -f deployment_nginx.yml
+
+#查看Deployment
+kubectl get deployment
+#查看 ReplicaSet 情况
+kubectl get rs
+#查看 pod 情况
+kubectl get pods
+</code></pre><p>Deployment相关命令：</p>
+<p>Bash</p>
+<pre><code>#查看Deployment
+kubectl get deployment
+#查看Deployment 显示更多信息
+kubectl get deployment -o wide
+
+#对deployment中的image进行升级
+kubectl set image deployment(resource) nginx-deployment(名字) nginx=nginx:1.13(image)
+#查看Deployment 显示更多信息（包括image版本）
+kubectl get deployment -o wide
+#查看 ReplicaSet 情况
+kubectl get rs#会发现存在一个旧的（停止）一个新的
+#查看 pod 情况
+kubectl get pods
+
+#查看整个 deployment 的历史
+kubectl rollout history deployment(resource) nginx-deployment(名字)
+#退回 deployment 的之前版本（即没有更新image之前）
+kubectl rollout undo deployment(resource) nginx-deployment(名字)
+#查看Deployment 显示更多信息（包括image版本）
+kubectl get deployment -o wide
+
+#查看节点信息（ip地址）
+kubectl get node -o wide
+</code></pre><h3 id="使用tectonic搭建本地多节点">使用Tectonic搭建本地多节点</h3>
+<p><a href="https://coreos.com/tectonic/">Tectonic</a>为CoreOS的产品：收费企业级产品，可免费试用。</p>
+<p>搭建本地多节点教程：https://coreos.com/tectonic/docs/latest/tutorials/sandbox/install.html（实测Tectonic下的sandbox已经不能正常获取！！！该实验无法正常进行！！！）</p>
+<p>本质是通过vagrant在virtualbox上创建多台虚拟机（CoreOS系统，Container Linux）</p>
+<p>修改kubeconfig文件，使kubectl命令同时支持minikube和tectnic（修改kubeconfig文件，添加新的cluster、context、user，具体配置可以参看<a href="https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/">官方说明</a>），通过以下命令可以进行切换：</p>
+<p>Bash</p>
+<pre><code>#查看目前的上下文变量
+kubectl config get-contexts
+#切换
+kubectl config use-context 上一个命令中的NAME栏名字
+</code></pre><h3 id="基础网络cluster-network">基础网络Cluster Network</h3>
+<p>Cluster Network的<a href="https://kubernetes.io/docs/concepts/cluster-administration/networking">官方说明</a></p>
+<p>pod_busybox.yml文件：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-pod
+  labels:
+    app: busybox
+spec:
+  containers:
+  - name: busybox-container
+    image: busybox
+    command:
+      - sleep
+      - &quot;360000&quot;
+</code></pre><p>pod_nginx.yml文件：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    ports:
+    - name: nginx-port
+      containerPort: 80
+</code></pre><p>service_nginx.yml文件：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  ports:
+  - port: 8080
+    nodePort: 8080
+    targetPort: nginx-port
+    protocol: TCP
+  selector:
+    app: nginx
+  type: NodePort
+</code></pre><p>w1节点上：</p>
+<p>Bash</p>
+<pre><code>#根据.yml创建pod
+kubectl create -f pod_busybox.yml
+kubectl create -f pod_nginx.yml
+
+#查看具体情况
+kubectl get pods -o wide
+#两个pod详细情况：
+#busybox-pod ip:10.2.0.50  节点w1
+#nginx-pod   ip:10.2.0.51  节点w1
+
+#在w1中（未进入pod中）ping
+ping 10.2.0.50#能够ping通
+ping 10.2.0.51#能够ping通
+
+#进入busybox-pod
+kubectl exec -it busybox-pod sh
+#查看ip
+ip a
+#尝试ping nginx-pod
+ping 10.2.0.51#能够ping通
+</code></pre><p>c1节点：</p>
+<p>Bash</p>
+<pre><code>#c1节点ping w1节点上的busybox-pod
+ping 10.2.0.50#能够ping通
+#c1节点ping w1节点上的nginx-pod
+ping 10.2.0.51#能够ping通
+</code></pre><p>上述网络关系的拓扑图：</p>
+<p><img src="https://nu-ll.github.io/2020/01/16/Docker/image-20200225225507153.png" alt="网络关系拓扑图"></p>
+<p>网络关系拓扑图</p>
+<ul>
+<li>flannel插件：coreos出品，开源免费，通过该插件实现了两台机器之间的overlay网络</li>
+<li>诸如flannel插件的其他开源插件还有很多，在本节开头的网址进入后会有其他插件介绍说明以及插件必须遵守的原则</li>
+</ul>
+<h3 id="service">Service</h3>
+<p>在cluster中，每个pod都有自己独立的ip地址，并且都能够相互ping通，不论pod是否在同一台设备（节点）上（机器本身也能够ping通任意一个pod的ip地址，详见上一节）</p>
+<p>注意：不要直接去使用和管理pods：</p>
+<ul>
+<li>当我们使用 ReplicaSet 或者 ReplicationController 水平扩展 scale 的时候,Pods有可能会被 terminated(终止)</li>
+<li>当我们使用 Deployment 的时候,我们去更新 Docker Image Version,旧的Pods会被 terminated(终止),然后新的Pods创建</li>
+</ul>
+<p>在Kubernetes中，Pod会经历“生老病死”而无法复活，也就是说，分配给Pod的IP会随着Pod的销毁而消失，这就导致一个问题——如果有一组Pod组成一个集群来提供服务，某些Pod提供后端服务API，某些Pod提供前端界面UI，那么该如何保证前端能够稳定地访问这些后端服务呢？这就是Service的由来。</p>
+<p>Service在Kubernetes中是一个抽象的概念，它定义了一组逻辑上的Pod和一个访问它们的策略（通常称之为微服务）。这一组Pod能够被Service访问到，通常是通过Label选择器确定的。</p>
+<p>创建service：</p>
+<p>1、命令行创建</p>
+<p>Bash</p>
+<pre><code>#给pod创建service 供外部访问
+kubectl expoese &lt;resources&gt; &lt;resources名字&gt;
+</code></pre><p>2、yml文件中通过<code>kind: Service</code>定义，主要有以下三种service</p>
+<ul>
+<li><strong>ClusterIP</strong>：ip地址是cluster内部均可以访问的，但是外界缺无法访问（这种内部的ip称为ClusterIP），外界可以通过service的ip访问（一般service的ip不会变动，而pod的ip会变动）</li>
+<li><strong>NodePort</strong>：将要访问的port绑定到所有node上，因为node对外可以提供访问（假设node的ip为公网ip），所以该类型的service外界也是可以访问的，但是这种方式暴露的port有范围限制（30000-32767）</li>
+<li><strong>LoadBalancer</strong>：一般需要结合云服务使用，由云服务商提供。实际环境中运用较多</li>
+<li><strong>ExternalName</strong>：通过DNS的方式。实际环境中运用较多</li>
+<li>Default：即ClusterIP，默认为ClusterIP方式</li>
+</ul>
+<p>以上均是通过ip地址访问的，但是其实也是可以通过dns访问，但是需要相关的插件</p>
+<hr>
+<p>ClusterIP的相关例子：</p>
+<p>例子1：</p>
+<p>w1节点上：</p>
+<p>Bash</p>
+<pre><code>#根据上一节.yml创建pod
+kubectl create -f pod_busybox.yml
+kubectl create -f pod_nginx.yml
+
+#查看具体情况
+kubectl get pods -o wide
+#两个pod详细情况：
+#busybox-pod ip:10.2.0.254  节点w1
+#nginx-pod   ip:10.2.0.252  节点w1
+
+#创建service
+kubectl expoese pods nginx-pod
+
+#查看service状态
+kubectl get svc
+#service name:nginx-pod  ip:10.3.248.3
+</code></pre><p>c1节点：</p>
+<p>Bash</p>
+<pre><code>curl 10.3.248.3#可以直接通过service访问pod
+</code></pre><hr>
+<p>例子2：</p>
+<p>deployment_python_http.yml文件：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: service-test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: service_test_pod
+  template:
+    metadata:
+      labels:
+        app: service_test_pod
+    spec:
+      containers:
+      - name: simple-http
+        image: python:2.7
+        imagePullPolicy: IfNotPresent
+        command: [&quot;/bin/bash&quot;]
+        args: [&quot;-c&quot;, &quot;echo \&quot;&lt;p&gt;Hello from $(hostname)&lt;/p&gt;\&quot; &gt; index.html; python -m SimpleHTTPServer 8080&quot;]
+        ports:
+        - name: http
+          containerPort: 8080
+</code></pre><p>w1节点上：</p>
+<p>Bash</p>
+<pre><code>#docker pull python:2.7
+#根据.yml文件创建Deployment
+kubectl create -f deployment_python_http.yml
+
+kubectl get pods -o wide
+#pod1 name:service-test-1863849916-b13b6 ip:10.2.0.142  节点w1
+#pod2 name:service-test-1863849916-ts7xr ip:10.2.0.141  节点w1
+</code></pre><p>c1节点上：</p>
+<p>Bash</p>
+<pre><code>curl 10.2.0.142:8080#可以直接访问pod1
+&lt;p&gt;Hello from service-test-1863849916-b13b6&lt;/p&gt;
+curl 10.2.0.141:8080#可以直接访问pod2
+&lt;p&gt;Hello from service-test-1863849916-ts7xr&lt;/p&gt;
+</code></pre><p>w1节点上：</p>
+<p>Bash</p>
+<pre><code>#查看deployment情况
+kubectl get deployment
+#创建deployment服务service-test
+kubectl expose deployment service-test
+#查看服务情况
+kubectl get svc
+#service name: service-test  ip:10.3.120.168
+</code></pre><p>c1节点上：</p>
+<p>Bash</p>
+<pre><code>curl 10.3.120.168:8080#可以直接通过service访问pod
+&lt;p&gt;Hello from service-test-1863849916-b13b6&lt;/p&gt;
+curl 10.3.120.168:8080#可以直接通过service访问pod
+&lt;p&gt;Hello from service-test-1863849916-ts7xr&lt;/p&gt;
+curl 10.3.120.168:8080#可以直接通过service访问pod
+&lt;p&gt;Hello from service-test-1863849916-ts7xr&lt;/p&gt;
+curl 10.3.120.168:8080#可以直接通过service访问pod
+&lt;p&gt;Hello from service-test-1863849916-b13b6&lt;/p&gt;
+...
+</code></pre><ul>
+<li>访问service ip会自动做一个<strong>负载均衡</strong></li>
+</ul>
+<hr>
+<p>例子3：</p>
+<p>接例子2中的换件，在c1中：</p>
+<p>Bash</p>
+<pre><code>#不停地调用
+while true; do curl 10.3.120.168:8080; done
+</code></pre><p>w1节点中：</p>
+<p>Bash</p>
+<pre><code>#直接编辑deployment_python_http.yml 达到应用升级
+kubectl edit deployment service-test#会自动打开deployment_python_http.yml文件
+#将 Hello from $(hostname) 修改为 Hello new version from $(hostname)
+
+#查看pods
+kubectl get pods#可以看到旧的pods已经终止，同时会生成并运行一个新的pods
+</code></pre><ul>
+<li>修改deployment_python_http.yml文件后，c1中的程序检测到该服务会停止一段时间，但是最后会恢复至正常</li>
+<li>该更新并不是Rolling Updata，即并不是零宕机更新，有一段时间会存在不能访问服务器</li>
+</ul>
+<h3 id="nodeport类型service以及label简单应用">NodePort类型service以及Label简单应用</h3>
+<p>演示：</p>
+<p>service中（c1节点pod_nginx.yml）：</p>
+<p>创建pod_nginx.yml：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx #具体的label，与后文中的service的yml文件中的label对应
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    ports:
+    - name: nginx-port #端口名字
+      containerPort: 80 #具体的端口
+</code></pre><ul>
+<li>labels：几乎所有的资源都可以设置一个label，由一对key value组成，且可以设置不止一个</li>
+</ul>
+<p>Bash</p>
+<pre><code>#创建pod
+kubectl create -f pod_nginx.yml
+#查看状态
+kubectl get pods -o wide
+
+#通过expose给改pod创建一个NodePort类型的service
+kubectl expose pods nginx-pod --type=NodePort
+#查看状态
+kubectl get svc
+#name:kubernetes ClusterIP ip:10.3.0.1 port:443/TCP
+#name:nginx-pod NodePort ip:10.3.38.138 port:80:31404/TCP
+kubectl get node -o wide
+#查看c1的ip
+kubectl describe node c1的id#172.17.4.101
+#查看w1的ip
+kubectl describe node w1的id#172.17.4.201
+
+#删除该service，注意pod还在
+kubectl delete service nginx-pod
+</code></pre><ul>
+<li>直接在浏览器中打开<code>172.17.4.101:31404</code>或<code>172.17.4.201:31404</code>即可正常访问Nginx</li>
+</ul>
+<p><strong>NodePort</strong>类型的service会将端口映射到整个Cluster上的每个node的ip地址上，所以可以通过Cluster的任意一个节点的ip地址+端口去访问服务</p>
+<p>类似创建pod，该service也可以通过<code>.yml</code>文件（service_nginx.yml）创建：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Service #创建service
+metadata:
+  name: nginx-service #名字
+spec:
+  ports:
+  - port: 32333 #需要暴露的端口
+    nodePort: 32333 #暴露到nodeport上
+    targetPort: nginx-port #目标端口名，对应上述pod的yml文件中描述的port
+    protocol: TCP
+  selector: #通过label去选择到底暴露那个pod
+    app: nginx
+  type: NodePort #创建service的类型
+</code></pre><ul>
+<li>注意<code>selector</code>应该和上文中的pod创建时指名的label一致，指名是该pod</li>
+</ul>
+<p>再次创建：</p>
+<p>Bash</p>
+<pre><code>#查看运行中的pod的label是否和yml文件中描述的吻合
+kubectl get pods --show-labels
+
+#创建service
+kubectl create -f service_nginx.yml
+#查看
+kubectl get svc
+#name:kubernetes ClusterIP ip:10.3.0.1 port:443/TCP
+#name:nginx-pod NodePort ip:10.3.124.158 port:32333:32333/TCP
+</code></pre><ul>
+<li>此时，直接在浏览器中打开<code>172.17.4.101:32333</code>或<code>172.17.4.201:32333</code>即可正常访问Nginx</li>
+</ul>
+<hr>
+<p>label例子演示：</p>
+<p>由上文中提到的，几乎所有的资源都可以设置一个label，由一对key value组成，且可以设置不止一个，具体使用如下：</p>
+<p>pod_busybox.yml文件：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-pod
+  labels:
+    app: busybox
+spec:
+  nodeSelector: #定义一个node的selector（筛选器）
+    hardware: good #自定义的label
+  containers:
+  - name: busybox-container
+    image: busybox
+    command:
+      - sleep
+      - &quot;360000&quot;
+</code></pre><p>创建：</p>
+<p>Bash</p>
+<pre><code>#创建pod
+kubectl create -f pod_busybox.yml
+#查看状态
+kubectl get pods#可以发现现在该busybox pod的状态都是pending
+</code></pre><ul>
+<li>pod_busybox状态一直是pending的原因为：整个Cluster中的所有node上的label匹配不到<code>hardware=good</code>的label，所以该pod一直不能正常部署到node上</li>
+</ul>
+<p>Bash</p>
+<pre><code>#查看所有node上的所有label
+kubectl get node --show-labels
+
+#获取node的id(name)
+kubectl get node
+#手动在node上添加label
+kubectl label node node的id hardware=good
+
+#等待一阵之后，查看
+kubectl get pods#发现已经由pending状态变为Running状态
+</code></pre>
+</div>
+
+
+  </main>
+
+  <footer>
+  <div class="copyright">
+    &copy; Antonio.D.C 2020 · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+  <script src="https://antoniodc-aaa.github.io/js/blog.js"></script>
+
+  
+</body>
+</html>

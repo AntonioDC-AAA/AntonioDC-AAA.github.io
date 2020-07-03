@@ -29,7 +29,7 @@ install 与build最大的区别是编译后将输出文件打包库放在pkg下<
     <item>
       <title>Effective Go</title>
       <link>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/effective-go/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 28 Dec 2019 16:07:30 +0800</pubDate>
       
       <guid>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/effective-go/</guid>
       <description>Effective Go 1.长命名并不会使其更具有可读性。一份有用的说明文档通常比额外的长命更有价值
@@ -43,7 +43,7 @@ install 与build最大的区别是编译后将输出文件打包库放在pkg下<
     <item>
       <title>Go语言</title>
       <link>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 28 Nov 2019 16:07:30 +0800</pubDate>
       
       <guid>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go/</guid>
       <description>Go 当内置的panic()函数调用时，外围函数或方法的执行会立即终止。然后，任何延迟执行(defer)的函数或方法都会被调用，就像其外围函数正常返回一样。最后，调用返回到该外围函数的调用者，就像该外围调用函数或方法调用了panic()一样，因此该过程一直在调用栈中重复发生：函数停止执行，调用延迟执行函数等。当到达main()函数时不再有可以返回的调用者，因此这个过程会终止，并将包含传入原始panic()函数中的值的调用栈信息输出到os.Stderr。

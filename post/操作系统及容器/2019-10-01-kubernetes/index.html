@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.65.0-DEV" />
+
+  <title>kubernetes &middot; Blog</title>
+
+  <meta name="description" content="" />
+
+  
+  <meta property="og:locale" content="en-us"/>
+
+  
+  <meta property="og:image" content="https://antoniodc-aaa.github.io/images/name.jpg">
+
+  
+  <meta property="og:site_name" content="Blog"/>
+  <meta property="og:title" content="kubernetes"/>
+  <meta property="og:description" content="组件说明 kubernetes前身Borg系统架构：
+Borg系统架构
+ BorgMaster：主要负责请求的分发，整个集群的大脑  多个，避免单节点故障，一般高可用集群的最好保持3个以上，一般为奇数，即3,5,7,9等 link shared：分发   Borglet：真正执行的节点 scheduler：调度器，会将数据写入Paxos（数据库） borgcfg、command-line tools、web browsers：通过 一些配置文件、命令行、浏览器 对这个集群进行调度管理  kubernetes架构："/>
+  <meta property="og:url" content="https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/2019-10-01-kubernetes/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2019-03-01T08:02:14&#43;0800"/>
+  <meta property="article:modified_time" content="2019-03-01T08:02:14&#43;0800"/>
+  <meta property="article:author" content="Antonio.D.C">
+  
+  
+  
+
+  <script type="application/ld+json">
+  {
+    "@context" : "http://schema.org",
+    "@type" : "Blog",
+    "name": "Blog",
+    "url" : "https://antoniodc-aaa.github.io/",
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "description": "You only live once !"
+  }
+  </script>
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "name": "kubernetes",
+    "headline": "kubernetes",
+    "datePublished": "2019-03-01T08:02:14\x2b0800",
+    "dateModified": "2019-03-01T08:02:14\x2b0800",
+    "author": {
+      "@type": "Person",
+      "name": "Antonio.D.C",
+      "url": "https://antoniodc-aaa.github.io/"
+    },
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "url": "https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/2019-10-01-kubernetes/",
+    "description": "组件说明 kubernetes前身Borg系统架构：\nBorg系统架构\n BorgMaster：主要负责请求的分发，整个集群的大脑  多个，避免单节点故障，一般高可用集群的最好保持3个以上，一般为奇数，即3,5,7,9等 link shared：分发   Borglet：真正执行的节点 scheduler：调度器，会将数据写入Paxos（数据库） borgcfg、command-line tools、web browsers：通过 一些配置文件、命令行、浏览器 对这个集群进行调度管理  kubernetes架构："
+  }
+  </script>
+  
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/hyde.css">
+
+  
+<style type="text/css">
+  .sidebar {
+    background-color: #fc21803;
+  }
+
+  .read-more-link a {
+    border-color: #fc21803;
+  }
+
+  footer a,
+  .content a,
+  .related-posts li a:hover {
+    color: #fc21803;
+  }
+</style>
+
+
+
+  <link type="text/css" rel="stylesheet" href="https://antoniodc-aaa.github.io/css/blog.css">
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+        
+        <div class="author-image">
+          <img src="https://antoniodc-aaa.github.io/images/name.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+        </div>
+        
+      
+
+      <h1>Blog</h1>
+
+      
+      <p class="lead">You only live once !</p>
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://antoniodc-aaa.github.io/">Home</a>
+        </li>
+        <li>
+          <a href="/post/"> Posts </a>
+        </li><li>
+          <a href="/tags/"> Tags </a>
+        </li><li>
+          <a href="/about/"> About </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="https://github.com/" rel="me" title="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1>kubernetes</h1>
+
+  <div class="post-date">
+    <time datetime="2019-03-01T08:02:14&#43;0800">Mar 1, 2019</time> · 13 min read
+  </div>
+
+  <h2 id="组件说明">组件说明</h2>
+<p>kubernetes前身Borg系统架构：</p>
+<p><img src="https://nu-ll.github.io/2020/03/15/kubernetes/image-20200305135111543.png" alt="Borg系统架构"></p>
+<p>Borg系统架构</p>
+<ul>
+<li>BorgMaster：主要负责请求的分发，整个集群的大脑
+<ul>
+<li>多个，避免单节点故障，一般高可用集群的最好保持<strong>3个以上</strong>，一般为奇数，即3,5,7,9等</li>
+<li>link shared：分发</li>
+</ul>
+</li>
+<li>Borglet：真正执行的节点</li>
+<li>scheduler：调度器，会将数据写入Paxos（数据库）</li>
+<li>borgcfg、command-line tools、web browsers：通过 一些配置文件、命令行、浏览器 对这个集群进行调度管理</li>
+</ul>
+<p>kubernetes架构：</p>
+<p><img src="https://nu-ll.github.io/2020/03/15/kubernetes/image-20200305221943103.png" alt="kubernetes架构"></p>
+<p>kubernetes架构</p>
+<ul>
+<li>kubectl、web UI：命令行管理工具、网页</li>
+<li>etcd：GO语言的开源项目，键值对数据库，起持久化作用，储存k8s集群中的所有重要信息
+<ul>
+<li>etcd的官方将它定位成一个<strong>可信赖</strong>的<strong>分布式键值存储服务</strong>，它能够为整个分布式集群存储些关键数据，协助分布式集群的正常运转，有以下两个版本：</li>
+<li>v2：会将所有数据写入内存中</li>
+<li>v3：会引入本地化 卷的持久化操作，关机后数据不会丢失（k8s 1.11之前没有该版本）</li>
+</ul>
+</li>
+<li>Master（上边大框）：领导者
+<ul>
+<li>scheduler：调度器，调度任务至不同的node中，会将任务交给api server</li>
+<li>api server：负责将请求写入etcd，一切服务、访问的入口</li>
+<li>replication controller：重置器，维护副本数目或者期望值</li>
+</ul>
+</li>
+<li>node（下面小框）：执行者
+<ul>
+<li>kubelet：根CRI（C：container容器 R：Runtime运行环境 I：interface接口 ，即docker在这里的表现形式）有关。kubelet会跟docker进行交互，操作docker创建对应的容器，维持pod生命周期</li>
+<li>kube_proxy：实现pod与pod之间的访问，包括负载均衡。默认操作防火墙（firewall）实现pod的映射。新版本中支持IPVS。</li>
+<li>docker或其他虚拟化引擎</li>
+</ul>
+</li>
+</ul>
+<p>ETCD内部架构图：</p>
+<p><img src="https://nu-ll.github.io/2020/03/15/kubernetes/image-20200305223042011.png" alt="image-20200305223042011"></p>
+<p>image-20200305223042011</p>
+<ul>
+<li>Raft：所有读写信息都在这里</li>
+<li>WAL：预写日志
+<ul>
+<li>Entry：日志完整备份</li>
+<li>Snapshot：日志临时备份</li>
+</ul>
+</li>
+<li>Store：Raft会将数据以及日志写入磁盘中进行持久化设置</li>
+</ul>
+<p>相关插件：</p>
+<ul>
+<li>COREDNS：可以为集群中的SVC创建一个域名IP的对应关系解析</li>
+<li>DASHBOARD：给K8s集群提供一个B/S结构访问体系</li>
+<li>INGRESS CONTROLLER：官方只能实现四层代理, INGRESS可以实现七层代理</li>
+<li>FEDERATION：提供一个可以跨集群中心多K8S统一管理功能</li>
+<li>PROMETHEUS：提供K8s集群的监控能力</li>
+<li>ELK：提供K8s集群日志統一分析接入平台</li>
+</ul>
+<h2 id="基础概念">基础概念</h2>
+<h3 id="pod概念">Pod概念</h3>
+<p>只要pod运行，pod中的pause容器就一定会被启动，且该pod中的其他容器会共用pause容器中的网络栈和存储资源</p>
+<ul>
+<li>共用网络栈：其他容器中没有独立的ip地址，有的只有pause容器中的或该pod的地址，即其他容器均可通过localhost访问对方，同时也表示同一个pod中容器之间的<strong>端口不能冲突</strong>（一样）</li>
+<li>共用存储资源：同一个pod中既共享网络又共享储存</li>
+</ul>
+<p>分类：</p>
+<ul>
+<li>自主式Pod：不是控制器管理的pod，一旦死亡就结束</li>
+<li>控制器管理的Pod</li>
+</ul>
+<p>pod控制器类型：</p>
+<ul>
+<li>
+<p>RC（ReplicationController） &amp; RS（ReplicaSet） &amp; Deployment：</p>
+<ul>
+<li>ReplicationController用来确保容器应用的副本数始终保持在用户定义的副本数，即如果有容器异常退出，会自动创建新的Pod来替代；而如果异常多出来的容器也会自动回收。在新版本的 Kubernetes中建议使用 ReplicaSet来取代 ReplicationController</li>
+<li>ReplicaSet跟 Replication Controller没有本质的不同，只是名字不一样，并且ReplicaSet<strong>支持集合式的selector</strong></li>
+<li>虽然 ReplicaSet可以独立使用，但一般还是建议使用 Deployment来自动管理ReplicaSet，这样就无需担心跟其他机制的不兼容问题(比如 ReplicaSet不支持<strong>rolling-update</strong>但Deployment<strong>支持</strong>，Deployment是通过创建ReplicaSet来创建新的容器进而达到滚动更新的目的，且更新或者回滚时之前创建的ReplicaSet会被停用（而非删除）)</li>
+</ul>
+</li>
+<li>
+<p>HPA（HorizontalPodAutoScale）：</p>
+<ul>
+<li>Horizontal Pod Autoscaling仅适用于 Deployment和 ReplicaSet（HPA是基于RS定义的），在v1版本中仅支持根据Pod的CPU利用率扩所容，在 v1 alpha版本中，支持根据内存和用户自定义的 metric扩缩容，即能够实现水平自动扩容</li>
+</ul>
+</li>
+<li>
+<p>StatefullSet</p>
+<ul>
+<li>
+<p>StatefullSet是为了解决</p>
+<p>有状态服务</p>
+<p>（无状态服务：没有状态需要实时保留，或拿出来一段时间后放回去仍能够正常工作。反之为有状态服务）的问题(对应 Deployments和 ReplicaSets是为无状态服务而设计)，其应用场景包括：</p>
+<ul>
+<li>稳定的持久化存储，即Pod死亡后重新调，还是能访问到相同的持久化数据，基于PVC来实现</li>
+<li>稳定的网络标志，即Pod重新调度后其 PodName和 HostName不变，基于 Headless Service
+(即没有 Cluster IP的 Service)来实现</li>
+<li>有序部署，有序扩展，即Pod是有顺序的，在部署或者扩展的时候要依据定义的顺序依次依次进行(即从0到N-1，在下一个Pod运行之前所有之前的Pod必须都是 Running和 Ready状态)，基于 init containers来实现</li>
+<li>有序收缩，有序删除(即从N-1到0)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>DaemonSet</p>
+<ul>
+<li>
+<p>DaemonSet确保全部（或者一些（通过在Node上打污点（不被调度的Node），将不会在打污点的Node上运行该Pod副本））Node上运行</p>
+<p>一个</p>
+<p>Pod的副本。当有Node加入集群时，也会为他们新增一个Pod。当有Node从集群移除时，这些Pod也会被回收。删除 DaemonSet将会删除它创建的所有Pod。DaemonSet的一些典型用法:</p>
+<ul>
+<li>运行集群存储 daemon，例如在每个Node上运行 glusterd、ceph</li>
+<li>在每个Nde上运行日志收集 daemon，例如 fluent、 logstash</li>
+<li>在每个Node上运行监控 daemon，例如 Prometheus Node Exporter</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Job、Cronjob</p>
+<ul>
+<li>Job负责批处理任务，即仅执行一次的任务，它<strong>保证</strong>批处理任务的一个或多个Pod<strong>成功结束</strong>。</li>
+<li>Cron Job管理基于时间的Job，即：
+<ul>
+<li>在给定时间点只运行一次</li>
+<li>周期性地在给定时间点运行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>服务发现：</p>
+<p><img src="https://nu-ll.github.io/2020/03/15/kubernetes/image-20200306230923154.png" alt="图解"></p>
+<p>图解</p>
+<ul>
+<li>
+<p>客户端想访问一组pod，这组pod会被service</p>
+<p>通过label</p>
+<p>选择到，同时service会有自己的ip+端口。所以客户端能够通过service的ip+端口访问从而间接访问service对应的pod，且该处有一个RR（轮询，负载均衡）算法存在</p>
+<ul>
+<li>一组pod：这些pod均具有相关性，即同一个RS、RC控制器创建或者是拥有同一组标签（本质是<strong>通过标签label</strong>）</li>
+</ul>
+</li>
+</ul>
+<h3 id="网络通讯方式">网络通讯方式</h3>
+<p>Kubernetes的网络模型假定了所有Pod都在一个可以<strong>直接连通</strong>的<strong>扁平</strong>（所有的pod均可以通过对方的ip&quot;直接到达&rdquo;(底层有相关的转化机制，详见后文Flannel)）的网络空间中，这在GCE( Google Compute Engine)里面是现成的网络模型，Kubernetes假定这个网络已经存在。而在私有云里搭建 Kubernetes集群，就不能假定这个网络已经存在了。我们需要自己实现这个网络假设，将不同节点上的 Docker容器之间的互相访问先打通，然后运行 Kubernetes</p>
+<p>三种方式：</p>
+<ul>
+<li>同一个Pod内的多个容器之间：lo（localhost，由pause容器的网络栈构成）
+<ul>
+<li>根本原因：同一个Pod共享同一个网络命名空间，共享同一个 Linux协议栈</li>
+</ul>
+</li>
+<li>各Pod之间的通讯：Overlay Network（全覆盖网络）
+<ul>
+<li>Pod1与Pod2不在同一台主机,Pod的地址是与 docker0在同一个网段的,但 docker0网段与宿主机网卡是两个完全不同的IP网段,并且不同Node之间的通信只能通过宿主机的物理网卡进行.将Pod的IP和所在Node的IP关联起来,通过这个关联让Pod可以互相访问（Flannel插件的原理，详解下文）</li>
+<li>Pod1与Pod2在同一台机器,由 Docker0网桥直接转发请求至Pod2,不需要经过 Flannel</li>
+</ul>
+</li>
+<li>Pod与 Service之间的通讯：各节点的 Iptables规则（最新版本中利用LVS机制）</li>
+<li>Pod到外网：Pod向外网发送请求,查找路由表,转发数据包到宿主机的网卡,宿主网卡完成路由选择后, iptables执行 Masquerade转换,把源IP更改为宿主网卡的IP,然后向外网服务器发送请求</li>
+<li>外网访问Pod：借助Service的Nodeport方式进行映射</li>
+</ul>
+<hr>
+<p><strong>Flannel</strong>是CoreOS团队针对 Kubernetes设计的一个网络规划服务，简单来说，它的功能是让集群中的<strong>不同节点主机</strong>创建的 Docker容器都具有<strong>全集群唯一</strong>的虚拟IP地址。而且它还能在这些IP地址之间建立一个<strong>覆盖网络</strong>(Overla Network)，通过这个覆盖网络，将数据包原封不动地传递到目标容器内</p>
+<p><img src="https://nu-ll.github.io/2020/03/15/kubernetes/image-20200306234642257.png" alt="Flannel框架说明"></p>
+<p>Flannel框架说明</p>
+<ul>
+<li>所有流量访问Backend的pod上，经过自己的网关处理后将相关请求分配至对应的Web appx服务上。这里的Backend与Web appx的相互之间的访问需要跨主机或者在同主机内部通信
+<ul>
+<li>服务器service上一般会安装一个守护进程Flanneld，该进程会监听一个端口，该端口是用于后期转发接收数据包的服务端口，同时会开启网桥Flannel0</li>
+<li>网桥Flannel0会收集Docker0转发出来的数据包</li>
+<li>Docker0会分配自己的ip到对应的pod上</li>
+</ul>
+</li>
+<li>同一台主机的不同pod访问：
+<ul>
+<li>由于均处在同一网桥下，所以数据包都从Docker0的网桥走（在主机内部已经完成了数据包的转换）</li>
+</ul>
+</li>
+<li>跨主机不同pod访问（Web app2 &ndash;&gt; Backend）：
+<ul>
+<li>设置源、目标地址：10.1.15.2/24–&gt;10.1.20.3/24</li>
+<li>由于不是同一个网段，所以会发往网关Docker0，Docker0会将数据包传给Flannel0中，Flannel0同样会将数据包传给Flanneld</li>
+<li>Flanneld会从etcd中获取一堆路由表记录，并根据该表判断路由到那一台机器。然后会根据数据报文按照右侧图例进行封装（图中mac层后outerIp中目标地址为192.168.66.12，这里图中错了，注意）</li>
+<li>数据包会被下面一台service中的Flanneld截获，并拆封该数据包，同时将数据包往Flannel0中发送，Flannel0又会转发给Docker0</li>
+<li>Docker0会再次解封数据包，并将真正的数据发送给Backend</li>
+</ul>
+</li>
+</ul>
+<p>ETCD和Flannel之间的关联：</p>
+<ul>
+<li>存储管理 Flannel可分配的IP地址段资源</li>
+<li>监控ETCD中每个Pod的实际地址，并在内存中建立维护Pod节点路由表</li>
+</ul>
+<hr>
+<p>K8s中的三层网络关系：</p>
+<p><img src="https://nu-ll.github.io/2020/03/15/kubernetes/image-20200307001616147.png" alt="三层网络示例图"></p>
+<p>三层网络示例图</p>
+<ul>
+<li>真实的物理网络只有：节点网络，其余网络均为虚拟化网络</li>
+<li>所有Pod均在扁平化网络Pod网络中通信</li>
+<li>访问Service需要在Service网络中访问，service会通过 LVS/iptables 在后台访问其他pod</li>
+</ul>
+<h2 id="kubernetes集群安装">Kubernetes集群安装</h2>
+<h3 id="前期准备">前期准备</h3>
+<p>基本情况：私有镜像Harbor（192.168.66.100）、主节点k8s-master01（192.168.66.10）、从节点k8s-node01（192.168.66.20）、k8s-node02（192.168.66.21）以及软路由Router（192.168.66.1）</p>
+<ul>
+<li>采用k8s官方提供的安装工具kubeadm构建</li>
+<li>Router采用koolshare构建</li>
+<li>节点及私有镜像均采用CentOS7</li>
+</ul>
+<h3 id="集群安装">集群安装</h3>
+<h4 id="软路由koolshare搭建">软路由koolshare搭建</h4>
+<p>VMware创建软路由koolshare：Windows10 x64（在PE中进行软路由的写入），固件类型为BIOS，2核心，暂时4G RAM后期再修改，网络类型为仅主机模式，磁盘类型为IDE，20G单个文件</p>
+<p>步骤：</p>
+<ul>
+<li>将CD/DVD选项填入老毛桃的image（iso文件）位置，再开启虚拟机，选择进入Windows10 64位PE</li>
+<li>进入虚拟机后，换掉光盘，换成koolshare的iso镜像文件</li>
+<li>进入PE中我的电脑，打开DVD驱动器，看到<code>IMG写盘工具.exe</code>，右键，管理员方式运行，确定后选择对应的20G的物理硬盘，并将<code>映像档</code>设为DVD驱动器中的openwrt-koolshare镜像文件</li>
+<li>点击开始，写入软路由koolshare</li>
+<li>写入完毕后，将VMware中的CD/DVD中的设备状态栏中<code>启用时连接</code>选项关闭</li>
+<li>关闭Windows10 PE</li>
+<li>再次调整虚拟机资源：1G RAM，1核心，添加网卡并设为NAT模式
+<ul>
+<li>之前的网卡为仅主机网络，用于和其他的k8s节点连接</li>
+<li>添加的NAT网卡用于连接物理机，用于上网</li>
+<li>在koolshare上安装ssr插件，进行科学上网</li>
+</ul>
+</li>
+<li>再次开启虚拟机，会进入koolshare的系统</li>
+<li>假设安装节点网络为192.168.66.0/24网段，其中master端口为192.168.66.10/24，node1为192.168.66.20/24，node2为192.168.66.21/24</li>
+<li>修改网络并安装ssr插件：
+<ul>
+<li>Windows控制面板中找到<code>网络连接</code>，选中仅主机网络对应的网卡（可以通过VMware中的虚拟网络编辑器查看），将对应网卡中IPv4协议中的<code>自动获得IP地址</code>改为<code>使用下面的IP地址</code>，并设置为192.168.1.240，子网掩码：255.255.255.0。点击<code>高级</code>，在<code>IP地址</code>栏中添加一个地址：192.168.66.240，子网掩码：255.255.255.0（一张网卡，两个地址，为了之后koolshare更改ip准备）</li>
+<li>Windows物理机中可以打开网页：192.168.1.1的koolshare后台，密码为koolshare</li>
+<li>找到网络-&gt;接口，删除DHCPv6的WAN6
+<ul>
+<li>编辑内网网卡 LAN：点击<code>物理设置</code>，关闭桥接</li>
+<li>编辑外网网卡 WAN：点击<code>物理设置</code>，没有桥接，正常，无需操作</li>
+<li>编辑<code>IPv4</code>地址为：192.168.66.1（此后koolshare后台地址变为了该地址）</li>
+</ul>
+</li>
+<li>重进后台，找到网络-&gt;诊断，尝试ping百度，测试网络</li>
+<li>点击<code>酷软</code>，安装离线插件<code>koolss_2.2.2.tar.gz</code>（安装ssr插件）</li>
+<li>配置上述插件的SS/SSR节点信息并保存</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="节点及k8s搭建">节点及k8s搭建</h4>
+<p>VMware创建3台centos7机器，分配100G磁盘并存储为单个文件（提高读写IO），4核心，并分别命令为主节点k8s-master01、从节点k8s-node01（4G RAM）、k8s-node02（4G RAM）</p>
+<p>网络配置：</p>
+<p>Bash</p>
+<pre><code>vi /etc/sysconfig/network-scripts/ifcfg-ens33
+
+#修改一下参数：
+BOOOTRPOTO=static
+#添加地址
+IPADDR=192.168.66.20 #修改成对应的ip
+NETMASK=255.255.255.0
+GATEWAY=192.168.66.2 # 可以提前用ip route list看下网关地址
+DNS1=192.168.66.2
+DNS2=114.114.114.114
+
+#重启网络
+service network restart
+#ip link set eth0 upi          # 开启网卡
+#ip link set eth0 down         # 关闭网卡
+</code></pre><p>环境配置步骤：</p>
+<p>Bash</p>
+<pre><code>#设置系统主机名以及Host文件的相互解析
+hostnamectl set-hostname k8s-master01
+#修改host文件 大环境中建议通过DNS来解析
+vi /etc/hosts
+#添加下述代码
+192.168.66.10 k8s-master01
+192.168.66.20 k8s-node01
+192.168.66.21 k8s-node02
+scp /etc/hosts root@k8s-node01:/etc/hosts#将host拷贝至其他机器中
+scp /etc/hosts root@k8s-node02:/etc/hosts#将host拷贝至其他机器中
+#修改yum源为阿里源
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+yum makecache
+#安装依赖
+yum install -y conntrack ntpdate ntp ipvsadm ipset jq iptables curl sysstat libseccomp wget vim net-tools git
+#设置防火墙为 Iptables 并设置空规则
+systemctl stop firewall &amp;&amp; systemctl disable firewall
+yum -y install iptables-services &amp;&amp; systemctl start iptables &amp;&amp; systemctl enable iptables &amp;&amp; iptables -F &amp;&amp; service iptables save
+#关闭SELINUX
+swapoff -a &amp;&amp; sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab # 关闭swap分区（虚拟内存），再将虚拟内存永久关闭，防止k8s检测到虚拟内存并将容器放到虚拟内存中运行，从而降低工作效率
+setenforce 0 &amp;&amp; sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config # 关闭SELinux
+#调整内核参数，对于k8s
+cat &gt; kubernetes.conf &lt;&lt;EOF
+net.bridge.bridge-nf-call-iptables=1 # 必备参数 开启网桥模式
+net.bridge.bridge-nf-call-ip6tables=1 # 必备参数 开启网桥模式
+net.ipv4.ip_forward=1
+net.ipv4.tcp_tw_recycle=0
+vm.swappiness=0 # 禁止使用swap空间，只有当系统 OOM 时才允许使用它
+vm.overcommit_memory=1 # 不检查物理内存是否够用
+vm.panic_on_oom=0 # 开启OOM
+fs.inotify.max_user_instances=8192
+fs.inotify.max_user_watches=1048576
+fs.file-max=52706963
+fs.nr_open=52706963
+net.ipv6.conf.all.disable_ipv6=1 # 必备参数 关闭IPv6
+net.netfilter.nf_conntrack_max=2310720
+EOF
+cp kubernetes.conf /etc/sysctl.d/kubernetes.conf
+sysctl -p /etc/sysctl.d/kubernetes.conf # 刷新立马生效后，如提示文件不存在是因为当前内核环境下该文件没有，可以不用管
+#调整系统时区
+timedatectl set-timezone Asia/Shanghai #设置系统时区为 中国/上海
+timedatectl set-local-rtc 0 #将当前的UTC时间写入硬件时钟
+systemctl restart rsyslog #重启依赖于系统时间的服务
+systemctl restart crond
+#关闭系统不需要的服务
+systemctl stop postfix &amp;&amp; systemctl disable postfix # 邮件服务
+#设置rsyslogd 和 systemd journald （centos7中有两套日志方案，这里保留systemd journald关闭rsyslogd）
+mkdir /var/log/journal # 持久化保存日志的目录
+mkdir /etc/systemd/journald.conf.d
+cat &gt; /etc/systemd/journald.conf.d/99-prophet.conf &lt;&lt;EOF
+[Journal]
+# 持久化保存到磁盘
+Storage=persistent
+
+# 压缩历史日志
+Compress=yes
+
+SyncIntervalSec=5m
+RateLimitInterval=30s
+RateLimitBurst=1000
+
+# 最大占用空间 10G
+SystemMaxUse=10G
+
+# 单日志文件最大 200M
+SystemMaxFileSize=200M
+
+# 日志保存时间 2 周
+MaxRetentionSec=2week
+
+# 不将日志转发到 syslog
+ForwardToSyslog=no
+EOF
+systemctl restart systemd-journald
+#升级系统内核到4.44（Centos7.×系统自带的3.10.×内核存在一些Bugs，导致运行的 Docker、 Kubernetes不稳定）
+rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm # 安装完成后检查/boot/grub2/grub.cfg中对应内核 menuentry 中是否包含 initrd16配置，如果没有，再安装一次！
+yum --enablerepo=elrepo-kernel install -y kernel-lt
+# 设置开机从新内核启动
+grub2-set-default 'CentOS Linux (4.4.189-1.el7.elrepo.x86_64) 7 (Core)'
+#重启
+reboot
+#再次检测内核
+uname -r
+</code></pre><p>部署安装k8s：</p>
+<p>Bash</p>
+<pre><code>#kube-proxy开启ipvs的前置条件
+modprobe br_netfilter #加载模块
+cat &gt; /etc/sysconfig/modules/ipvs.modules &lt;&lt;EOF
+#!/bin/bash
+modprobe -- ip_vs
+modprobe -- ip_vs_rr
+modprobe -- ip_vs_wrr
+modprobe -- ip_vs_sh
+modprobe -- nf_conntrack_ipv4
+EOF
+chmod 755 /etc/sysconfig/modules/ipvs.modules &amp;&amp; bash /etc/sysconfig/modules/ipvs.modules &amp;&amp; lsmod | grep -e ip_vs -e nf_conntrack_ipv4 #赋予权限并执行，查看是否引导成功
+#安装docker
+yum install -y yum-utils device-mapper-persistent-data lvm2 #docker依赖
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo #阿里云docker ce镜像仓库
+yum update -y &amp;&amp; yum install -y docker-ce-18.09.9
+#更新后重启，利用uname -r查看，发现又回到了之前的内核版本，需要重新选择内核，这里直接先切换，再重启
+grub2-set-default 'CentOS Linux (4.4.216-1.el7.elrepo.x86_64) 7 (Core)' &amp;&amp; reboot #中间点版本号可能不同，通过uname -r来查看
+systemctl start docker &amp;&amp; systemctl enable docker #启动docker并设为自启
+mkdir /etc/docker # 创建/etc/docker目录
+#配置 daemon
+cat &gt; /etc/docker/daemon.json &lt;&lt;EOF
+{
+  &quot;exec-opts&quot;:[&quot;native.cgroupdriver=systemd&quot;],
+  &quot;log-driver&quot;:&quot;json-file&quot;,
+  &quot;log-opts&quot;:{
+    &quot;max-size&quot;:&quot;100m&quot;
+  }
+}
+EOF
+mkdir -p /etc/systemd/system/docker.service.d
+#重启 docker服务
+systemctl daemon-reload &amp;&amp; systemctl restart docker &amp;&amp; systemctl enable docker
+</code></pre><p>上述过程后，所有节点的基本环境差不多搭建完成，还需要最后做一点工作：</p>
+<p>首先初始化master节点：</p>
+<p>Bash</p>
+<pre><code>#安装 Kubeadm （主从配置）
+cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=0
+repo_gpgcheck=0
+gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
+http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+yum -y install kubeadm-1.15.1 kubectl-1.15.1 kubelet-1.15.1 #初始化工具 命令行工具 容器接口工具
+systemctl enable kubelet.service #开机自启kubelet
+#初始化主节点（这一步只需要主节点执行即可）（kubeadm会从GCE（谷歌云服务器）上拉取镜像，可以直接通过软路由科学上网下载，也可以利用打包好的镜像直接导入（见下文））
+#显示init-defaults文件并打印到 kubeadm-config.yaml 中，获得默认的初始化模板
+kubeadm config print init-defaults &gt; kubeadm-config.yaml 
+vim kubeadm-config.yaml # 编辑默认的初始化模板，并修改如下参数：
+localAPIEndpoint:
+    dvertiseAddress: 192.168.66.10 # 当前服务器节点地址
+kubernetesVersion: v1.15.1 # 修改为当前k8s版本
+networking:
+  podSubnet: &quot;10.244.0.0/16&quot; # 添加pod网段，修改到该网段（Flannel插件的默认网段）
+  serviceSubnet: 10.96.0.0/12
+#再在最后添加如下字段：
+---
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+featureGates:
+  SupportIPVSProxyMode: true
+mode: ipvs # 将默认调度的方式改为ipvs
+
+kubeadm init --config=kubeadm-config.yaml --experimental-upload-certs | tee kubeadm-init.log # 指定初始化文件，并自动颁发证书（1.13后的k8s才用该功能，可以让其他子节点自动颁发证书），最后将所有信息都写入到kubeadm-init.log中（该步骤会下载镜像（可以通过再开一个shell输入docker images查看镜像下载情况），如果直接采用现成的打包好的镜像这一步会很快，具体方法详见下文）
+#加入主节点以及其余工作节点
+vim kubeadm-init.log #这一步可以通过找到安装日志kubeadm-init.log中的命令，执行即可（下面三个命令均为该文件中的）
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+#至此 kubectl 已经能够正常使用
+</code></pre><ul>
+<li>
+<p>初始化主节点中，若使用现有的镜像文件：</p>
+<p>Bash</p>
+<pre><code>#解压压缩文件
+tar -zxvf kubeadm-basic.images.tar.gz
+</code></pre></li>
+<li>
+<p>编写shell脚本load-image.sh一起倒入全部镜像：</p>
+<p>Bash</p>
+<pre><code>#!/bin/bash
+ls /root/kubeadm-basic.images &gt; /tmp/image-list.txt
+cd /root/kubeadm-basic.images
+  
+for i in $( cat /tmp/image-list.txt )
+do
+  docker load -i $i
+done
+  
+rm -rf /tmp/image-list.txt
+</code></pre></li>
+<li>
+<p>执行脚本</p>
+<p>Bash</p>
+<pre><code>chmod a+x load-image.sh
+./load-image.sh
+</code></pre></li>
+<li>
+<p>传给另外两台节点</p>
+<p>Bash</p>
+<pre><code>#传给node01的家目录下
+scp -r kubeadm-basic.images load-image.sh root@k8s-node01:/root/
+#传给node02的家目录下
+scp -r kubeadm-basic.images load-image.sh root@k8s-node02:/root/
+  
+#另外两台子节点分别执行脚本，导入image
+./load-image.sh
+</code></pre></li>
+</ul>
+<p>然后需要给master节点中的k8s网络装上Flannel网络插件，实现网络扁平化：</p>
+<p>Bash</p>
+<pre><code>kubectl get node # 查看节点信息 可以发现目前节点还是NotReady状态（还没有Flannel插件构建网络）
+#备份下重要配置文件
+mkdir -p install-k8s/core
+mv kubeadm-init.log kubeadm-config.yaml install-k8s/core # init日志和k8s初始化时的配置文件
+#子节点加入：从master节点的安装信息最后面可以获取到子节点加入的命令，在子节点上执行即可
+#部署网络（安装flannel插件，master节点）
+mkdir -p install-k8s/plugin/flannel
+cd install-k8s/plugin/flannel
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml # 通过网络部署
+#若不能通过上述命令，也可以直接打开网页另存为kube-flannel.yml或以下命令
+wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml &amp;&amp; kubectl create -f kube-flannel.yml # 根据.yml文件创建flannel
+
+kubectl get pod -n kube-system -w # 查看插件安装结果（获取kube-system命名空间的信息，不加-n参数默认是default空间，-w为watch，会一直监视）会发现一个NAME带flannel的组件（本文中为kube-flannel-ds-amd64-lkxfd，仅供参考）
+kubectl get node # 查看节点情况 等flannel组件初始化成功后，master节点应该是Ready状态
+#再次备份
+cd ~
+mv install-k8s/ /usr/local/
+rm -rf *
+</code></pre><p>其他节点的加入：</p>
+<p>Bash</p>
+<pre><code>#kubeadm-init.log文件中的最后几行会保存其他节点加入该网络的信息
+vim kubeadm-init.log # 最后移动到了/usr/local/install-k8s/core/kubeadm-init.log
+#本文中为以下加入命令，仅供参考：
+kubeadm join 192.168.199.10:6443 --token abcdef.0123456789abcdef \
+    --discovery-token-ca-cert-hash sha256:46156bf0422bbca50c2588200c87c9d8d609b9eb5ac5d91c66a129703a0503f6
+</code></pre><ul>
+<li>
+<p>注意：默认<code>kubeadm join</code>命令默认的令牌<code>token</code>有效期为24小时，master节点可以通过如下命令对令牌进行操作（<a href="https://kubernetes.io/zh/docs/reference/setup-tools/kubeadm/kubeadm-token/">参考链接</a>）：</p>
+<p>Bash</p>
+<pre><code>#创建一个引导令牌
+kubeadm token create [token]
+#参数：--ttl duration 默认值：24h0m0s 令牌有效时间，超过该时间令牌被自动删除。(例如： 1s, 2m, 3h)。如果设置为 '0'，令牌将永远不过期。
+  
+#删除指定的引导令牌
+kubeadm token delete [token-value] ...
+  
+#列出所有的引导令牌
+kubeadm token list
+</code></pre></li>
+<li>
+<p>node节点加入格式（<a href="https://kubernetes.io/zh/docs/reference/setup-tools/kubeadm/kubeadm-join/">参考链接</a>）：</p>
+<p>Bash</p>
+<pre><code>kubeadm join 192.168.199.10:6443 --token 令牌 --discovery-token-ca-cert-hash sha256:46156bf0422bbca50c2588200c87c9d8d609b9eb5ac5d91c66a129703a0503f6（该值在master初始化时确定）
+</code></pre></li>
+</ul>
+<blockquote>
+<p>安装过程中遇到的坑：node节点安装好后一直加入不了master节点中的网络，只输出以下信息：</p>
+<p>Bash</p>
+<pre><code>[preflight] Running pre-flight checks
+</code></pre><p>通过如下方法查询可能出现的问题：</p>
+<p>Bash</p>
+<pre><code>#在master节点上查看k8s网络上各个pod情况
+kubectl get pod -n kube-system
+</code></pre><p>发现两个coredns pod均不是Running状态，均为CrashLoopBackOff，大致找到问题所在，通过日志查看详细情况：</p>
+<p>Bash</p>
+<pre><code>kubectl logs coredns-5c98db65d4-ksqvt -n kube-system
+#输出如下
+E0318 09:27:20.034010       1 reflector.go:134] github.com/coredns/coredns/plugin/kubernetes/controller.go:322: Failed to list *v1.Namespace: Get https://10.96.0.1:443/api/v1/namespaces?limit=500&amp;resourceVersion=0: dial tcp 10.96.0.1:443: connect: no route to host
+E0318 09:27:20.034010       1 reflector.go:134] github.com/coredns/coredns/plugin/kubernetes/controller.go:322: Failed to list *v1.Namespace: Get https://10.96.0.1:443/api/v1/namespaces?limit=500&amp;resourceVersion=0: dial tcp 10.96.0.1:443: connect: no route to host
+log: exiting because of error: log: cannot create log: open /tmp/coredns.coredns-5c98db65d4-ksqvt.unknownuser.log.ERROR.20200318-092720.1: no such file or directory
+</code></pre><p>发现是<code>k8s coredns connect: no route to host</code>问题，在github上查到<a href="https://github.com/kubernetes/minikube/issues/4350">相关链接</a>发现是<strong>iptables没有刷新</strong>的问题，遂在<a href="https://github.com/kubernetes/kubeadm/issues/193">该问题</a>下找打了答案：</p>
+<p>Bash</p>
+<pre><code>systemctl stop kubelet &amp;&amp; systemctl stop docker
+iptables --flush
+iptables -tnat --flush
+systemctl start kubelet &amp;&amp; systemctl start docker
+</code></pre><p>之后coredns pod一切正常node节点能够链接到master节点上。</p>
+</blockquote>
+<hr>
+<h4 id="私有仓库harbor搭建">私有仓库Harbor搭建</h4>
+<p>VMware创建私有镜像Harbor：2核心，2G RAM，100G单个文件。安装CentOS7，基本安装和上文中的节点类似这里不再叙述，值得一提的是该系统中Docker需要安装完毕IP配置为192.168.66.100且内核需要升级到4.4。</p>
+<p>修改所有节点及私有仓库Harbor的docker配置文件：</p>
+<p>Bash</p>
+<pre><code>vim /etc/docker/daemon.json
+
+{
+  &quot;exec-opts&quot;: [&quot;native.cgroupdriver=systemd&quot;],
+  &quot;log-driver&quot;: &quot;json-file&quot;,
+  &quot;log-opts&quot;: {
+    &quot;max-size&quot;: &quot;100m&quot;
+  }, # 注意这个逗号
+  &quot;insecure-registries&quot;: [&quot;https://hub.null.com&quot;] # 添加该行
+}
+
+#重启docker
+systemctl restart docker
+</code></pre><ul>
+<li><code>insecure-registries</code>：默认docker仓库是一个https的访问，需要一个https的证书，这里会在局域网内部制作一个假的证书，该证书对整个k8s集群来说会认为是一个危险的证书，需要通过该参数来将该域名对应的证书加到白名单中</li>
+</ul>
+<p>安装Harbor：</p>
+<p>从<a href="https://github.com/vmware/harbor/releases">Harbor的官方地址</a>下载压缩包，这里采用<code>harbor-offline-installer-v1.2.0.tgz</code></p>
+<p>Bash</p>
+<pre><code>#下载docker-compose
+curl -L https://github.com/docker/compose/releases/download/1.9.0/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose
+chmod a+x /usr/local/bin/docker-compose
+#安装Harbor
+tar -zxvf harbor-offline-installer-v1.2.0.tgz
+mv harbor /usr/local/
+cd /usr/local/harbor
+vim harbor.cfg # 编辑配置文件，具体参数如下
+
+hostname = hub.null.com # 修改为自己的域名，后面均需要该域名
+ui_url_protocol = https
+db_password = root123
+max_job_workers = 3
+customize_crt = on
+ssl_cert = /data/cert/server.crt # 需要创建该目录
+ssl_cert_key = /data/cert/server.key
+harbor_admin_password = Harbor12345 # 进入后台的密码
+
+mkdir -p /data/cert
+cd !$ # 进入刚刚创建的目录/data/cert
+#创建证书
+openssl genrsa -des3 -out server.key 2048 # 生成私钥（需要输入密码） 1234
+openssl req -new -key server.key -out server.csr # 根据该私钥创建证书（需要输入地点邮箱及域名，最后不需要修改密码和公司名字）
+cp server.key server.key.org # 备份私钥
+openssl rsa -in server.key.org -out server.key # 转换证书（主要是退掉密码，使私钥中不包含密码，不然docker中ngnix启动时会报错）
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt # 用该证书去签名并生成新的证书
+chmod a+x * # 将证书赋予可执行权限
+cd - # 回到刚刚的目录，即/usr/local/harbor
+./install.sh # 执行安装脚本
+</code></pre><ul>
+<li>
+<pre><code>harbor.cfg
+</code></pre><p>中的相关参数：</p>
+<ul>
+<li>hostname： 目标的主机名或者完全限定域名</li>
+<li>ui_url_protocol： http或https。 默认为http</li>
+<li>db_password： 用于db_auth的MySQL数据库的根密码。 更改此密码进行任何生产用途</li>
+<li>max_job_workers： （默认值为3） 作业服务中的复制工作人员的最大数量。 对于每个映像复制作业，
+工作人员将存储库的所有标签同步到远程目标。 增加此数字允许系统中更多的并发复制作业。 但是， 由于每个工
+作人员都会消耗一定数量的网络/CPU/IO资源， 请根据主机的硬件资源， 仔细选择该属性的值</li>
+<li>customize_crt： （on或off。 默认为on） 当此属性打开时， prepare脚本将为注册表的令牌的生成/验证创
+建私钥和根证书</li>
+<li>ssl_cert： SSL证书的路径， 仅当协议设置为https时才应用</li>
+<li>ssl_cert_key： SSL密钥的路径， 仅当协议设置为https时才应用</li>
+<li>secretkey_path： 用于在复制策略中加密或解密远程注册表的密码的密钥路径</li>
+</ul>
+</li>
+</ul>
+<p>收尾，修改各个节点的host</p>
+<p>Bash</p>
+<pre><code>echo &quot;192.168.66.100 hub.null.com&quot; &gt;&gt; /etc/hosts
+cat /etc/hosts
+</code></pre><p>另外，如果需要Windows实体机访问虚拟机中的内容，需要修改Windows实体机中的host文件，host具体路径在：<code>C:\Windows\System32\drivers\etc\HOST</code>，到最后追加如下内容：</p>
+<p>Bash</p>
+<pre><code>192.168.66.100 hub.null.com
+</code></pre><p>打开Windows实体机中浏览器，进入网址hub.null.com即可进入harbor的后台（默认密码为admin，密码为Harbor12345）</p>
+<h2 id="资源清单">资源清单</h2>
+<h3 id="资源类型">资源类型</h3>
+<h4 id="k8s中的资源">k8s中的资源</h4>
+<p>K8s中所有的内容都抽象为资源，资源实例化之后，叫做对象</p>
+<p>名称空间级别：尽在此名称空间下生效，如kube-system名称空间</p>
+<ul>
+<li>工作负载型资源（workload）：Pod、 ReplicaSet、 Deployment、 StatefulSet、 DaemonSet、Job、 CronJob（ Replication Controller在v1.11版本被废弃）</li>
+<li>服务发现及负载均衡型资源（ ServiceDiscovery LoadBalance）：Service、 Ingress…</li>
+<li>配置与存储型资源：Volume（存储卷）、CSI（容器存储接口，可以扩展各种各样的第三方存储卷）</li>
+<li>特殊类型的存储卷：ConfigMap（当配置中心来使用的资源类型）、 Secret（保存敏感数据）、 DownwardAPI（把外部环境中的信息输出给容器）</li>
+</ul>
+<p>集群级别：Namespace、Node、Role、 ClusterRole、 RoleBinding、 ClusterRoleBinding</p>
+<p>元数据级别：HPA、 PodTemplate、 LimitRange</p>
+<h4 id="常用检测命令">常用检测命令</h4>
+<p>清理工作：</p>
+<p>Bash</p>
+<pre><code>#删除default命名空间下的所有pod
+kubectl get pod
+kubectl delete pod --all
+#删除对应服务
+kubectl get svc
+kubectl delete svc 服务NAME
+#
+</code></pre><p>检测：</p>
+<p>Bash</p>
+<pre><code>#获取pod状态
+#-w：watch，一直监视
+#-o wide：显示ip等详细信息
+kubectl get pod
+#查看pod的详细信息
+kubectl describe pod pod的NAME
+#进入pod内部的容器
+#-c：指定那个容器，可以从yaml文件中获取，如果只有一个容器可以省略该参数 
+#-it -- 待运行命令：交互并打开一个tty并执行相应的命令
+#kubectl exec mypod -it -- /bin/sh
+kubectl exec pod的NAME -c 指定容器名字 -it -- 待运行命令
+#查看pod对应的log
+kubectl log pod的NAME
+</code></pre><h4 id="资源清单yaml格式">资源清单yaml格式</h4>
+<p>在k8s中，一般使用yaml格式的文件来创建符合我们预期期望的pod，这样的yaml文件我们一般称为资源清单</p>
+<blockquote>
+<p>yaml语法：</p>
+<p>是一个可读性高，用来表达数据序列的格式。YAML的意思其实是：仍是一种标记语言，但为了强调这种语言以数居做为中心，而不是以标记语言为重点</p>
+<p>规则：</p>
+<ul>
+<li>缩进时不允许使用Tab键，只允许使用空格</li>
+<li>缩进的空格数目不重要，只要相同层级的元素左侧对齐即可</li>
+<li>#标识注释，从这个宇符一直到行尾，都会被解释器忽略</li>
+</ul>
+<p>支持的数据结构：</p>
+<ul>
+<li>
+<p>对象：键值对的集合，又称为映射（ mapping）/哈希（ hashes）/字典（ dictionary）</p>
+<p>Yaml</p>
+<pre><code>name: Steve
+age: 18
+#Yaml也允许另一种写法,将所有键值对写成一个行内对象
+hash: {name: Steve, age: 18}
+</code></pre></li>
+<li>
+<p>数组：一组按次序排列的值，又称为序列（ sequence）/列表（list）</p>
+<p>Yaml</p>
+<pre><code>#一组连词线开头的行,构成一个数组
+animal
+- Cat
+- Dog
+#也可以采用行内表示法
+animal: [Cat, Dog]
+</code></pre></li>
+<li>
+<p>复合结构：对象和数组可以结合使用，形成复合结构</p>
+<p>Yaml</p>
+<pre><code>languages:
+- Ruby
+- Perl
+- Python
+websites:
+YAML: yaml.org
+Ruby: ruby-lang.org
+Python: python.org
+Perl: use.perl.org
+</code></pre></li>
+<li>
+<p>纯量（ scalars）：单个的、不可再分的值（字符串、布尔值、整数、浮点数、Null、时间、日期）</p>
+<p>Yaml</p>
+<pre><code># 数值直接以字面量的形式表示
+number: 12.30
+# 布尔值用true和 false表示
+isSet: true
+# null用 ~ 表示
+parent: ~
+# 时间采用ISO8601格式
+iso8601: 2001-12-14t21:59:43.10-05:00
+# 日期采用复合iso8601格式的年、月、日表示
+date: 1976-07-31
+# YAML允许使用两个感叹号,强制转换数据类型
+e: !!str 123
+f: !!str true
+</code></pre><ul>
+<li>
+<p>字符串相关说明：</p>
+<p>Yaml</p>
+<pre><code># 字符串默认不使用引号表示
+str: 这是一行字符串
+# 如果字符串之中包含空格或特殊字符,需要放在引号之中
+str: '内容: 字符串'
+# 单引号和双引号都可以使用,双引号不会对特殊字符转义
+s1: '内容\n字符串'
+s2: &quot;内容\n字符串&quot;
+# 单引号之中如果还有单引号,必须连续使用两个单引号转义
+str: 'labor''s day'
+# 字符串可以写成多行,从第二行开始,必须有一个缩进,换行符会被转为 空格
+str: 这是一段
+  多行
+  字符串
+# 多行字符串可以使用|保留换行符,也可以使用&gt;折叠换行
+this: |
+Foo
+Bar
+that: &gt;
+Foo
+Bar
+# +表示保留文字块末尾的换行,-表示删除字符串末尾的换行
+s1: |
+  Foo
+s2: |+
+  Foo
+s3: |-
+  Foo
+</code></pre></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="常用字段解释说明">常用字段解释说明</h4>
+<p>必须存在的属性：</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数名</th>
+<th align="center">字段类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">version</td>
+<td align="center">String</td>
+<td align="center">指的是K8S APl的版本,目前基本上是v1,可以用<code>kubectl api-versions</code>命令查询</td>
+</tr>
+<tr>
+<td align="center">kind</td>
+<td align="center">String</td>
+<td align="center">指的是yaml文件定义的资源类型和角色,比如:Pod</td>
+</tr>
+<tr>
+<td align="center">metadata</td>
+<td align="center">Object</td>
+<td align="center">元数据对象,固定值就写metadata</td>
+</tr>
+<tr>
+<td align="center"><a href="http://metadata.name/">metadata.name</a></td>
+<td align="center">String</td>
+<td align="center">元数据对象的名字,这里由我们编写,比如命名Pod的名字</td>
+</tr>
+<tr>
+<td align="center">metadata.namespace</td>
+<td align="center">String</td>
+<td align="center">元数据对象的命名空间,由我们自身定义(默认为default空间)</td>
+</tr>
+<tr>
+<td align="center">Spec</td>
+<td align="center">Object</td>
+<td align="center">详细定义对象,固定值就写Spec</td>
+</tr>
+<tr>
+<td align="center">spec.containers[]</td>
+<td align="center">list</td>
+<td align="center">Spec对象的容器列表定义,是个列表</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].name</td>
+<td align="center">String</td>
+<td align="center">定义容器的名字(可以不填，由系统随机)</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].image</td>
+<td align="center">String</td>
+<td align="center">定义要用到的镜像名称</td>
+</tr>
+</tbody>
+</table>
+<p>主要对象（可以不填）：</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数名</th>
+<th align="center">字段类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">spec.containers[].name</td>
+<td align="center">String</td>
+<td align="center">定义容器的名字(可以不填，由系统随机)</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].imagePullPollcy</td>
+<td align="center">String</td>
+<td align="center">定义镜像拉取策略,有 Always、 Never、IfNotPresent三个值可选(1) Always:意思是每次都尝试重新(从远程)拉取镜像(2) Never:表示仅使用本地镜像(3) IfNotPresent:如果本地有镜像就使用本地镜像,没有就拉取在线镜像.(默认是 Always)</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].command[]</td>
+<td align="center">list</td>
+<td align="center">指定容器启动命令,因为是数组可以指定多个,不指定则使用镜像打包时使用的启动命令</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].args[]</td>
+<td align="center">list</td>
+<td align="center">指定容器启动命令参数,因为是数组可以指定多个</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].workingDir</td>
+<td align="center">String</td>
+<td align="center">指定容器运行时所处的工作目录</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].volumeMounts[]</td>
+<td align="center">List</td>
+<td align="center">指定容器内部的存储卷配置</td>
+</tr>
+<tr>
+<td align="center">spec containers[].volumeMounts[].name</td>
+<td align="center">String</td>
+<td align="center">指可以被容器挂载的存储卷的名称</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].volumeMounts[].mountPath</td>
+<td align="center">String</td>
+<td align="center">指定可以被容器挂载的存储卷的路径</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].volumeMounts[].readOnly</td>
+<td align="center">String</td>
+<td align="center">设置存储卷路径的读写模式,ture或者false默认为读写模式</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].ports[]</td>
+<td align="center">List</td>
+<td align="center">指定容器需要用到的端口列表</td>
+</tr>
+<tr>
+<td align="center">spec.containets[].ports[].name</td>
+<td align="center">String</td>
+<td align="center">指定端口名称</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].ports[].containerPort</td>
+<td align="center">String</td>
+<td align="center">指定容器需要监听的端口号</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].ports[].hostPort</td>
+<td align="center">String</td>
+<td align="center">指定容器所在主机需要监听的端口号,默认跟上面 containerPort相同,注意设置了 hostPort,同一台主机无法启动该容器的相同副本(因为主机的端口号不能相同,这样会冲突)</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].ports[].protocol</td>
+<td align="center">String</td>
+<td align="center">指定端口协议,支持TCP和UDP,默认值为TCP</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].env[]</td>
+<td align="center">List</td>
+<td align="center">指定容器运行前需设置的环境变量列表</td>
+</tr>
+<tr>
+<td align="center">spec.containersl].env[].name</td>
+<td align="center">String</td>
+<td align="center">指定环境变量名称</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].env[].value</td>
+<td align="center">String</td>
+<td align="center">指定环境变量值</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].resources</td>
+<td align="center">Object</td>
+<td align="center">指定资源限制和资源请求的值（这里开始就是设置容器的资源上限）</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].resources.limits</td>
+<td align="center">Object</td>
+<td align="center">指定设置容器运行时资源的运行上限</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].resources.limits.cpu</td>
+<td align="center">String</td>
+<td align="center">指定CPU的限制，单位为core数，将用于<code>docker run --cpu-shares</code>参数（这里前面文章Pod资源限制有讲过)</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].resources.limits.memory</td>
+<td align="center">String</td>
+<td align="center">指定MEM内存的限制，单位为MIB、GiB</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].resources.requests</td>
+<td align="center">Object</td>
+<td align="center">指定容器启动和调度时的限制设置</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].resources.requests.cpu</td>
+<td align="center">String</td>
+<td align="center">CPU请求，单位为core数，容器启动时初始化可用数量</td>
+</tr>
+<tr>
+<td align="center">spec.containers[].resources.requests.memory</td>
+<td align="center">String</td>
+<td align="center">内存请求，单位为MIB、GiB，容器启动的初始化可用数量</td>
+</tr>
+</tbody>
+</table>
+<p>额外的参数项：</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数名</th>
+<th align="center">字段类型</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">spec.restartPolicy</td>
+<td align="center">String</td>
+<td align="center">定义Pod的重启策略,可选值为 Always、 OnFailure,默认值为 Always. 1Always:pod一旦终止运行,则无论容器是如何终止的, kubelet服务都将重启它。2.OnFailure:只有pod以非零退出码终止时, kubelet会重启该容器。如果容器正常结束(退出码为0),则 kubelet将不会重启它 3. Never:pod终止后, kubeletMast将退出码报告给,不会重启该 Pod.</td>
+</tr>
+<tr>
+<td align="center">spec.nodeSelector</td>
+<td align="center">Object</td>
+<td align="center">定义node的Label过滤标签,以key:value格式指定</td>
+</tr>
+<tr>
+<td align="center">spec.imagePullSecrets</td>
+<td align="center">Object</td>
+<td align="center">定义pull镜像时secret使用名称,以 name:secretkey格式指定</td>
+</tr>
+<tr>
+<td align="center">spec.hostNetwork</td>
+<td align="center">Boolean</td>
+<td align="center">定义是否使用主机网络模式,默认值为fase.设置true表示使用宿主机网络,不使用docker网桥,同时设置了true将无法在同一台宿主机上启动第二个副本。</td>
+</tr>
+</tbody>
+</table>
+<p>其他具体的可以通过如下命令查询：</p>
+<p>Bash</p>
+<pre><code>kubectl explain &lt;资源类型&gt;
+# eg:
+# kubectl explain pod
+# kubectl explain pod.apiVersion
+# kubectl explain rs
+</code></pre><p>最简单的模板：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Pod # 这里名字需谨慎，必须为Pod 不能小写
+metadata:
+  name: mpapp-pod
+  namespace: default
+  labels:
+    app: mpapp
+    version: v1
+spec:
+  containers:
+  - name: app
+    image: xxxx:v1
+</code></pre><ul>
+<li>
+<p>编写后如果有错误，可以尝试从以下方面着手解决：</p>
+<p>Bash</p>
+<pre><code>#查看pod内部信息
+kubectl describe pod pod名字
+# 查看对应报错容器日志（通过-c指定多个容器中的一个，若pod中只有一个容器则无需指定）
+kubectl log pod名字 -c 容器名字
+</code></pre></li>
+</ul>
+<h3 id="容器生命周期">容器生命周期</h3>
+<p>pod的基本的生命周期如下所示：</p>
+<p><img src="https://nu-ll.github.io/2020/03/15/kubernetes/image-20200321225715567.png" alt="pod生命周期"></p>
+<p>pod生命周期</p>
+<ul>
+<li>kubectl先kubeapi发送调度指令，kubeapi会调度kubelet，整个调度过程中间由etcd在中间完成，包括存储及其他功能。</li>
+<li>kubelet会操作CRI去完成容器的初始化</li>
+<li>初始化过程中会先启动pause的基础容器，负责网络以及存储资源的共享</li>
+<li>pause负责多个（或者0个）Init C（compose）的初始化
+<ul>
+<li>Init C如果非正常退出（退出码为非0），会根据重启策略判断是否重新执行</li>
+<li>这些Init C不是并行的</li>
+</ul>
+</li>
+<li>Init C初始化完成后，会进入Main C（compose）中运行
+<ul>
+<li>Main C在刚运行的时候，可以启动START脚本/命令，同样，在结束的时候也可以执行STOP脚本/命令</li>
+<li>Main C的执行过程中会有readiness和Liveness的参与
+<ul>
+<li>readiness可以根据配置在Main C开始执行的一定时间后启动，负责就绪检测，如果检测成功后Pod的状态会变成Running或Ready</li>
+<li>Liveness可以根据配置在Main C开始执行的一定时间后启动，会伴随着Main C的整个生命周期，负责检测Main C中的进程，如果发现有不正常的现象，会根据重启策略执行诸如重启、删除pod等命令</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="init-c">Init C</h4>
+<p>Pod能够具有多个容器，应用运行在容器里面，但是它也可能有一个或多个先于应用容器启动的Init容器。Init容器与普通的容器非常像，除了如下两点：</p>
+<ul>
+<li>Init容器总是运行到成功完成为止</li>
+<li>每个Init容器都必须在下一个Init容器启动之前成功完成</li>
+</ul>
+<p>如果Pod的Init容器失败， Kubernetes会不断地重启该Pod，直到Init容器成功为止。然而，如果Pod对应的 restartPolicy（重启策略）为 Never，它不会重新启动</p>
+<p>因为Init容器具有与应用程序容器分离的单独镜像，所以它们具有如下优势：</p>
+<ul>
+<li>它们（Init容器）可以包含并运行实用工具，但是出于安全考虑，是不建议在应用程序容器镜像中包含这些实用工具的</li>
+<li>它们（Init容器）可以包含使用工具和定制化代码来安装，但是不能出现在应用程序镜像中。例如，创建镜像没必要FROM另一个镜像，只需要在安装过程中使用类似sed、awk、 python或dig这样的工具</li>
+<li>应用程序镜像可以分离出创建和部署的角色，而没有必要联合它们构建一个单独的镜像。</li>
+<li>Init容器使用 Linux Namespace，所以相对应用程序容器来说具有不同的文件系统视图。因此，它们能够具有访问 Secret的权限，而应用程序容器则不能</li>
+<li>它们（Init容器）必须在应用程序容器启动之前运行完成，而应用程序容器是并行运行的，所以Init容器能够提供了一种简单的阻塞或延迟应用容器的启动的方法，直到满足了一组先决条件。</li>
+</ul>
+<p>Init C模板：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod # pod名字
+  labels:
+    app: myapp # pod标签
+spec:
+  containers: # pod中的容器
+  - name: myapp-container
+    image: busybox
+    command: ['sh', '-c', 'echo The app is running! &amp;&amp; sleep 3600'] # 镜像启动时执行的命令，用于取代cmd的命令
+  initContainers: # Init C
+  - name: init-myservice # Init容器名字
+    image: busybox
+    command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
+  - name: init-mydb # Init容器名字
+    image: busybox
+    command: ['sh', '-c', 'until nslookup mydb; do echo waiting for mydb; sleep 2; done;']
+</code></pre><p>想要上诉代码成功的通过Init C，需要有以下两个服务被创建：</p>
+<p>Yaml</p>
+<pre><code>kind: Service
+apiVersion: v1
+metadata:
+  name: myservice
+spec:
+  ports:
+    - protocol: TCP
+      port: 86
+      targetPort: 9376
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mydb
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9377
+</code></pre><p>特殊说明：</p>
+<ul>
+<li>在Pod启动过程中，Init容器会按顺序在<strong>网络</strong>和<strong>数据卷</strong>初始化（这两个都是在pause中完成的）之后启动。每个容器必须在下一个容器启动之前成功退出</li>
+<li>如果由于运行时或失败退出，将导致容器启动失败，它会根据Pod的 restartPolicy指定的策略进行重试。如果Pod的 restartPolicy设置为 Always，Init容器失败时会使用RestartPolicy策略（即重新初始化）</li>
+<li>在所有的Init容器没有成功之前，Pod将不会变成 Ready状态。Init容器的端口将不会在Service中进行聚集。正在初始化中的Pod处于 Pending状态，但应该会将 Initializing状态设置为true</li>
+<li>如果<strong>Pod重启</strong>，所有Init容器必须<strong>重新执行</strong></li>
+<li>pod启动后，如果对Init容器spec的修改，范围会被限制在容器 image字段，修改其他字段都不会生效。更改Init容器的 Image字段，等价于重启该Pod</li>
+<li>Init容器具有应用容器的所有字段，除了 readinessProbe字段（就绪检测）。因为Init容器无法定义不同于完成（ completion）的就绪（ readiness）之外的其他状态。</li>
+<li>在Pod中的每个app和Init容器的名称必须唯一；与任何其它容器共享同一个名称，会在验证时抛出错误</li>
+<li>Init C中端口可以冲突</li>
+</ul>
+<h4 id="探针">探针</h4>
+<p>探针是由 kubelet对容器执行的定期诊断。要执行诊断， kubelet调用由容器实现的 Handler。Handler有三种类型的处理程序：</p>
+<ul>
+<li>ExecAction：在容器内执行指定命令。如果命令退出时返回码为0则认为诊断成功。</li>
+<li>TCPSocketAction：对指定端口上的容器的IP地址进行TCP检查。如果端口打开，则诊断被认为是成功的。</li>
+<li>HTTPGetAction：对指定的端口和路径上的容器的IP地址执行 Http Get请求。如果响应的状态码大于等于200且小于400，则诊断被认为是成功的</li>
+</ul>
+<p>每次探测都将获得以下三种结果之一</p>
+<ul>
+<li>成功：容器通过了诊断</li>
+<li>失败：容器未通过诊断</li>
+<li>未知：诊断失败，因此不会采取任何行动</li>
+</ul>
+<p>探测方法：</p>
+<ul>
+<li>livenessProbe：存活探测，指示容器是否正在运行。如果存活探测失败，则 kubelet会杀死容器（Main C），并且容器将受到其重启策略的影响。如果容器不提供存活探针，则默认状态为 Success</li>
+<li>readinessProbe：就绪探测，指示容器是否准备好服务请求。如果就绪探测失败，端点控制器将从与Pod匹配的所有 Service的端点中删除该Pod的IP地址。初始延迟之前的就绪状态默认为 Failure。如果容器不提供就绪探针，则默认状态为 Success</li>
+</ul>
+<hr>
+<p>例子1（readinessprobe-httpget）：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: readiness-httpget-pod
+  namespace: default
+spec:
+  containers:
+  - name: readiness-httpget-container
+    image: wangyanglinux/myapp:v1
+    imagePullPolicy: IfNotPresent # 镜像下载策略：如果有就不下载
+    readlinessProbe: # 就绪检测
+      httpGet: # 检测方案：gttpget方案
+        port: 80 # 端口
+        path: /index.html # 检测路径
+      initialDelaySeconds: 1 # 检测延时：容器启动后1s才开始检测
+      periodSeconds: 3 # 重试时间：3s
+</code></pre><p>例子2（livenessProbe-exec）：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-exec-pod
+  namespace: default
+spec:
+  containers:
+  - name: liveness-exec-container
+    image: null.com/library/busybox
+    imagePullPolicy: IfNotPresent
+    command: [&quot;/bin/sh&quot;,&quot;-c&quot;,&quot;touch /tmp/live; sleep 60; rm -rf /tmp/live; sleep 3600&quot;]
+    livenessProbe: # 存活检测
+      exec: # 检测方案：ExecAction方式
+        command: [&quot;test&quot;,&quot;-e&quot;,&quot;/tmp/live&quot;] # 运行的检测命令，返回值为0则正常
+      initialDelaySeconds: 1 # 检测延时：容器启动后1s才开始检测
+      periodSeconds: 3 # 重试时间：3s
+</code></pre><p>例子3（livenessProbe-httpget）：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-httpget-pod
+  namespace: default
+spec:
+  containers:
+  - name: liveness-httpget-container
+    image: null.com/library/busybox:v1
+    imagePullPolicy: IfNotPresent
+    ports:
+    - name: http
+      containerPort: 80
+    livenessProbe: # 存活检测
+      httpGet: # 检测方案：gttpget方案
+        port: http # 端口
+        path: /index.html # 检测路径
+      initialDelaySeconds: 1 # 检测延时：容器启动后1s才开始检测
+      periodSeconds: 3 # 重试时间：3s
+      timeoutSeconds: 10 # 最大超时时间
+</code></pre><p>例子4（livenessProbe-tcp）：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: probe-tcp
+spec:
+  containers:
+  - name: nginx
+    image: null.com/library/myapp:v1
+    livenessProbe: # 存活检测
+      tcpSocket: # 检测方案：TCPSocketAction方案
+        port: 8080 # 端口
+      initialDelaySeconds: 5 # 检测延时：容器启动后5s才开始检测
+      timeoutSeconds: 1 #最大超时时间
+      periodSeconds: 3 # 重试时间：3s
+</code></pre><h4 id="startstop相位">start、stop、相位</h4>
+<p>启动退出动作模板：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: v1
+kind: Pod
+metadata:
+  name: lifecycle-demo
+spec:
+  containers:
+  - name: lifecycle-demo-container
+    image: null.com/library/myapp:v1
+    lifecycle:
+      postStart: # start动作
+        exec:
+          command: [&quot;/bin/sh&quot;,&quot;-c&quot;,&quot;echo Hello from the poststart handler &gt; /usr/share/message&quot;]
+      postStop: # stop动作
+        exec:
+          command: [&quot;/bin/sh&quot;,&quot;-c&quot;,&quot;echo Hello from the poststop handler &gt; /usr/share/message&quot;]
+</code></pre><p>Pod的 status字段是一个 Podstatus对象， PodStatus中有一个 phase（<strong>相位</strong>）字段。该字段是Pod在其生命周期中的简单宏观概述。该阶段并不是对容器或Pod的综合汇总，也不是为了作为综合状态机。Pod相位的数量和含义是严格指定的。除了下面列举的状态外，不应该再假定Pod有其他的phase值：</p>
+<ul>
+<li>挂起（ Pending）：Pod已被 Kubernetes系统接受，但有一个或者多个容器镜像尚未创建。等待时间包括调度Pod的时间和通过网络下载镜像的时间，这可能需要花点时间</li>
+<li>运行中（ Running）：该Pod已经绑定到了一个节点上，Pod中所有的容器都已被创建。至少有一个容器正在运行，或者正处于启动或重启状态</li>
+<li>成功（ Succeeded）：Pod中的所有容器都被成功终止（每个pod的退出码为0，即正常退出），并且不会再重启</li>
+<li>失败（ Failed）：Pod中的所有容器都已终止了，并且至少有一个容器是因为失败终止。也就是说，容器以非0状态退出或者被系统终止</li>
+<li>未知（ Unknown）：因为某些原因无法取得Pod的状态，通常是因为与Pod所在主机通信失败</li>
+</ul>
+<h2 id="资源控制器">资源控制器</h2>
+<p>相关模板及帮助文档均可通过以下命令查询：</p>
+<p>Bash</p>
+<pre><code>kubectl explain &lt;资源类型&gt;
+# eg:
+# kubectl explain rs
+</code></pre><p>Pod 的分类：</p>
+<ul>
+<li>自主式 Pod：Pod 退出了，此类型的 Pod 不会被创建</li>
+<li>控制器管理的 Pod：在控制器的生命周期里，始终要维持 Pod 的副本数目</li>
+</ul>
+<p>控制器：Kubernetes中内建了很多 controller（控制器），这些相当于一个状态机，用来控制Pod的具体状态和行为</p>
+<p>控制器类型：</p>
+<ul>
+<li>ReplicationController和ReplicaSet</li>
+<li>Deployment</li>
+<li>DaemonSet</li>
+<li>StateFulSet</li>
+<li>Job/CronJob</li>
+<li>Horizontal Pod Autoscaling</li>
+</ul>
+<h3 id="replicationcontroller和replicaset">ReplicationController和ReplicaSet</h3>
+<p>ReplicationController(RC)用来<strong>确保容器应用的副本数</strong>始终保持在用户定义的副本数，即如果有容器异常退出，会自动创建新的Pod来替代；而如果异常多出来的容器也会自动回收；</p>
+<p>在新版本的Kubernetes中建议使用ReplicaSet 来取代 ReplicationController。ReplicaSet跟ReplicationController没有本质的不同，只是名字不一样，并且ReplicaSet支持集合式的selector（通过标签控制）</p>
+<p>模板：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: frontend
+spec:
+  replicas: 3
+  selector: # 这里确定RC控制的目标pod的标签
+    matchLabels:
+      tier: frontend
+  template: # 这里可以理解为嵌套了一个pod，其后在pod中的一些特性（如 init C等）这里均能够正常使用
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: php-redis
+        image: gcr.io/google_samples/gb-frontend:v3
+        env:
+        - name: GET_HOSTS_FROM
+          value: dns
+        ports:
+        - containerPort: 80
+</code></pre><h3 id="deployment">Deployment</h3>
+<p>Deployment为Pod和Replicaset提供了一个声明式定义(declarative)方法，用来<strong>替代</strong>以前的<strong>ReplicationController</strong>来方便的管理应用。典型的应用场景包括；</p>
+<blockquote>
+<p>命令式编程：侧重于如何实现程序，就像我们刚接触编程的时候那样，我们需要把程序的实现过程按照逻辑结果一步步写下来</p>
+<p>声明式编程：侧重于定义想要什么，然后告诉计算机/引擎，让他帮你去实现</p>
+</blockquote>
+<ul>
+<li>通过定义Deployment来创建Pod和Replicaset（Deployment会创建ReplicaSet进而创建Pod）</li>
+<li>滚动升级和回滚应用（会保留之前版本的ReplicaSet）</li>
+<li>扩容和缩容</li>
+<li>暂停和继续Deployment</li>
+</ul>
+<p>模板：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  template: # 这里可以理解为嵌套了一个pod，其后在pod中的一些特性（如 init C等）这里均能够正常使用
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+</code></pre><p>相关示例：</p>
+<p>yaml文件为上述模板</p>
+<p>Bash</p>
+<pre><code>kubectl create -f nginx-deployment.yaml --record ##--record：记录命令，可以方便查看每次revision的变化
+kubectl get deployment
+kubectl get rs
+kubectl get pod -o wide
+#扩容
+kubectl scale deployment nginx-deployment(deployment名字) --replicas=10（扩容数量）
+kubectl get rs#会发现rs不会变，即模板信息不会变，即数目变化不会导致回滚
+#更新镜像
+kubectl get deploy -o wide # 查案版本信息
+kubectl set image deployment/nginx-deployment(deployment名字) nginx=nginx:1.9.1（容器名称=容器名称:升级后的版本号）
+kubectl get rs#rs改变，能够进行回滚操作
+#回滚（仅限回到上一次，再次回滚会又回来）
+kubectl get deploy -o wide # 查案版本信息
+kubectl rollout undo deployment/nginx-deployment(deployment名字)
+kubectl rollout undo deployment/nginx-deployment --to-revision=2 # 使用--to-revision参数退回到指定某个历史版本
+</code></pre><h4 id="细节知识">细节知识</h4>
+<p>Rollover</p>
+<p>假如您创建了一个有5个<code>niginx:1.7.9</code> replica的 Deployment，但是当还只有3个<code>nginx:1.7.9</code>的 replica 创建出来的时候就开始更新含有5个 <code>nginx:1.9.1</code> replica 的 Deployment。在这种情况下，Deployment 会立即杀掉已创建的3个<code>nginx:1.7.9</code>的Pod，并开始创建<code>nginx:1.9.1</code>的 Pod。不会等到所有的5个<code>nginx:1.7.9</code>的Pod都创建完成后才开始改变航道</p>
+<p>回退相关命令（接上述 相关示例 ）</p>
+<p>Bash</p>
+<pre><code>kubectl set image deployment/nginx-deployment nginx=nginx:1.91 # 更新镜像
+kubectl rollout status deployments/nginx-deployment # 查看当前更新状态（更新成功返回0）
+kubectl get pods
+kubectl rollout history deployment/nginx-deployment # 查看历史版本（创建时加上--record这里会显示详细信息）
+kubectl rollout undo deployment/nginx-deployment # 回滚（仅限回到上一次，再次回滚会又回来）
+kubectl rollout undo deployment/nginx-deployment --to-revision=2 # 使用--to-revision参数退回到指定某个历史版本
+kubectl rollout pause deployment/nginx-deployment # 暂停deployment的更新
+kubectl rollout resume deployment/nginx-deployment # 恢复更新
+</code></pre><p>可以通过设置<code>.spec.revisonHistoryLimit</code>项来指定 deployment 最多保留多少 revision 历史记录。默认的会保留所有的 revision；如果将该项设置为0，Deployment 将不允许回退</p>
+<h3 id="daemonset">Daemonset</h3>
+<p>DaemonSet 确保<strong>全部（或者一些）**Node上运行**一个</strong>Pod的副本。当有Node加入集群时，也会为他们新增一个Pod。当有Node从集群移除时，这些Pod也会被回收。删除DaemonSet将会删除它创建的所有Pod。使用Daemonset的一些典型用法：</p>
+<ul>
+<li>运行集群存储daemon，例如在每个Node 上运行glusterd、ceph</li>
+<li>在每个Node 上运行日志收集daemon，例如fluentd、logstash</li>
+<li>在每个Node 上运行监控daemon，例如Prometheus Node Exporter、collectd、Datadog 代理、New Relic 代理，或Ganglia gmond</li>
+</ul>
+<p>实例：</p>
+<p>Yaml</p>
+<pre><code>apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: deamonset-example # 必须和下面的matchLabels匹配成功，否则会不停创建
+  labels:
+    app: daemonset
+spec:
+  selector: # 必须和上面的labels匹配成功，否则会不停创建
+    matchLabels:
+      name: deamonset-example
+  template: # pod模板
+    metadata:
+      labels:
+        name: deamonset-example
+    spec:
+      containers:
+      - name: daemonset-example
+        image: wangyanglinux/myapp:v1
+</code></pre><h3 id="job">Job</h3>
+<p>Job负责<strong>批处理任务</strong>，即仅执行一次的任务，它<strong>保证</strong>批处理任务的一个或多个Pod成功结束</p>
+<h4 id="job-spec">Job Spec</h4>
+<p><code>.spec.completions</code>标志Job结束需要成功运行的Pod个数，默认为1
+<code>.spec.parallelism</code>标志并行运行的Pod的个数，默认为1
+<code>.spec.activeDeadlineSeconds</code>标志失败Pod的重试最大时间，超过这个时间不会继续重试</p>
+<p>例子：</p>
+<p>Yaml</p>
+<pre><code>apiversion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  template: # pod模板
+    metadata:
+      name: pi
+    spec:
+      containers: # pod中的容器
+      - name: pi
+        image: perl # 该镜像较大且国内下载慢
+        command: [&quot;perl&quot;， &quot;-Mbignum=bpi&quot;, &quot;-wle&quot;, &quot;print bpi(2000)&quot;] # 运行该命令，计算pi后的2000位
+      restartPolicy: Never # 永不重启，这里仅支持Never和OnFailure
+</code></pre><p>命令：</p>
+<p>Bash</p>
+<pre><code>kubectl create -f xxxx.yaml
+kubectl get pod -o wide # 查看创建情况
+kubectl get job # 查看job控制器
+kubectl log # 查看日志，有pi后2000位输出
+</code></pre><h3 id="cronjob">CronJob</h3>
+<p>CronJob管理<strong>基于时间</strong>的Job（与Deployment类似，本质是在特定的时间循环创建Job），即:</p>
+<ul>
+<li>在给定时间点只运行一次</li>
+<li>周期性地在给定时间点运行</li>
+</ul>
+<p>使用前提条件：当前使用的Kubernetes集群版本&gt;= 1.8 (对CronJob)。</p>
+<p>典型的用法如下所示：</p>
+<ul>
+<li>在给定的时间点调度Job运行</li>
+<li>创建周期性运行的Job，例如：数据库备份、发送邮件</li>
+</ul>
+<h4 id="cronjob-spec">CronJob Spec</h4>
+<p><code>.spec.schedule</code>:调度，必需字段，指定任务运行周期，格式同Cron
+<code>.spec.jobTemplate</code>:Job模板，必需字段，指定需要运行的任务，格式同Job
+<code>.spec.startingDeadlineSeconds</code>:启动Job的期限（秒级别），该字段是可选的。如果因为任何原因而错过了被调度的时间，那么错过执行时间的Job将被认为是失败的。如果没有指定，则没有期限
+<code>.spec.concurrencyPolicy</code>:并发策略，该字段也是可选的。它指定了如何处理被CronJob创建的Job的并发执行。只允许指定下面策略中的一种：</p>
+<ul>
+<li>
+<p><code>Allow</code>(默认）：允许并发运行Job</p>
+</li>
+<li>
+<p><code>Forbid</code>:禁止并发运行，如果前一个还没有完成，则直接跳过下一个</p>
+</li>
+<li>
+<p><code>Replace</code>:取消当前正在运行的Job，用一个新的来替换</p>
+<p>注意，当前策略只能应用于同一个CronJob创建的Job。如果存在多个CronJob，它们创建的Job之间总是允许并发运行。</p>
+</li>
+</ul>
+<p><code>.spec.suspend</code>:挂起，该字段也是可选的。如果设置为true，后续所有执行都会被挂起。它对已经开始执行的Job不起作用。默认值为false。
+<code>.spec.successfulJobsHistoryLimit</code>和<code>.spec.failedJobsHistoryLimit</code>:历史限制，是可选的字段。它们指定了可以保留多少完成和失败的Job。默认情况下，它们分别设置为3和1。设置限制的值为0，相关类型的Job完成后将不会被保留。</p>
+<p>例子：</p>
+<p>Yaml</p>
+<pre><code>apiversion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: &quot;*/1 * * * *&quot; # 分 时 日 月 周 （这里是每分钟）
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            args:
+            - /bin/sh
+            - -C
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure #无失败则无重启
+</code></pre><h4 id="限制">限制</h4>
+<ol>
+<li>创建Job操作应该是幂等的</li>
+<li>成功与否并不太好去判断（但是Job可以判断）</li>
+</ol>
+<h3 id="statefulset">StatefulSet</h3>
+<p>StatefulSet作为Controller 为Pod提供唯一的标识。 它可以保证部署和scale的顺序。StatefulSet是为了解决<strong>有状态服务</strong>的问题（对应Deployments和ReplicaSets是为无状态服务而设计），其应用场景包括：</p>
+<ul>
+<li>稳定的持久化存储，即Pod重新调度后还是能访问到相同的持久化数据，基于PVC来实现</li>
+<li>稳定的网络标志，即Pod重新调度后其PodName和HostName不变，基于Headless Service (即没有Cluster IP的Service)来实现</li>
+<li>有序部署，有序扩展，即Pod是有顺序的，在部署或者扩展的时候要依据定义的顺序依次依次进行(即从0到N-1,在下一个Pod运行之前所有之前的Pod必须都是Running和Ready状态)，基于init containers来实现</li>
+<li>有序收缩,有序删除(即从N-1到0)</li>
+</ul>
+<h3 id="horizontal-pod-autoscaling">Horizontal Pod Autoscaling</h3>
+<p>应用的资源使用率通常都有高峰和低谷的时候，如何削峰填谷，提高集群的整体资源利用率，让service中的Pod个数自动调整？这就有赖于Horizontal Pod Autoscaling了，顾名思义，使Pod<strong>水平自动缩放</strong></p>
+<p>HPA（Horizontal Pod Autoscaling）可以理解为是一个控制器的附属品，在选定其他控制器后再来确定是否需要HPA来管理选定的其他控制器。HPA可以根据K8s的一些资源指标（如CPU使用情况等）来对Pod进行水平缩放</p>
+
+</div>
+
+
+  </main>
+
+  <footer>
+  <div class="copyright">
+    &copy; Antonio.D.C 2020 · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+  <script src="https://antoniodc-aaa.github.io/js/blog.js"></script>
+
+  
+</body>
+</html>

@@ -1,0 +1,3283 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.65.0-DEV" />
+
+  <title>Go语言入门经典 &middot; Blog</title>
+
+  <meta name="description" content="" />
+
+  
+  <meta property="og:locale" content="en-us"/>
+
+  
+  <meta property="og:image" content="https://antoniodc-aaa.github.io/images/name.jpg">
+
+  
+  <meta property="og:site_name" content="Blog"/>
+  <meta property="og:title" content="Go语言入门经典"/>
+  <meta property="og:description" content="Go语言入门经典 零、前言 go中的编码统一为utf-8，其中ascii的字符占一字节，汉字占三字节
+GO语言中导入的包或声明的变量 若没有使用则会报错
+Go
+//格式化源码gofmt -w main.go%T输出数据的类型"/>
+  <meta property="og:url" content="https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/2019-10-01-go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2019-10-01T08:02:14&#43;0800"/>
+  <meta property="article:modified_time" content="2019-10-01T08:02:14&#43;0800"/>
+  <meta property="article:author" content="Antonio.D.C">
+  
+  
+  
+
+  <script type="application/ld+json">
+  {
+    "@context" : "http://schema.org",
+    "@type" : "Blog",
+    "name": "Blog",
+    "url" : "https://antoniodc-aaa.github.io/",
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "description": "You only live once !"
+  }
+  </script>
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "name": "Go语言入门经典",
+    "headline": "Go语言入门经典",
+    "datePublished": "2019-10-01T08:02:14\x2b0800",
+    "dateModified": "2019-10-01T08:02:14\x2b0800",
+    "author": {
+      "@type": "Person",
+      "name": "Antonio.D.C",
+      "url": "https://antoniodc-aaa.github.io/"
+    },
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "url": "https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/2019-10-01-go%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E7%BB%8F%E5%85%B8/",
+    "description": "Go语言入门经典 零、前言 go中的编码统一为utf-8，其中ascii的字符占一字节，汉字占三字节\nGO语言中导入的包或声明的变量 若没有使用则会报错\nGo\n\/\/格式化源码\rgofmt -w main.go\r%T输出数据的类型"
+  }
+  </script>
+  
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/hyde.css">
+
+  
+<style type="text/css">
+  .sidebar {
+    background-color: #fc21803;
+  }
+
+  .read-more-link a {
+    border-color: #fc21803;
+  }
+
+  footer a,
+  .content a,
+  .related-posts li a:hover {
+    color: #fc21803;
+  }
+</style>
+
+
+
+  <link type="text/css" rel="stylesheet" href="https://antoniodc-aaa.github.io/css/blog.css">
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+        
+        <div class="author-image">
+          <img src="https://antoniodc-aaa.github.io/images/name.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+        </div>
+        
+      
+
+      <h1>Blog</h1>
+
+      
+      <p class="lead">You only live once !</p>
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://antoniodc-aaa.github.io/">Home</a>
+        </li>
+        <li>
+          <a href="/post/"> Posts </a>
+        </li><li>
+          <a href="/tags/"> Tags </a>
+        </li><li>
+          <a href="/about/"> About </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="https://github.com/" rel="me" title="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1>Go语言入门经典</h1>
+
+  <div class="post-date">
+    <time datetime="2019-10-01T08:02:14&#43;0800">Oct 1, 2019</time> · 24 min read
+  </div>
+
+  <h1 id="go语言入门经典">Go语言入门经典</h1>
+<h2 id="零前言">零、前言</h2>
+<p>go中的编码统一为utf-8，其中ascii的字符占一字节，汉字占三字节</p>
+<p>GO语言中导入的包或声明的变量 若没有使用则会报错</p>
+<p>Go</p>
+<pre><code>//格式化源码
+gofmt -w main.go
+</code></pre><p><code>%T</code>输出数据的类型</p>
+<p>格式：</p>
+<p>Go</p>
+<pre><code>//正确：
+main{
+
+}
+//错误：
+main
+{
+
+}
+</code></pre><p>标识符相关：</p>
+<ul>
+<li>
+<p>下划线“_”本身在Go中是一个特殊的标识符,称为空标识符。可以代表任何其它的标识符,但是它对应的值会被忽略(比如:忽略某个返回值)。所以<strong>仅能被作为占位符使用</strong>,不能作为标识符使用</p>
+</li>
+<li>
+<p>保留关键字（注意int、float32等均没有在这里边，不能使用这些作为命名）：</p>
+<p>保留关键字</p>
+</li>
+<li>
+<p>预定义标识符：</p>
+<p>预定义标识符</p>
+</li>
+<li>
+<p>尽量保持：包名和该文件所在目录的名字保持一致</p>
+</li>
+<li>
+<p>首字母大写共有的，首字母小写是私有的（没有public、private等关键字）</p>
+</li>
+</ul>
+<p>运算符相关：</p>
+<ul>
+<li>
+<p>%运算的本质：$ a%b=a-a/b*b $</p>
+</li>
+<li>
+<p>自增自减只能独立使用，不能和别的语句组合使用，有且仅有<code>i++</code>和<code>i--</code></p>
+</li>
+<li>
+<p>没有三目运算符</p>
+</li>
+<li>
+<p>逻辑运算符：<code>&amp;&amp;</code>、<code>||</code>、<code>！</code></p>
+</li>
+<li>
+<p>位运算符：<code>&amp;</code>、<code>|</code>、<code>^</code></p>
+</li>
+<li>
+<p>优先级：</p>
+<p>优先级</p>
+<ul>
+<li>只有单目运算符、赋值运算符是从右往左运算</li>
+</ul>
+</li>
+</ul>
+<h2 id="一类型1-4基本-5-end派生">一、类型（1-4基本 5-end派生）</h2>
+<ul>
+<li>
+<p><strong>值类型</strong>：基本数据类型，int、float、bool、数组、结构体struct</p>
+</li>
+<li>
+<p>变量直接存储，通常在<strong>栈</strong>中分配</p>
+</li>
+<li>
+<p>引用类型</p>
+<p>：指针、slice切片、map、管道chan、interface</p>
+<ul>
+<li>变量存储的是一个地址，这个地址对应的空间才是真正的存储数据（值），内存通常在堆上分配</li>
+<li>当没有任何变量应引用这个地址时，改地址对应的数据空间就成为一个垃圾，由GC来回收</li>
+</ul>
+</li>
+</ul>
+<h3 id="1布尔">1.布尔</h3>
+<ul>
+<li>true</li>
+<li>false（默认值）</li>
+<li>占用一个字节</li>
+</ul>
+<p>注：Go不能用 1 和 0 代表 true 和 false，未赋值变量默认为false</p>
+<p>定义：</p>
+<p>Go</p>
+<pre><code>var b bool
+</code></pre><h3 id="2整数">2.整数</h3>
+<ul>
+<li>默认值为0</li>
+</ul>
+<p>声明：</p>
+<p>Go</p>
+<pre><code>var i int = 3
+</code></pre><h3 id="3浮点数">3.浮点数</h3>
+<ul>
+<li>float32：32位</li>
+<li>float64：64位</li>
+<li>默认值为0（float64）</li>
+</ul>
+<p>Go</p>
+<pre><code>num1 := .123
+num2 := 5.12e2//512
+</code></pre><h3 id="4字符串">4.字符串</h3>
+<ul>
+<li>默认值为&rdquo;&rdquo;</li>
+</ul>
+<p>Go</p>
+<pre><code>var s string =&quot;&quot;//双引号
+s += &quot;foo&quot;
+//反引号
+s := `
+asdfaf
+asdf
+`
+</code></pre><ul>
+<li>不能对字符串执行数学运算</li>
+<li>字符串是不可变的（不能修改）</li>
+<li>可以通过‘+’拼接字符串，过长时能够换行（必须以‘+’号结尾）</li>
+<li>println直接输出byte时输出的是ASCII<strong>码值</strong></li>
+</ul>
+<h3 id="45基本数据类型的转换">4.5基本数据类型的转换</h3>
+<ul>
+<li>不能自动转换，必须显式转换</li>
+<li>表达式：<code>T(V)</code>，表示将值V转化为类型T</li>
+<li>基本数据类型转成string
+<ul>
+<li>fmt.Sprintf</li>
+<li>strconv包函数
+<ul>
+<li>func FormatBool(b bool) string</li>
+<li>func Itoa(i int) string</li>
+<li>func FormatInt(i int64, base int) string</li>
+<li>func FormatUint(i uint64, base int) string</li>
+<li>func FormatFloat(f float64, fmt byte, prec, bitSize int) string</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>string转成基本数据类型
+<ul>
+<li>strconv包函数
+<ul>
+<li>func ParseBool(str string)(value bool, err error)</li>
+<li>func ParseFloat(s string. bitSize int)(f float64, err error)</li>
+<li>func ParseInt(s string, base int, bitSize int)(i int64, err error)</li>
+<li>func ParseUint(s string, b int, bitSize int)(n uint64, err error)</li>
+</ul>
+</li>
+<li>失败时，转换的结果为对应类型的默认值</li>
+</ul>
+</li>
+</ul>
+<h3 id="5数组">5.数组</h3>
+<ul>
+<li>声明后元素固定，不能增加删除</li>
+<li>值类型</li>
+<li>数组的地址为<code>&amp;数组名</code></li>
+</ul>
+<p>Go</p>
+<pre><code>//var 数组名 [数组大小]数组类型
+var beatles [4]string
+beatles[0] = &quot;John&quot;
+beatles[1] = &quot;Paul&quot;
+beatles[2] = &quot;Ringo&quot;
+beatles[3] = &quot;George&quot;
+fmt.Println(beatles)//按顺序打印数组所有元素
+//其他初始化方式：
+var beatles [4]string = [4]string{&quot;John&quot;,&quot;Paul&quot;,&quot;Ringo&quot;,&quot;George&quot;}
+var beatles = [4]string{&quot;John&quot;,&quot;Paul&quot;,&quot;Ringo&quot;,&quot;George&quot;}
+var beatles = [...]string{&quot;John&quot;,&quot;Paul&quot;,&quot;Ringo&quot;,&quot;George&quot;}
+var beatles = [...]string{0:&quot;John&quot;,1:&quot;Paul&quot;,3:&quot;George&quot;,2:&quot;Ringo&quot;}
+beatles = [...]string{0:&quot;John&quot;,1:&quot;Paul&quot;,3:&quot;George&quot;,2:&quot;Ringo&quot;}
+</code></pre><p>遍历：</p>
+<ul>
+<li>
+<p>常规遍历</p>
+</li>
+<li>
+<p>for-range结构遍历</p>
+<p>基本语法：</p>
+<p>Go</p>
+<pre><code>for index,value := range array01 {
+    ...
+}
+</code></pre><ul>
+<li>index：数组下标</li>
+<li>value：该下标对应的值</li>
+<li>他们都是仅在for循环内部可见的局部变量</li>
+<li>遍历数组元素的时候,如果不想使用下标 index,可以直接把下标 index标为下划线 _</li>
+<li>index,value不是固定的</li>
+</ul>
+</li>
+</ul>
+<p>注意事项：</p>
+<ul>
+<li>数组是多个相同类型数据的组合，一个数组一旦声明/定义了，其长度是固定的，不能动态变化</li>
+<li>var arr []int这时arr就是一个slice切片</li>
+<li>数组中的元素可以是任何数据类型,包括值类型和引用类型,但是<strong>不能混用</strong></li>
+<li>数组创建后,如果没有赋值,有默认值
+<ul>
+<li>数值类型数组：默认值为0</li>
+<li>字符串数组：默认值为&rdquo;&rdquo;</li>
+<li>bool数组：默认值为 false</li>
+</ul>
+</li>
+<li>使用数组的步骤
+<ul>
+<li>1.声明数组并开辟空间</li>
+<li>2给数组各个元素赋值</li>
+<li>3使用数组</li>
+</ul>
+</li>
+<li>数组的下标是从0开始的</li>
+<li>数组下标必须在指定范围内使用,否则报 panic:数组越界</li>
+<li>Go的数组属值类型,在默认情况下是值传递,因此会进行值拷贝。数组间不会相互影响</li>
+<li>如想在其它函数中,去修改原来的数组,可以使用引用传递（指针方式）</li>
+<li>长度是数组类型的一部分,在传递函数参数时需要考虑数组的长度</li>
+</ul>
+<h4 id="51切片slice">5.1切片slice</h4>
+<p>基本语法：</p>
+<p>Go</p>
+<pre><code>var 切片名 [] 类型
+</code></pre><ul>
+<li>
+<p>切片是数组的一个引用,因此切片是<strong>引用类型</strong>,在进行传递时,遵守引用传递机制。</p>
+<ul>
+<li>
+<p>通过slice改变值后原始数据也会改变</p>
+</li>
+<li>
+<p>slice作为形参时，在函数内部改变slice中的值也会改变元素数据中的值</p>
+<p>Go</p>
+<pre><code>func test(slice []int) {
+    slice[0] = 100  //这里修改slice[0],会改变实参
+}
+func main() {
+    var slice = []int {1, 2, 3, 4}
+    fmt.Println(&quot;slice=&quot;, slice) // [1,2,3,4]
+    test(slice)
+    fmt.Println(&quot;slice=&quot;, slice) // [100, 2, 3, 4]
+}
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>切片的使用和数组类似,遍历切片、访问切片的元素和求切片长度len(slice)都一样</p>
+</li>
+<li>
+<p>切片的长度是可以变化的,因此切片是一个可以动态变化的数组</p>
+</li>
+</ul>
+<hr>
+<p>例子：</p>
+<p>Go</p>
+<pre><code>var intArr [5]int = [...]int{1, 22, 33, 66, 99}
+//声明/定义一个切片
+//slice := intArr[1:3]
+//1. slice 就是切片名
+//2. intArr[1:3] 表示 slice 引用到intArr这个数组
+//3. 引用intArr数组的起始下标为 1 , 最后的下标为3(但是不包含3)
+slice := intArr[1:3]
+fmt.Println(&quot;intArr=&quot;, intArr)
+fmt.Println(&quot;slice 的元素是 =&quot;, slice) //  22, 33
+fmt.Println(&quot;slice 的元素个数 =&quot;, len(slice)) // 2
+fmt.Println(&quot;slice 的容量 =&quot;, cap(slice)) // 切片的容量是可以动态变化
+</code></pre><p>slice从底层来说,其实就是一个数据结构(struct结构体)：</p>
+<p>Go</p>
+<pre><code>//上述例子中的slice的结构可以视为：
+type slice struct{
+    ptr *[2]int
+    len int
+    cap int
+}
+</code></pre><p>所以可以通过slice来更改原始数据。</p>
+<p>上述例子的具体内存模型：</p>
+<p><img src="https://nu-ll.github.io/2019/10/23/Go%E8%AF%AD%E8%A8%80/image-20200103220708761.png" alt="slice的内存模型"></p>
+<p>slice的内存模型</p>
+<hr>
+<p>切片的<strong>使用</strong>：</p>
+<ul>
+<li>
+<p>定义一个切片,然后让切片去引用一个已经创建好的数组,如上述例子</p>
+<ul>
+<li>初始化：var slice = arr[startIndex:endIndex]
+<ul>
+<li>从arr中的startIndex取到endIndex（不包含endIndex）：[startIndex,endIndex)</li>
+<li>切片初始化时,仍然不能越界。范围在[0-len(arr)]之间,但是可以动态增长</li>
+<li>var slice = arr[0:end] ==&gt; var slice = arr[:end]</li>
+<li>var slice = arr[start:len(arr)] ==&gt; var slice = arr[start:]</li>
+<li>var slice = arr[0:len(arr)] ==&gt; var slice = arr[:]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>通过内置函数make创建切片</p>
+<ul>
+<li>
+<p>语法：</p>
+<pre><code>var 切片名 []type = make([],len,[cap])
+</code></pre><ul>
+<li>type：数据类型</li>
+<li>len：大小</li>
+<li>cap：指定切片容量，可选</li>
+</ul>
+</li>
+<li>
+<p>如果没有给切片的各个元素赋值,那么就会使用默认值</p>
+</li>
+<li>
+<p>通过make方式创建的切片对应的数组是由make底层维护,对外不可见,即只能通过slice去访问各个元素</p>
+</li>
+</ul>
+</li>
+<li>
+<p>定义一个切片,直接就指定具体数组,使用原理类似make的方式</p>
+<p>Go</p>
+<pre><code>var strSlice []string = []string{&quot;tom&quot;, &quot;jack&quot;, &quot;mary&quot;}
+fmt.Println(&quot;strSlice=&quot;, strSlice)
+fmt.Println(&quot;strSlice size=&quot;, len(strSlice)) //3
+fmt.Println(&quot;strSlice cap=&quot;, cap(strSlice)) // ?
+</code></pre></li>
+</ul>
+<p>上述方式1和2的区别：</p>
+<ul>
+<li>方式1是直接引用数组,这个数组是事先存在的,程序员是可见的</li>
+<li>方式2是通过mak来创建切片,make会创建一个数组,是由切片在底层进行维护,程序员是看不见的。</li>
+</ul>
+<p>切片的<strong>遍历</strong>：</p>
+<ul>
+<li>for循环常规遍历</li>
+<li>for-range结构遍历</li>
+</ul>
+<p>注意事项：</p>
+<ul>
+<li>
+<p><code>cap</code>是一个内置函数,用于统计切片的容量,即最大可以存放多少个元素</p>
+</li>
+<li>
+<p>切片定义完后,还不能使用,因为本身是一个空的,需要让其引用到一个数组或者make一个空间供切片来使用</p>
+</li>
+<li>
+<p>切片可以继续切片(此时可以不用考虑切片底层的数据结构，即是在切完之后的切片上继续再切，但是所有的这些都是操作的同一片内存空间)</p>
+</li>
+<li>
+<p>使用内置不定参函数<code>append</code>，可以对切片进行动态追加，append会调整切片的长度</p>
+<p>Go</p>
+<pre><code>var slice3 []int = []int{100, 200, 300}
+//通过append直接给slice3追加具体的元素
+slice3 = append(slice3, 400, 500, 600)
+fmt.Println(&quot;slice3&quot;, slice3) //100, 200, 300,400, 500, 600
+//通过append将切片slice3追加给slice3
+slice3 = append(slice3, slice3...) // 100, 200, 300,400, 500, 600 100, 200, 300,400, 500, 600
+fmt.Println(&quot;slice3&quot;, slice3)
+</code></pre><ul>
+<li>切片 append操作的本质就是对数组扩容</li>
+<li>go底层会创建一下新的数组 newArr(安装扩容后大小)</li>
+<li>将slice原来包含的元素拷贝到新的数组 newArr</li>
+<li>slice重新引用到 newArr</li>
+<li>注意 newArr是在底层来维护的,程序员不可见</li>
+</ul>
+</li>
+<li>
+<p>使用内置函数<code>copy</code>复制切片中的元素，复制前需声明一个和目标切片类型一致的切片（切片长度没要求，按照小的算）</p>
+<ul>
+<li>
+<p>copy(para1,para2)：para1和para2均为切片类型，从para2拷贝至para1</p>
+<p>Go</p>
+<pre><code>var slice4 []int = []int{1, 2, 3, 4, 5}
+var slice5 = make([]int, 10)
+copy(slice5, slice4)
+fmt.Println(&quot;slice4=&quot;, slice4)// 1, 2, 3, 4, 5
+fmt.Println(&quot;slice5=&quot;, slice5) // 1, 2, 3, 4, 5, 0 , 0 ,0,0,0
+</code></pre></li>
+<li>
+<p>copy会创建一个新的副本</p>
+</li>
+</ul>
+</li>
+<li>
+<p>使用内置不定参函数<code>append</code>删除元素，append会调整切片的长度，元素的排列顺序不会发生变化</p>
+<ul>
+<li>注意append删除最后的<code>...</code></li>
+</ul>
+</li>
+</ul>
+<p>Go</p>
+<pre><code>//make(数据类型,长度)
+var cheeses = make([]string,2)
+cheeses[0] = &quot;hello&quot;
+cheeses[1] = &quot;world&quot;
+cheeses := append(cheeses,&quot;hi&quot;)//创建新的元素，索引为2
+cheeses := append(cheeses,&quot;hi1&quot;,&quot;hi2&quot;,&quot;hi3&quot;)
+fmt.Println(len(cheeses))//打印长度
+cheeses := append(cheeses[:2],cheeses[2+1:]...)//删除索引为2的元素
+fmt.Println(len(cheeses))//打印长度
+//开始复制
+var smellyCheeses = make([]string,2)
+copy(smellyCheeses,cheeses)
+</code></pre><h4 id="52string和slice">5.2string和slice</h4>
+<ul>
+<li>
+<p>string底层是一个byte数组,因此 string也可以进行切片处理</p>
+</li>
+<li>
+<p>string和切片在内存的形式,以&quot;abcd&quot;画出内存示意图<img src="https://nu-ll.github.io/2019/10/23/Go%E8%AF%AD%E8%A8%80/image-20200104225130095.png" alt="内存示意图"></p>
+<p>内存示意图</p>
+</li>
+<li>
+<p>string是不可变的,也就说<strong>不能</strong>通过str[0]=‘z’方式来修改字符串</p>
+</li>
+<li>
+<p>如果需要修改出字符串,可以先将 string -&gt; []byte或者[]rune-&gt;修改-&gt;重写转成string.</p>
+<p>Go</p>
+<pre><code>str := &quot;hello@atguigu&quot;
+//&quot;hello@atguigu&quot; =&gt;改成 &quot;zello@atguigu&quot;
+arr1 := []byte(str)
+arr1[0] = 'z'
+str = string(arr1)
+fmt.Println(&quot;str=&quot;, str)
+// 细节，我们转成[]byte后，可以处理英文和数字，但是不能处理中文
+// 原因是 []byte 字节来处理 ，而一个汉字，是3个字节，因此就会出现乱码
+// 解决方法是 将  string 转成 []rune 即可， 因为 []rune是按字符处理，兼容汉字
+arr1 := []rune(str)
+arr1[0] = '北'
+str = string(arr1)
+fmt.Println(&quot;str=&quot;, str)
+</code></pre></li>
+</ul>
+<h4 id="53多维数组二维数组">5.3多维数组（二维数组）</h4>
+<p>使用：</p>
+<ul>
+<li>
+<p>先声明在赋值</p>
+<ul>
+<li>
+<p>语法：var 数组名 [大小][大小]类型</p>
+<p>Go</p>
+<pre><code>/*
+0 0 0 0 0 0
+0 0 1 0 0 0
+0 2 0 3 0 0
+0 0 0 0 0 0
+*/
+//定义/声明二维数组
+var arr [4][6]int
+//赋初值
+arr[1][2] = 1
+arr[2][1] = 2
+arr[2][3] = 3
+fmt.Println(arr)
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>直接初始化</p>
+<ul>
+<li>
+<p>语法：var 数组名 [大小][大小]类型 = [大小][大小]类型{ {初值},{初值…} }</p>
+<p>Go</p>
+<pre><code>//arr3 [2][3]int = [2][3]int{{1,2,3}, {4,5,6}}
+arr3  := [2][3]int{{1,2,3}, {4,5,6}}
+fmt.Println(&quot;arr3=&quot;, arr3)
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p>其他几种写法（类似一维数组）</p>
+<ul>
+<li>var 数组名 [大小][大小]类型 = [大小][大小]类型{ {初值},{初值…} }</li>
+<li>var 数组名 [大小][大小]类型 = […][大小]类型{ {初值},{初值…} }</li>
+<li>var 数组名 = [大小][大小]类型{ {初值},{初值…} }</li>
+<li>var 数组名 = […][大小]类型{ {初值},{初值…} }</li>
+</ul>
+</li>
+</ul>
+<p>内存布局：</p>
+<p>Go</p>
+<pre><code>var arr2 [2][3]int //以这个为例来分析arr2在内存的布局!!
+arr2[1][1] = 10
+fmt.Println(arr2)
+
+fmt.Printf(&quot;arr2[0]的地址%p\n&quot;, &amp;arr2[0])//第一行首地址
+fmt.Printf(&quot;arr2[1]的地址%p\n&quot;, &amp;arr2[1])//第二行首地址
+
+fmt.Printf(&quot;arr2[0][0]的地址%p\n&quot;, &amp;arr2[0][0])
+fmt.Printf(&quot;arr2[1][0]的地址%p\n&quot;, &amp;arr2[1][0])
+</code></pre><p><img src="https://nu-ll.github.io/2019/10/23/Go%E8%AF%AD%E8%A8%80/image-20200105113017051.png" alt="二维数组内存布局示意图"></p>
+<p>二维数组内存布局示意图</p>
+<p>遍历：</p>
+<ul>
+<li>
+<p>双层for循环</p>
+</li>
+<li>
+<p>for-range方式遍历</p>
+<p>Go</p>
+<pre><code>var arr3  = [2][3]int{{1,2,3}, {4,5,6}}
+for i, v := range arr3 {//遍历行
+    for j, v2 := range v {//遍历行中的元素
+        fmt.Printf(&quot;arr3[%v][%v]=%v \t&quot;,i, j, v2)
+    }
+    fmt.Println()
+}
+</code></pre></li>
+</ul>
+<h4 id="54映射map">5.4映射map</h4>
+<p>map是 key-value数据结构,又称为字段或者关联数组。类似其它编程语言的集合,在编程中是经常使用到。</p>
+<p>map是一个无序的结构，不会按照keytype或者valuetype进行排序</p>
+<p>可以通过内置函数<code>len</code>获取map的长度</p>
+<p>语法：<code>var 变量名 map[keytype]valuetype</code></p>
+<ul>
+<li>keytype：可以是很多种类型,比如bool,数字, string,指针, channel,还可以是只包含前面几个类型的接口,结构体,数组（keytype通常为int、 string）
+<ul>
+<li>注意:slice,map还有 function不可以,因为这几个没法用==来判断</li>
+</ul>
+</li>
+<li>valuetype：类型和keytype基本一致（valuetype通常为数字（整数、浮点）、string、map、struct）</li>
+</ul>
+<p>声明：</p>
+<ul>
+<li>
+<p>var a map[string]string</p>
+</li>
+<li>
+<p>var a map[string]int</p>
+</li>
+<li>
+<p>var a map[int]string</p>
+</li>
+<li>
+<p>var a map[string]map[string]string</p>
+</li>
+<li>
+<p>声明</p>
+<p>不会分配内存</p>
+<p>，初始化需要</p>
+<p>make</p>
+<p>，分配内存后才能赋值和使用</p>
+<ul>
+<li>make(数据类型，大小)</li>
+<li>a = make(map[string]string, 10)</li>
+</ul>
+</li>
+</ul>
+<p>使用方式：</p>
+<ul>
+<li>
+<p>先声明再make</p>
+<p>Go</p>
+<pre><code>var a map[string]string
+//在使用map前，需要先make , make的作用就是给map分配数据空间
+a = make(map[string]string, 10)
+</code></pre></li>
+<li>
+<p>声明的同时make</p>
+<p>Go</p>
+<pre><code>cities := make(map[string]string)
+cities[&quot;no1&quot;] = &quot;北京&quot;
+cities[&quot;no2&quot;] = &quot;天津&quot;
+</code></pre></li>
+<li>
+<p>声明时直接赋值</p>
+<p>Go</p>
+<pre><code>heroes := map[string]string{
+    &quot;hero1&quot; : &quot;宋江&quot;,
+    &quot;hero2&quot; : &quot;卢俊义&quot;,
+    &quot;hero3&quot; : &quot;吴用&quot;,
+}
+heroes[&quot;hero4&quot;] = &quot;林冲&quot;
+</code></pre></li>
+</ul>
+<p>增删改查：</p>
+<ul>
+<li>
+<p>增加和更新</p>
+<ul>
+<li>map[key] = value //如果key还没有,就是增加,如果key存在就是修改</li>
+</ul>
+</li>
+<li>
+<p>删除</p>
+<ul>
+<li>内置函数<code>delete</code>：<code>delete(map,&quot;key&quot;)</code>, 如果key存在,就删除该 key-value，如果key不存在，不操作，但是也不会报错</li>
+<li>如果要删除所有元素：
+<ul>
+<li>遍历后一一delete</li>
+<li>map = make()，make一个新的，让原来的成为垃圾，被gc回收</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>查找</p>
+<ul>
+<li>
+<p>直接找</p>
+<p>Go</p>
+<pre><code>val, ok := cities[&quot;no2&quot;]
+if ok {
+    fmt.Printf(&quot;有no1 key 值为%v\n&quot;, val)
+} else {
+    fmt.Printf(&quot;没有no1 key\n&quot;)
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<p>遍历（只能for-range）：</p>
+<p>Go</p>
+<pre><code>studentMap := make(map[string]map[string]string)
+
+studentMap[&quot;stu01&quot;] =  make(map[string]string, 3)
+studentMap[&quot;stu01&quot;][&quot;name&quot;] = &quot;tom&quot;
+studentMap[&quot;stu01&quot;][&quot;sex&quot;] = &quot;男&quot;
+studentMap[&quot;stu01&quot;][&quot;address&quot;] = &quot;北京长安街~&quot;
+
+studentMap[&quot;stu02&quot;] =  make(map[string]string, 3) //这句话不能少!!
+studentMap[&quot;stu02&quot;][&quot;name&quot;] = &quot;mary&quot;
+studentMap[&quot;stu02&quot;][&quot;sex&quot;] = &quot;女&quot;
+studentMap[&quot;stu02&quot;][&quot;address&quot;] = &quot;上海黄浦江~&quot;
+
+for k1, v1 := range studentMap {
+    fmt.Println(&quot;k1=&quot;, k1)//k1= stu01
+    for k2, v2 := range v1 {
+        fmt.Printf(&quot;\t k2=%v v2=%v\n&quot;, k2, v2)//k2=address v2=北京长安街~
+    }
+    fmt.Println()
+}
+</code></pre><p>注意事项：</p>
+<ul>
+<li>map是<strong>引用</strong>类型,遵守引用类型传递的机制,在一个函数接收map,修改后,会直接修改原来的map</li>
+<li>map的容量达到后,再想map增加元素,会自动扩容（无需借助其他函数，也不用管make中指定的大小）,并不会发生 panic,也就是说map能<strong>动态</strong>的增长键值对( key-value）</li>
+<li>map的value也经常使用 <strong>struct类型</strong>,更适合管理复杂的数据(比前面value是一个map更好),比如value为 Student结构体</li>
+</ul>
+<h4 id="55map切片及排序">5.5map切片及排序</h4>
+<p>map切片：</p>
+<p>切片的数据类型如果是map,则我们称为 slice of map,map切片,这样使用则map的个数就可以动态变化（利用append）</p>
+<p>Go</p>
+<pre><code>//1. 声明一个map切片
+var monsters []map[string]string
+monsters = make([]map[string]string, 2) //准备放入两个妖怪
+//2. 增加第一个妖怪的信息
+if monsters[0] == nil {
+    monsters[0] = make(map[string]string, 2)
+    monsters[0][&quot;name&quot;] = &quot;牛魔王&quot;
+    monsters[0][&quot;age&quot;] = &quot;500&quot;
+}
+
+if monsters[1] == nil {
+    monsters[1] = make(map[string]string, 2)
+    monsters[1][&quot;name&quot;] = &quot;玉兔精&quot;
+    monsters[1][&quot;age&quot;] = &quot;400&quot;
+}
+
+// 下面这个写法越界。
+// if monsters[2] == nil {
+// 	monsters[2] = make(map[string]string, 2)
+// 	monsters[2][&quot;name&quot;] = &quot;狐狸精&quot;
+// 	monsters[2][&quot;age&quot;] = &quot;300&quot;
+// }
+
+//这里我们需要使用到切片的append函数，可以动态的增加monster
+//1. 先定义个monster信息
+newMonster := map[string]string{
+    &quot;name&quot; : &quot;新的妖怪~火云邪神&quot;,
+    &quot;age&quot; : &quot;200&quot;,
+}
+monsters = append(monsters, newMonster)
+
+fmt.Println(monsters)
+</code></pre><p>map排序：</p>
+<ul>
+<li>先将map的key 放入到 切片中</li>
+<li>对切片排序</li>
+<li>遍历切片，然后按照key来输出map的值</li>
+</ul>
+<p>例子：</p>
+<p>Go</p>
+<pre><code>map1 := make(map[int]int, 10)
+map1[10] = 100
+map1[1] = 13
+map1[4] = 56
+map1[8] = 90
+fmt.Println(map1)
+//如果按照map的key的顺序进行排序输出
+//1. 先将map的key 放入到 切片中
+//2. 对切片排序
+//3. 遍历切片，然后按照key来输出map的值
+var keys []int
+for k, _ := range map1 {
+    keys = append(keys, k)
+}
+//排序
+sort.Ints(keys)//需要引入sort包
+fmt.Println(keys)
+
+for _, k := range keys{
+    fmt.Printf(&quot;map1[%v]=%v \n&quot;, k, map1[k])
+}
+</code></pre><h3 id="6检测变量类型">6.检测变量类型</h3>
+<ul>
+<li>依赖<code>reflect</code>包</li>
+</ul>
+<p>Go</p>
+<pre><code>var s string = &quot;string&quot;
+reflect.TypeOf(s)
+</code></pre><h3 id="7类型转换">7.类型转换</h3>
+<p>字符串和其他类型互换：</p>
+<ul>
+<li>依赖<code>strconv</code>包</li>
+</ul>
+<h2 id="二变量">二、变量</h2>
+<ul>
+<li>使用关键字<code>var</code>声明</li>
+<li>声明后不能再次声明，但是可以重新赋值</li>
+<li>变量声明后若未给与指定值将会设为默认值，不同变量类型默认值不一样，这种默认值称为<strong>零值</strong></li>
+</ul>
+<h3 id="1快捷声明">1.快捷声明</h3>
+<p>多个同类型变量：</p>
+<p>Go</p>
+<pre><code>var s,t string = &quot;foo&quot;,&quot;bar&quot;
+</code></pre><p>多个<strong>不</strong>同类型变量：</p>
+<p>Go</p>
+<pre><code>//全局
+var{
+    s string = &quot;foo&quot;
+    i int = 4
+}
+//或(函数内部)
+n1,name,n3 := 100,&quot;tom&quot;,80
+var n1,name,n3 := 100,&quot;tom&quot;,80
+</code></pre><h3 id="2简短声明">2.简短声明</h3>
+<ul>
+<li>编译器会自动推断变量类型</li>
+<li>只能在<strong>函数</strong>中使用</li>
+</ul>
+<p>Go</p>
+<pre><code>s := &quot;hello World&quot;
+</code></pre><h3 id="3省略变量名声明">3.省略变量名声明</h3>
+<p>Go</p>
+<pre><code>var s = &quot;hello World&quot;
+</code></pre><ul>
+<li>一般来说在函数内使用简短声明，在函数外省略变量名声明</li>
+</ul>
+<h3 id="4指针">4.指针</h3>
+<ul>
+<li>&amp;：取地址</li>
+<li>*变量名：指针，eg：*int：int类型指针</li>
+<li>*指针：取指针中的值</li>
+<li>详见第五章</li>
+</ul>
+<h3 id="5常量">5.常量</h3>
+<ul>
+<li>可以引用，但是不能修改</li>
+<li>关键字<code>const</code>修饰</li>
+<li>定义时就必须初始化</li>
+<li>常量只能修饰bool、数字类型（int、float）、string类型</li>
+</ul>
+<p>Go</p>
+<pre><code>const str string = &quot;hello&quot;
+</code></pre><p>注意事项：</p>
+<p>Go</p>
+<pre><code>//简洁的写法：
+const(
+    a = 1
+    b = 2
+)
+//专业的写法：
+const(
+    a = iota//a = 0
+    b//在上述基础上+1 b=1
+    c//在上述基础上+1 c=2
+)
+</code></pre><ul>
+<li>golang中没有常量名必须字母大写的规定</li>
+<li>仍然通过首字母的大小写来控制常量的访问范围</li>
+</ul>
+<h2 id="三函数和包">三、函数和包</h2>
+<h3 id="1基本格式">1.基本格式</h3>
+<ul>
+<li>关键字<code>func</code>修饰</li>
+<li>函数签名：函数的第一行，即<code>func 函数名(变量类型1 参数1,变量类型2 参数2,...) 返回值类型</code></li>
+</ul>
+<p>Go</p>
+<pre><code>func 函数名(参数1 变量类型1,参数2 变量类型2,...) (返回值类型) {
+	函数体
+    return 返回值列表
+}
+</code></pre><p>eg：</p>
+<p>多个返回值：</p>
+<p>Go</p>
+<pre><code>package main
+
+import (
+	&quot;fmt&quot;
+)
+//输入为空，返回一个int一个string
+func getPrice() (int,string) {
+    i := 2
+    s := &quot;goldfish&quot;
+    return i,s
+}
+
+func main() {
+    quantity,prize := getPrice()
+	fmt.Println(&quot;You won %v %v\n&quot;,quantity,prize)
+}
+</code></pre><p>注意事项：</p>
+<ul>
+<li>基本数据类型和<strong>数组</strong>都是<strong>值传递</strong>，在函数内修改不会影响到原来的值</li>
+<li>如果希望函数内的变量能修改函数外的变量,可以传入变量的地址&amp;,函数内以指针的方式操作变量。从效果上看类似引用</li>
+<li>不支持传统的函数重载</li>
+<li>函数本身也是一种数据类型，可以作为形参并且调用</li>
+<li>go支持自定义数据类型
+<ul>
+<li>语法：<code>type 自定义数据类型名 数据类型</code></li>
+</ul>
+</li>
+<li>支持函数返回值命名</li>
+<li>使用<code>_</code><strong>标识符</strong>，忽略返回值</li>
+<li>支持可变参数
+<ul>
+<li>args是slice切片,通过args[index]可以访间到各个值。</li>
+<li>可变参数需要放在形参列表的最后一个</li>
+</ul>
+</li>
+</ul>
+<h3 id="2不定参数函数">2.不定参数函数</h3>
+<ul>
+<li>使用<code>...</code>指定不定参</li>
+</ul>
+<p>eg：</p>
+<p>Go</p>
+<pre><code>package main
+
+import (
+	&quot;fmt&quot;
+)
+//numbers为一个包含所有参数的切片
+func sumNumbers(numbers... int) int {
+    total := 2
+    for _,number := range numbers{
+        total += number
+    }
+    return total
+}
+
+func main() {
+    result := sumNumbers(1,2,3,4)
+	fmt.Println(result)
+}
+</code></pre><h3 id="3具名返回值">3.具名返回值</h3>
+<ul>
+<li>函数返回前将赋值给具名变量</li>
+<li>无需显示的返回相应的变量</li>
+</ul>
+<p>Go</p>
+<pre><code>func sayHi() (x,y string) {
+    x := &quot;hello&quot;
+    y := &quot;world&quot;
+    return
+}
+</code></pre><h3 id="4init函数">4.init函数</h3>
+<p>每一个源文件都可以包含一个init函数,该函数会在main函数执行前,被Go运行框架调用,也就是说init会在main函数前被调用。</p>
+<p>注意事项：</p>
+<ul>
+<li>如果一个文件同时包含全局变量定义,init函数和main函数,则执行的流程是：<strong>全局变量定义-&gt;init函数-&gt;main函数</strong></li>
+<li>init函数最主要的作用,就是完成一些初始化的工作</li>
+<li>如果main.go和main包含的其他包中都有init函数，首先应优先执行包含包中的变量定义-&gt;init函数-&gt;main中变量定义-&gt;init函数-&gt;main函数</li>
+</ul>
+<h3 id="5匿名函数">5.匿名函数</h3>
+<p>Go支持匿名函数,如果我们某个函数只是希望使用一次,可以考虑使用匿名函数,匿名函数也可以实现多次调用</p>
+<p>全局匿名函数：如果将匿名函数赋给一个全局变量,那么这个匿名函数,就成为一个全局匿名函数,可以在程序有效。</p>
+<p>使用方式：</p>
+<ul>
+<li>
+<p>在定义匿名函数时就直接调用</p>
+<p>Go</p>
+<pre><code>res := func(n1 int,n2 int) int {
+    return n1 + n2
+}(10,20)
+</code></pre></li>
+<li>
+<p>将匿名函数赋给一个变量(函数变量),再通过该变量来调用匿名函数</p>
+<p>Go</p>
+<pre><code>a := func(n1 int,n2 int) int {
+    return n1 + n2
+}//a的数据类型就是函数类型
+res := a(10,20)
+</code></pre></li>
+</ul>
+<h3 id="6内置函数">6.内置函数</h3>
+<ul>
+<li>len</li>
+<li>new：用来分配内存,主要用来分配值类型,比如int、foat32、struct。返回的是指针</li>
+<li>make：用来分配内存,主要用来分配引用类型,比如chan、map、 slice。</li>
+</ul>
+<h3 id="7包">7.包</h3>
+<ul>
+<li>包的本质实际上就是创建不同的文件夹,来存放程序文件。</li>
+<li>基本概念：go的每一个文件都是属于一个包的,也就是说go是以包的形式来管理文件和项目目录结构的</li>
+<li>作用：
+<ul>
+<li>区分相同名字的函数、变量等标识符</li>
+<li>当程序文件很多时,可以很好的管理项目</li>
+<li>控制函数、变量等访问范围,即作用域（首字母大写共有，小写私有）</li>
+</ul>
+</li>
+</ul>
+<p>语法：</p>
+<p>Go</p>
+<pre><code>//打包：
+package 包名
+//引入包：
+import &quot;包的路径&quot;
+//调用包中的函数
+包名.函数名()
+</code></pre><p>细节说明：</p>
+<ul>
+<li>
+<p>在给一个文件打包时,该包对应一个文件夹,比如这里的utis文件夹对应的包名就是 utils,文件的包名通常和文件所在的文件夹名一致,般为小写字母。</p>
+<ul>
+<li>不一致的话，调用包中的函数时，包名就得变更为具体的包名</li>
+<li>import导入的在某种意义上相当于导入包所在的路径</li>
+</ul>
+</li>
+<li>
+<p>使用前需要先引用对应的包</p>
+</li>
+<li>
+<p>打包指令应该在第一行然后才能是import指令</p>
+</li>
+<li>
+<p>在import包时,路径从<code>$GOPATH</code>的src下开始,不用带src,编译器会自动从src下开始引入</p>
+</li>
+<li>
+<p>首字母大写共有，小写私有</p>
+</li>
+<li>
+<p>在访问其它包函数时,其语法是<code>包名.函数名</code></p>
+</li>
+<li>
+<p>go支持给包取别名</p>
+<ul>
+<li>别名后只能通过<code>别名.函数名</code>访问</li>
+</ul>
+<p>Go</p>
+<pre><code>import(
+  &quot;fmt&quot;
+    util &quot;go_code/chapter06/fundemo01/utils&quot;//取别名为util
+)
+  
+func main(){
+    util.Cal()//只能通过别名.函数名调用
+}
+</code></pre></li>
+<li>
+<p>在<strong>同一包下</strong>（可以是不同文件）,不能有相同的函数名和全局变量名,否则报重复定义</p>
+</li>
+<li>
+<p>如果你要编译成一个可执行程序文件,就需要将这个包声明为man,即 package main，这就是一个语法规范。如果你是写一个库,包名可以自定</p>
+<ul>
+<li>main包只有一个</li>
+<li>编译后生成一个有默认名的可执行文件,在<code>$GOPATH</code>目录下,可以指定名字和目录,比如:放在bin目录下:<code>D: goproject&gt; gobuild -o bin/my.exe go_code/chapter06/fundemo01/main</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="7闭包">7.闭包</h3>
+<p>闭包就是<strong>一个函数</strong>和与其<strong>相关的引用环境</strong>组合的一个整体(实体)</p>
+<p>Go</p>
+<pre><code>func AddUpper() func (int) int {
+    var n int = 10
+    return func (x int) int {
+        n = n + x
+        return n
+    }
+}
+func main() {
+    f := AddUpper()//这里可以理解为初始化闭包中的一些变量 这里的传参是给闭包的
+    fmt.Println(f(1))//11 这里的传参是给闭包中的函数的
+    fmt.Println(f(2))//13
+    fmt.Println(f(3))//16
+}
+</code></pre><ul>
+<li>
+<p>返回的是一个匿名函数,但是这个匿名函数引用到函数外的n因此这个匿名函数就和n形成个整体,构成闭包</p>
+</li>
+<li>
+<p>可以这样理解：闭包是类，函数是操作，n是字段。函数和它使用到的n构成闭包</p>
+</li>
+<li>
+<p>当我们反复的调用f函数时,因为n</p>
+<p>只初始化一次</p>
+<p>,因此每调一次就进行累计</p>
+<ul>
+<li>闭包中的变量只会初始化一次且会一直保存</li>
+</ul>
+</li>
+<li>
+<p>我们要搞清楚闭包的关键,就是要分析出返回的函数它使用(引用)到哪些变量,因为函数和它引用到的变量共同构成闭包。</p>
+</li>
+</ul>
+<h2 id="四控制流程">四、控制流程</h2>
+<h3 id="1if">1.if</h3>
+<ul>
+<li>支持在if条件中直接定义一个变量</li>
+<li>大括号不能省</li>
+<li>条件可以用小括号，但是不推荐</li>
+</ul>
+<p>Go</p>
+<pre><code>if 套件表达式 {
+    执行语句
+}
+//=======================
+if 套件表达式 {
+    执行语句a
+}else{
+    执行语句b
+}
+//=======================
+if 套件表达式1 {
+    执行语句a
+}else if 条件表达式2 {
+    执行语句b
+}
+</code></pre><h4 id="11运算符">1.1运算符</h4>
+<h5 id="111比较">1.1.1比较</h5>
+<ul>
+<li>双方需要类型一致</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>运算符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>==</td>
+<td></td>
+</tr>
+<tr>
+<td>!=</td>
+<td></td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td></td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h5 id="112算术">1.1.2算术</h5>
+<ul>
+<li>双方需要类型一致</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>运算符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+</tr>
+<tr>
+<td>*</td>
+<td></td>
+</tr>
+<tr>
+<td>/</td>
+<td></td>
+</tr>
+<tr>
+<td>%</td>
+<td>余（模）</td>
+</tr>
+</tbody>
+</table>
+<h5 id="113逻辑">1.1.3逻辑</h5>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>运算符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;&amp;</td>
+<td>与</td>
+</tr>
+<tr>
+<td>||</td>
+<td>或</td>
+</tr>
+<tr>
+<td>!</td>
+<td>非</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2switch">2.switch</h3>
+<p>Go</p>
+<pre><code>switch 变量值 {
+    case 值1,值2:
+    	相关操作
+    case 值:
+         相关操作
+    default:
+    	相关操作
+}
+</code></pre><ul>
+<li><code>fallthrough</code>：switch穿透，如果在case语句块后增加fallthrough,则会继续执行下一个case</li>
+<li>Type Switch: switch语句还可以被用于 type-switch来判断某个 interface变量中实际指向的变量类型</li>
+</ul>
+<h3 id="3for">3.for</h3>
+<p>语法格式：</p>
+<p>Go</p>
+<pre><code>for 循环变量初始化;循环条件;循环变量迭代 {
+	循环操作(语句)
+}
+</code></pre><ul>
+<li>
+<p>可以配合<strong>break</strong>退出循环</p>
+</li>
+<li>
+<p>beak语句出现在多层嵌套的语句块中时,可以<strong>通过标签</strong>指明要终止的是哪层语句块</p>
+</li>
+<li>
+<p>可以配合<strong>continue</strong>退出<strong>本次</strong>循环</p>
+</li>
+<li>
+<p>continue语句出现在多层嵌套的语句块中时,可以<strong>通过标签</strong>指明要跳过的是哪层语句块</p>
+</li>
+<li>
+<p>可以通过</p>
+<p>goto</p>
+<p>语句可以无条件地转移到程序中指定的行</p>
+<ul>
+<li>在Go程序设计中般不主张使用goto语句,以免造成程序流程的混乱,使理解和调试程序都产生困难</li>
+</ul>
+</li>
+</ul>
+<p>Go</p>
+<pre><code>for i &lt; 10 {
+	i++
+	相关操作
+}
+</code></pre><p>初始化语句：</p>
+<p>Go</p>
+<pre><code>for i := 0;i &lt; 10; i++ {
+	相关操作
+}
+</code></pre><p>遍历数组：</p>
+<p>Go</p>
+<pre><code>for i,n := range numbers {
+	相关操作
+}
+</code></pre><p>遍历字符串：</p>
+<p>Go</p>
+<pre><code>for i := 0,n := len(str);i++ {//按照字节处理，如有中文会乱码
+	相关操作
+}
+//--------------------------------------
+str1 = []rune(str)//解决中文乱码，将str转成切片
+for i := 0,n := len(str1);i++ {
+	相关操作
+}
+//--------------------------------------
+for index,val := range str {//按照编码方式处理，中文不会有问题
+	相关操作
+}
+</code></pre><h3 id="4defer">4.defer</h3>
+<p>在函数中,程序员经常需要创建资源比如:数据库连接、文件句柄、锁等),为了在函数执行完后及时的释放资源,Go的设计者提供 defer（延时机制）</p>
+<ul>
+<li>
+<p>用于执行清理操作或者确保操作完成后</p>
+<p>再执行</p>
+<p>另一个函数</p>
+<ul>
+<li>即，在defer所在的函数执行完毕后<strong>执行另一个函数</strong></li>
+</ul>
+</li>
+<li>
+<p>多条defer语句的输出将按照与defer出现的顺序<strong>相反的顺序</strong>执行</p>
+</li>
+</ul>
+<p>例子：</p>
+<p>Go</p>
+<pre><code>func sum(n1 int, n2 int) int {
+	//当执行到defer时，暂时不执行，会将defer后面的语句压入到独立的栈(假设为defer栈)
+	//当函数执行完毕后，再从defer栈，按照先入后出的方式出栈，执行
+	defer fmt.Println(&quot;ok1 n1=&quot;, n1) //defer 3. ok1 n1 = 10
+	defer fmt.Println(&quot;ok2 n2=&quot;, n2) //defer 2. ok2 n2= 20
+	//增加一句话
+	n1++ // n1 = 11
+	n2++ // n2 = 21
+	res := n1 + n2 // res = 32
+	fmt.Println(&quot;ok3 res=&quot;, res) // 1. ok3 res= 32
+	return res
+}
+func main() {
+	res := sum(10, 20)
+	fmt.Println(&quot;res=&quot;, res)  // 4. res= 32
+}
+</code></pre><p>注意：</p>
+<ul>
+<li>当go执行到一个 defer时,不会立即执行 defer后的语句,而是将defer后的语句压入到一个栈中[暂时称该栈为 defer栈]然后继续执行函数下一个语句</li>
+<li>当函数执行完毕后,在从 defer栈中,依次从栈顶取出语句执行(注:遵守栈先入后出的机制)。</li>
+<li>在 defer将语句放入到栈时,也会将相关的值拷贝同时入栈。</li>
+</ul>
+<h2 id="五结构体和指针">五、结构体和指针</h2>
+<h3 id="1结构体">1.结构体</h3>
+<p>面向对象编程说明：</p>
+<ul>
+<li>Galang也支持面向对象编程(OOP),但是和传统的面向对象编程有区别,并不是纯粹的面向对象语言。所以我们说 Galang支持<strong>面向对象编程特性</strong>是比较准确的。</li>
+<li>Galang没有类（class）,Go语言的结构体( struct)和其它编程语言的类（class）有同等的地位,你可以理解 Galang是基于 struct来实现OOP特性的</li>
+<li>Galang面向对象编程非常简洁,<strong>去掉</strong>了传统OOP语言的继承、方法重载、构造函数和析构函数、隐藏的this指针等等</li>
+<li>Galang仍然有面向对象编程的继承,封装和多态的特性,只是实现的方式和其它OOP语言不一样,比如<strong>继承</strong>: Galang没有 extends关键字,继承是通过匿名字段来实现</li>
+<li>Galang面向对象(OOP)很优雅,OOP本身就是语言类型系统( type system)的一部分,通过接口 (interface)关联,<strong>耦合性低</strong>,也非常灵活。也就是说在 Galang中<strong>面向接口编程</strong>是非常重要的特性</li>
+</ul>
+<p>结构体是<strong>值类型</strong>，其在内存中的布局如下所示：</p>
+<p><img src="https://nu-ll.github.io/2019/10/23/Go%E8%AF%AD%E8%A8%80/image-20200105163550051.png" alt="内存中的布局"></p>
+<p>内存中的布局</p>
+<h4 id="11声明">1.1声明</h4>
+<p>Go</p>
+<pre><code>type 结构体名称 struct{
+	字段名称 字段类型
+    ......
+}
+//结构体名称首字母大小：结构体能够在其他包中被使用
+//结构体中字段名称首字母大小：字段能够在其他包中被使用
+</code></pre><ul>
+<li>字段/属性：结构体字段=属性= field，字段是结构体的一个组成部分,一般是基本数据类型、数组,也可是引用类型。
+<ul>
+<li>字段声明同变量</li>
+<li>在创建一个结构体变量后,如果没有给字段赋值,都对应一个零值(默认值),规则同前面讲的一样</li>
+<li>同结构体变量的字段是独立,互不影响,一个结构体变量字段的更改,不影响另外一个。</li>
+</ul>
+</li>
+<li>关键字<code>type</code>指定一种新类型</li>
+<li>关键字<code>struct</code>指定为结构体</li>
+<li>可以使用关键字<code>new</code>创建结构体实例</li>
+<li>使用<code>.</code>访问结构体中的成员</li>
+<li>声明或创建后不能再修改其成员的数据类型</li>
+<li>每个字段独占一行时，最后一个字段结尾必须加逗号</li>
+<li>结构体可以嵌套</li>
+</ul>
+<p>Go</p>
+<pre><code>//声明
+type Movie struct{
+    Name string
+    Rating float32
+}
+//创建
+var m Movie
+m.Name = &quot;Metropoils&quot;
+m.Rating = 0.9918
+//new创建
+x := new(Movie)//返回的其实是个指针
+//(*x).Name = &quot;Metropoils&quot;//标准写法
+//(*x).Rating = 0.99
+x.Name = &quot;Metropoils&quot;//go的设计者 为了程序员使用方便，底层会对 x.Name = &quot;Metropoils&quot; 进行处理,会给 x 加上 取值运算 (*x).Name = &quot;Metropoils&quot;
+x.Rating = 0.99
+//使用简短变量赋值，可以省略new
+n := Movie{
+    Name:&quot;Citizen Kane&quot;,
+    Rating:10,//每个字段独占一行时，最后一个字段结尾必须加逗号
+}
+n := Movie{Name:&quot;Citizen Kane&quot;,Rating:10}//注意逗号
+n := Movie{&quot;Citizen Kane&quot;,10}//可以省略字段名，不推荐
+//另一种创建方式
+//var movie *Movie = &amp;Movie{&quot;Metropoils&quot;,0.45}//创建时直接赋值也是可以的
+var movie *Movie = &amp;Movie{}//返回结构体指针
+//(*movie).Name = &quot;Metropoils&quot;//标准写法
+movie.Name = &quot;Metropoils&quot;
+//输出
+fmt.Println(&quot;%+v\n&quot;,m)
+</code></pre><ul>
+<li>结构体指针访问字段的标准方式应该是:<code>(*结构体指针).字段名</code></li>
+<li>go做了一个简化,也支持<code>结构体指针.字段名</code>,更加符合程序员使用的习惯,go编译器底层对<code>结构体指针.字段名</code>做了<strong>转化</strong><code>(*结构体指针).字段名</code></li>
+<li><code>(*结构体指针).字段名</code><strong>不能写成</strong><code>*结构体指针.字段名</code>：<code>.</code>的优先级高于<code>*</code></li>
+</ul>
+<h4 id="12自定义结构体字段的默认值">1.2自定义结构体字段的默认值</h4>
+<ul>
+<li>可以利用自定义函数（构造函数）专门来给自定义的结构体赋自定义的默认值</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>零值（默认值）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>布尔型</td>
+<td>flase</td>
+</tr>
+<tr>
+<td>整形</td>
+<td>0</td>
+</tr>
+<tr>
+<td>浮点型</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td>字符串</td>
+<td>“”</td>
+</tr>
+<tr>
+<td>指针</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>函数</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>接口</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>切片slice</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>通道</td>
+<td>nil</td>
+</tr>
+<tr>
+<td>映射map</td>
+<td>nil</td>
+</tr>
+</tbody>
+</table>
+<h4 id="13结构体比较">1.3结构体比较</h4>
+<ul>
+<li>只能比较字段均一致的结构体
+<ul>
+<li>可以使用<code>reflect</code>包检查结构体类型</li>
+</ul>
+</li>
+<li>只有==和!=</li>
+<li>结构体或字段的首字母大写才能导出（公有值）</li>
+</ul>
+<h4 id="14结构体注意事项">1.4结构体注意事项</h4>
+<ul>
+<li>
+<p>结构体的所有字段在内存中是连续的</p>
+</li>
+<li>
+<p>结构体是用户单独定义的类型,和其它类型进行转换时（利用强制类型转化）需要有<strong>完全</strong>相同的字段（名字、个数和类型）</p>
+</li>
+<li>
+<p>结构体进行type重新定义(相当于取别名), Golang认为是新的数据类型,但是相互间可以<strong>强制类型转化</strong></p>
+</li>
+<li>
+<p>struct的每个字段上,可以写上一个tag,该tag可以通过<strong>反射机制</strong>获取,常见的使用场景就是<strong>序列化</strong>和<strong>反序列化</strong></p>
+<p>Go</p>
+<pre><code>package main
+import &quot;fmt&quot;
+import &quot;encoding/json&quot;
+  
+type A struct {
+    Num int
+}
+type B struct {
+    Num int
+}
+  
+type Monster struct{
+    Name string `json:&quot;name&quot;` // `json:&quot;name&quot;` 就是 struct tag
+    Age int `json:&quot;age&quot;`
+    Skill string `json:&quot;skill&quot;`
+}
+func main() {
+    var a A
+    var b B
+    a = A(b) // ? 可以转换，但是有要求，就是结构体的的字段要完全一样(包括:名字、个数和类型！)
+    fmt.Println(a, b)
+  
+    //1. 创建一个Monster变量
+    monster := Monster{&quot;牛魔王&quot;, 500, &quot;芭蕉扇~&quot;}
+  
+    //2. 将monster变量序列化为 json格式字串
+    //   json.Marshal 函数中使用反射，这个讲解反射时，会详细介绍
+    jsonStr, err := json.Marshal(monster)//若将Monster中的字段改成小写，就不能够调用（作用域限制），这里只能够用tag
+    if err != nil {
+        fmt.Println(&quot;json 处理错误 &quot;, err)
+    }
+    fmt.Println(&quot;jsonStr&quot;, string(jsonStr))
+  
+}
+</code></pre></li>
+</ul>
+<h3 id="2指针">2.指针</h3>
+<p>Go</p>
+<pre><code>type Movie struct{
+    Name string
+    Rating float32
+}
+a := Movie{
+    Name:&quot;Citizen Kane&quot;,
+    Rating:10,
+}
+b := a//值引用，拷贝副本到b中
+c := &amp;a//指针引用，c和a是一块内存区域，改变c，a也会变
+</code></pre><h2 id="六方法和接口">六、方法和接口</h2>
+<h3 id="1方法">1.方法</h3>
+<ul>
+<li>Galang中的<strong>方法</strong>是作用在<strong>指定的数据类型上</strong>的(即:和指定的数据类型绑定),因此<strong>自定义类型</strong>,都可以有方法,而不仅仅是 struct</li>
+<li>与函数类似，有关键字<code>func</code>指定，会在func后添加另一个参数表</li>
+<li>可以建立多个方法，构成方法集</li>
+<li>方法和某个结构体紧密绑定，可以通过<code>结构体.方法名</code>的形式调用属于该结构体的方法</li>
+<li>方法中的接受者类型类似<strong>一般用指针</strong>，以便直接修改结构体内部成员。如果不使用指针，修改后的值将不会保存，相当于拷贝了一份原结构体的副本来进行操作</li>
+</ul>
+<p>Go</p>
+<pre><code>func (接受者参数 接受者类型) 方法名(参数列表) (返回值列表) {
+	函数体
+}//就相当于 该方法 和 接受者 进行了绑定
+</code></pre><ul>
+<li>接受者类型type：表示这个方法和type这个类型进行绑定,或者说该方法作用于type类型</li>
+<li>type可以是结构体,也可以其它的自定义类型</li>
+<li>接受者参数：就是type的一个实例（变量）</li>
+</ul>
+<p>eg：</p>
+<p>Go</p>
+<pre><code>package main
+import (
+	&quot;fmt&quot;
+    &quot;math&quot;
+)
+type Sphere struct{
+    Radius float64
+    base float64
+}
+//SurfaceArea方法和*Sphere类型绑定
+//Sphere结构体的方法，指针类型，可以修改结构体中的值
+func (s *Sphere) SurfaceArea(f float64) float64 {
+    Sphere.base = f
+    return float64(4) * math.PI * (s.Radius * s.Radius)//s.Radius其实是(*s).Radius的简写
+}
+//Volume方法和Sphere类型绑定
+//Sphere结构体的方法，非指针类型，修改的是副本结构体中的值（结构体是值传递，会拷贝一份副本）
+func (s Sphere) Volume(f float64) {
+    Sphere.base = f
+    return
+}
+
+func main() {
+    s := Sphere{
+        Radius: 5,
+        base:3,
+    }
+    fmt.Println(s.SurfaceArea(4))//会修改s.base的值
+    //实际上是(&amp;s).SurfaceArea(4) 只不过编译器底层会将s.SurfaceArea(4)优化成(&amp;s).SurfaceArea(4)
+    s.Volume(4)//不会修改s.base的值
+}
+</code></pre><ul>
+<li>方法的调用和传参机制和函数基本一样,不一样的地方是方法调用时会将<strong>调用方法的变量</strong>,当做实参也传递给方法。</li>
+</ul>
+<p>结构体创建及赋值：</p>
+<p>Go</p>
+<pre><code>//方式1
+//在创建结构体变量时，就直接指定字段的值
+var stu1 = Stu{&quot;小明&quot;, 19} // stu1---&gt; 结构体数据空间
+stu2 := Stu{&quot;小明~&quot;, 20}
+//在创建结构体变量时，把字段名和字段值写在一起, 这种写法，就不依赖字段的定义顺序.
+var stu3 = Stu{
+    Name :&quot;jack&quot;,
+    Age : 20,
+}
+stu4 := Stu{
+    Age : 30,
+    Name : &quot;mary&quot;,
+}
+fmt.Println(stu1, stu2, stu3, stu4)
+
+//方式2， 返回结构体的指针类型(!!!)
+var stu5 *Stu = &amp;Stu{&quot;小王&quot;, 29}  // stu5--&gt; 地址 ---》 结构体数据[xxxx,xxx]
+stu6 := &amp;Stu{&quot;小王~&quot;, 39}
+//在创建结构体指针变量时，把字段名和字段值写在一起, 这种写法，就不依赖字段的定义顺序.
+var stu7 = &amp;Stu{
+    Name : &quot;小李&quot;,
+    Age :49,
+}
+stu8 := &amp;Stu{
+    Age :59,
+    Name : &quot;小李~&quot;,
+}
+fmt.Println(*stu5, *stu6, *stu7, *stu8)
+</code></pre><p>注意事项：</p>
+<ul>
+<li>结构体类型是值类型,在方法调用中,遵守<strong>值类型</strong>的传递机制,是值拷贝传递方式</li>
+<li>如程序员希望在方法中,修改结构体变量的值,可以通过<strong>结构体指针</strong>的方式来处理</li>
+<li>Golang中的方法作用在<strong>指定的数据类型</strong>上的(即:和指定的数据类型绑定)因此<strong>自定义类型</strong>,都可以有方法,而不仅仅是 struct,比如int,foat32等都可以有方法</li>
+<li>方法的访问范围控制的规则,和函数一样。方法名首字母小写,只能在本包访问,方法首字母大写,可以在本包和其它包访问。</li>
+<li>如果一个变量实现了**String()**这个方法,那么 fmt.Println默认会调用这个变量的String()进行输出（这里的类型必须一样，若绑定的方法接受者类型为指针，则输入参数一定要加&amp;）</li>
+</ul>
+<p>方法和函数的区别：</p>
+<ul>
+<li>
+<p>调用方式不一样</p>
+<ul>
+<li>函数：函数名(实参列表)</li>
+<li>方法：变量.方法名(实参列表)</li>
+</ul>
+</li>
+<li>
+<p>对于普通函数,接收者为值类型时,不能将指针类型的数据直接传递,反之亦然</p>
+</li>
+<li>
+<p>对于方法(如 struct的方法),接收者为值类型时,可以直接用指针类型的变量调用方法,反过来同样也可以。最终的决定权在方法的<strong>接受者类型</strong>上</p>
+<p>Go</p>
+<pre><code>type Person struct {
+    Name string
+}
+//对于方法（如struct的方法），
+//接收者为值类型时，可以直接用指针类型的变量调用方法，反过来同样也可以
+func (p Person) test03() {
+    p.Name = &quot;jack&quot;
+    fmt.Println(&quot;test03() =&quot;, p.Name) // jack
+}
+func (p *Person) test04() {
+    p.Name = &quot;mary&quot;
+    fmt.Println(&quot;test03() =&quot;, p.Name) // mary
+}
+func main() {
+    p := Person{&quot;tom&quot;}
+    p.test03()
+    fmt.Println(&quot;main() p.name=&quot;, p.Name) // tom
+    (&amp;p).test03() // 从形式上是传入地址，但是本质仍然是值拷贝
+    fmt.Println(&quot;main() p.name=&quot;, p.Name) // tom
+  
+    (&amp;p).test04()
+    fmt.Println(&quot;main() p.name=&quot;, p.Name) // mary
+    p.test04() // 等价 (&amp;p).test04 , 从形式上是传入值类型，但是本质仍然是地址拷贝
+}
+</code></pre></li>
+</ul>
+<h3 id="2接口详见十一章">2.接口（详见十一章）</h3>
+<ul>
+<li>使用关键字<code>interface</code>指定接口</li>
+<li>可以理解为方法集的一个蓝本（充当了方法集的规范），描述了方法集中的所有方法，但并没有实现它</li>
+<li>描述了方法集中的所有方法，并指定了每个方法的函数签名</li>
+<li>使用接口前需要实现接口，即满足接口要求：
+<ul>
+<li>实现接口指定方法集</li>
+<li>函数签名正确无误</li>
+</ul>
+</li>
+<li>接口是一种<strong>类型</strong>，可以<strong>作为参数</strong>传递给函数</li>
+</ul>
+<p>Go</p>
+<pre><code>type 接口名称 interface {
+    方法1名称(参数1 变量类型1,参数2 变量类型2,...) 返回值类型
+    方法2名称(参数1 变量类型1,参数2 变量类型2,...) 返回值类型
+    ...
+}
+</code></pre><h2 id="七字符串">七、字符串</h2>
+<ul>
+<li>字符串实际上是只读的字节切片</li>
+</ul>
+<h3 id="1字面量">1.字面量</h3>
+<ul>
+<li>与C语言类型，利用<strong>双引号</strong>括起来</li>
+<li>可以使用基于反斜杠的各种转义字符</li>
+</ul>
+<h3 id="2rune字面量">2.rune字面量</h3>
+<ul>
+<li>使用<strong>反引号</strong><code>·</code>括起来（Esc键下的那个）</li>
+<li>不能使用转义字符，是什么格式写在代码里就怎么输出</li>
+</ul>
+<h3 id="3拼接字符串">3.拼接字符串</h3>
+<ul>
+<li>使用运算符<code>+</code>或<code>+=</code>拼接</li>
+<li>只能拼接字符串型变量
+<ul>
+<li>可以使用strconv包中的Itoa方法将整数转化为字符串</li>
+</ul>
+</li>
+<li>拼接次数增多会导致效率边低
+<ul>
+<li>可使用缓存区解决</li>
+</ul>
+</li>
+</ul>
+<h3 id="4strings包处理字符串">4.strings包处理字符串</h3>
+<ul>
+<li>strings.ToLower：将字符串转化为小写</li>
+<li>strings.Index：在字符串中查找子串并返回索引</li>
+<li>strings.TrimSpace：去除开头和结尾的空格</li>
+</ul>
+<h3 id="5常用系统函数">5.常用系统函数</h3>
+<ul>
+<li>统计字符串长度，按照字节：len(str)，内嵌函数，无需包</li>
+<li>字符串遍历,同时处理有中文的间题 r := []rune(str)</li>
+<li>字符串 转 整数:n,err := strconv.Atoi(“12”)</li>
+<li>整数 转 字符串str = strconv.Itoa(12345)</li>
+<li>字符串 转 []byte: var bytes = []byte(“hello go”)</li>
+<li>[]byte 转 字符串:str = string([]byte{97,98,99})</li>
+<li>10进制 转 2,8,16进制:str = strconv.FormatInt(123,2)</li>
+<li>查找子串是否在指定的字符串中: strings.Contains(“seafood”,“foo”)//true</li>
+<li>统计一个字符串有几个指定的子串: strings.Count(“cheese”,“e”)//4</li>
+<li>不区大小写的字符串比较(==比较是区分字母大小写的): fmt.PrintIn( strings.EqualFold(“abc”,“Abc”)//true</li>
+<li>返回子串在字符串第一次出现的index值,如果没有返回-1: strings.Index(“NTL_abc”,“abc”)//4</li>
+<li>返回子串在字符串最后一次出现的index,如没有返回-1: strings.Lastlndex(“go golang”,“go”)//3</li>
+<li>将指定的子串替换成另外一个子串: strings.Replace(“go go hello”,“go”,“go语言”,n)n可以指定你希望替换几个,如果n=-1表示全部替换</li>
+<li>按照指定的某个字符,为分割标识,将一个字符串拆分成字符串数组：strings.Split(“hello,wrold,ok”,&quot;,&quot;)</li>
+<li>将字符串的字母进行大小写的转换: strings.ToLower(“Go”)//go strings.ToUpper(“Go”)//Go</li>
+<li>将字符串左右两边的空格去掉: strings.TrimSpacel(&rdquo; tn a lone gopher ntrn &ldquo;)</li>
+<li>将字符串左右两边指定的字符去掉: strings.Trim(&quot;! hello!&quot;,&rdquo; !&quot;)//[“hello”]//将左右两边!和&rdquo; &ldquo;去掉</li>
+<li>将字符串左边指定的字符去掉: strings.TrimLeft(&quot;! hello!&quot;,&rdquo; !&quot;)//[“hello”]//将左边!和&rdquo; &ldquo;去掉</li>
+<li>将字符串右边指定的字符去掉: strings.TrimRight(&quot;! hello!&quot;,&rdquo; !&quot;)//[“hello”]//将右边!和&rdquo; &ldquo;去掉</li>
+<li>判断字符串是否以指定的字符串开头: strings.HasPrefix(“<a href="ftp://192.168.10.1/">ftp://192.168.10.1</a>&quot;,“ftp”)//true</li>
+<li>判断字符串是否以指定的字符串结束: strings.HasSuffix(“NLT_abc. jpg”,“abc”)//false</li>
+</ul>
+<h2 id="八处理错误">八、处理错误</h2>
+<h3 id="1错误的处理机制">1.错误的处理机制</h3>
+<p>基本说明：</p>
+<ul>
+<li>Go语言追求简洁优雅,所以,Go语言不支持传统的try…catch…finally这种处理</li>
+<li>Go中引入的处理方式为: <code>defer</code>, <code>panic</code>, <code>recover</code></li>
+<li>这几个异常的使用场景可以这么简单描述：Go中可以抛出一个 panic的异常,然后在 defer中通过 <strong>recover捕获</strong>这个异常,然后正常处理</li>
+</ul>
+<p>例子：</p>
+<p>Go</p>
+<pre><code>//该函数调用后不会终止（会运行匿名函数），任然会正常运行
+func test() {
+	//使用defer + recover 来捕获和处理异常
+	defer func() {
+		err := recover()  // recover()内置函数，可以捕获到异常
+		if err != nil {  // 说明捕获到错误
+			fmt.Println(&quot;err=&quot;, err)
+			//这里就可以将错误信息发送给管理员....
+			fmt.Println(&quot;发送邮件给admin@sohu.com~&quot;)
+		}
+	}()
+	num1 := 10
+	num2 := 0
+	res := num1 / num2//这里会有异常
+	fmt.Println(&quot;res=&quot;, res)
+}
+</code></pre><h3 id="2自定义错误">2.自定义错误</h3>
+<ul>
+<li>
+<p>没有错误，返回的错误值为nil</p>
+</li>
+<li>
+<p>一般错误是通过返回给他的调用者处理的</p>
+</li>
+<li>
+<p>错误是一个值，在标准库中声明了接口error</p>
+<p>Go</p>
+<pre><code>type error interface {
+    Error() string
+}
+</code></pre></li>
+</ul>
+<h4 id="11创建错误">1.1创建错误</h4>
+<ul>
+<li>
+<p>使用标准库中的<code>errors</code>包</p>
+<p>Go</p>
+<pre><code>err := errors.New(&quot;错误内容&quot;)
+if err != nil{
+    fmt.Println(err)
+    panic(err)
+}
+</code></pre></li>
+<li>
+<p>使用标准库中的<code>fmt</code>包中的<code>Errorf</code>方法灵活的创建</p>
+<p>Go</p>
+<pre><code>role,name := &quot;Richard Jupp&quot;,&quot;Drummer&quot;
+err := fmt.Errorf(&quot;The %v %v quit&quot;,role,name)
+if err != nil{
+    fmt.Println(err)
+    panic(err)
+}
+</code></pre></li>
+</ul>
+<h4 id="12-panic内置函数">1.2 panic内置函数</h4>
+<ul>
+<li>慎用</li>
+<li>内置函数,接收一个interface{}类型的值(也就是任何值了)作为参数。可以接收error类型的变量,输出错误信息,并退出程序</li>
+<li>是go语言中的内置函数，能够终止正常的控制流程并引起恐慌，导致程序停止执行</li>
+</ul>
+<h2 id="九goroutine协程">九、Goroutine协程</h2>
+<ul>
+<li>关键字<code>go</code>修饰</li>
+<li>是一种支持并发编程的方式</li>
+<li>用于处理需要并发的任务</li>
+<li>占用内存极小，且创建和销毁效率也很高</li>
+</ul>
+<p>进程和线程：</p>
+<ul>
+<li>进程就是程序程序在操作系统中的一次执行过程，是系统进行资源分配和调度的基本单位</li>
+<li>线程是进程的一个执行实例，是程序执行的最小单元，它是比进程更小的能独立运行的基本单位。</li>
+<li>一个进程可以创建核销毁多个线程，同一个进程中的多个线程可以并发执行</li>
+<li>一个程序至少有一个进程，一个进程至少有一个线程</li>
+</ul>
+<p>并发和并行：</p>
+<ul>
+<li>多线程程序在单核上运行，就是并发</li>
+<li>多线程程序在多核上运行，就是并行</li>
+</ul>
+<p>go协程和go主线程</p>
+<ul>
+<li>Go主线程（有程序员直接称为线程/也可以理解成进程一个Go线程上，可以起多个协程，你可以这样理解，协程是轻量级的线程</li>
+<li>Go协程的特点
+<ul>
+<li>有独立的栈空间</li>
+<li>共享程序堆空间</li>
+<li>调度由用户控制</li>
+<li>协程是轻量级的线程</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>例子：</p>
+<p>Go</p>
+<pre><code>func main() {
+	go test() // 开启了一个协程
+
+	for i := 1; i &lt;= 10; i++ {
+		fmt.Println(&quot; main() hello,golang&quot; + strconv.Itoa(i))
+		time.Sleep(time.Second)
+	}
+}
+</code></pre><ul>
+<li>如果主线程退出了，则协程即使还没有执行完毕，也会退出</li>
+<li>当然协程也可以在主线程没有退出前，就自己结束了，比如完成了自己的任务</li>
+</ul>
+</blockquote>
+<p>协程的调度模型（MPG模式）：</p>
+<ul>
+<li>M：操作系统的主线程（是物理线程）</li>
+<li>P：协程执行需要的上下文</li>
+<li>G：协程</li>
+</ul>
+<p>设置Golang运行的cpu数：</p>
+<p>Go</p>
+<pre><code>import &quot;runtime&quot;
+runtime.NumCPU()//获取本地机器的逻辑cpu
+runtime.GOMAXPROCS(num)//设置Go可同时执行的最大cpu个数
+</code></pre><ul>
+<li>go1.8后，默认让程序运行在多个核上可以不用设置了</li>
+<li>go1.8前，还是要设置一下，可以更高效的利益cpu</li>
+</ul>
+<h3 id="1多个协程之间的通信">1.多个协程之间的通信</h3>
+<p>在<strong>编译</strong>程序时，可以通过增加<code>-race</code>参数，即可查看是否存在资源竞争，如：</p>
+<p>Go</p>
+<pre><code>&gt; go build -race test.go
+&gt; test.exe
+</code></pre><p><code>sync</code>包提供了一些基本的同步元素，如互斥锁。大部分都是适用于低水平程序线程，高水平的同步使用channel通信更好一些。</p>
+<blockquote>
+<p>例子：</p>
+<p>Go</p>
+<pre><code>package main
+import (
+    &quot;fmt&quot;
+    _ &quot;time&quot;
+    &quot;sync&quot;
+)
+// 需求：现在要计算 1-200 的各个数的阶乘，并且把各个数的阶乘放入到map中。
+// 最后显示出来。要求使用goroutine完成 
+var (
+    myMap = make(map[int]int, 10)  
+    //声明一个全局的互斥锁lock
+    lock sync.Mutex
+)
+// test 函数就是计算 n!, 让将这个结果放入到 myMap
+func test(n int) {
+    res := 1
+    for i := 1; i &lt;= n; i++ {
+        res *= i
+    }
+
+    //这里我们将 res 放入到myMap 
+    lock.Lock()//加锁
+    myMap[n] = res //concurrent map writes?
+    lock.Unlock()//解锁
+}
+
+func main() {
+    // 我们这里开启多个协程完成这个任务[200个]
+    for i := 1; i &lt;= 20; i++ {
+        go test(i)
+    }
+
+    //休眠10秒钟【第二个问题 】
+    //time.Sleep(time.Second * 5)
+
+    lock.Lock()//这里加锁是为了让go底层知道（go底层可能仍会访问改资源）
+    for i, v := range myMap {
+        fmt.Printf(&quot;map[%d]=%d\n&quot;, i, v)
+    }
+    lock.Unlock()
+
+}
+</code></pre></blockquote>
+<p>更好的通信机制应该是用到下一章的<strong>管道</strong></p>
+<h2 id="十channel通道">十、channel通道</h2>
+<ul>
+<li>一种与Goroutine通信的方式</li>
+<li>能够让数据进入和离开Goroutine，方便Goroutine之间进行通信</li>
+<li>使用关键字<code>make</code>创建，使用关键字<code>chan</code>指定创建的是通道</li>
+<li>channel的本质就是一个数据结构——队列
+<ul>
+<li>先进先出</li>
+</ul>
+</li>
+<li><strong>线程安全</strong>，多 goroutine访问时，不需要加锁，就是说 channel本身就是线程安全</li>
+<li>channel是有类型的，一个 string的channel只能存放 string类型数据</li>
+</ul>
+<p>声明：</p>
+<p>Go</p>
+<pre><code>var 变量名 chan 数据类型
+</code></pre><ul>
+<li>channel是<strong>引用类型</strong></li>
+<li>channel必须初始化才能写入数据（即make后）</li>
+<li>管道是有类型的</li>
+</ul>
+<p>初始化：</p>
+<p>Go</p>
+<pre><code>管道变量名字 = make(chan 通道存储的数据类型,管道中的容量)
+</code></pre><p>数据传输：</p>
+<p>向通道发送消息（注意通道只能接受创建时指定的通道类型）：</p>
+<p>Go</p>
+<pre><code>var intChan chan int
+intChan = make(chan int, 3)
+intChan&lt;- 10
+num := 211
+intChan&lt;- num
+intChan&lt;- 50
+</code></pre><ul>
+<li><code>len(intChan)</code>：获取到通道的长度，具体为传入通道中的数据</li>
+<li><code>cap(intChan)</code>：获取通道的容量，具体为make创建时的大小</li>
+<li>给管写入数据时，不能超过其容量</li>
+</ul>
+<p>从通道接收消息：</p>
+<p>Go</p>
+<pre><code>var num2 int
+num2 = &lt;-intChan//10
+</code></pre><ul>
+<li>在没有使用协程的情况下，如果我们的管道数据已经全部取出，再取就会报deadlock</li>
+</ul>
+<blockquote>
+<p>注意：</p>
+<p>Go</p>
+<pre><code>type Cat struct {
+    Name string
+    Age int
+}
+
+func main() {
+    //定义一个存放任意数据类型的管道 3个数据
+    //var allChan chan interface{}
+    allChan := make(chan interface{}, 3)
+
+    allChan&lt;- 10
+    allChan&lt;- &quot;tom jack&quot;
+    cat := Cat{&quot;小花猫&quot;, 4}
+    allChan&lt;- cat
+
+    //我们希望获得到管道中的第三个元素，则先将前2个推出
+    &lt;-allChan
+    &lt;-allChan
+
+    newCat := &lt;-allChan //此时从管道中取出的Cat是一个空接口
+    fmt.Printf(&quot;newCat=%T , newCat=%v\n&quot;, newCat, newCat)//newCat=main.Cat , newCat=&lt;小花苗 4&gt;  此处能够打印出来是在运行的层面上
+    //下面的写法是错误的!编译不通过
+    //fmt.Printf(&quot;newCat.Name=%v&quot;, newCat.Name)//此处不能编译通过是在编译的层面上发现类型不匹配（接口中不能有字段）
+    //使用类型断言 强制转换
+    a := newCat.(Cat) 
+    fmt.Printf(&quot;newCat.Name=%v&quot;, a.Name)
+}
+</code></pre></blockquote>
+<p>管道关闭：</p>
+<p>使用内置函数<code>close</code>可以关闭 channel，当 channel关闭后，就不能再向 channel写数据，但是仍然可以从该 channel读取数据。</p>
+<p>Go</p>
+<pre><code>intChan := make(chan int, 3)
+intChan&lt;- 100
+intChan&lt;- 200
+close(intChan) // close
+//这是不能够再写入数到channel
+//intChan&lt;- 300
+//当管道关闭后，读取数据是可以的
+n1 := &lt;-intChan
+fmt.Println(&quot;n1=&quot;, n1)
+</code></pre><p>管道关闭后，数据全部读取完毕后假设再次读取，此时会返回一个错误值：</p>
+<p>Go</p>
+<pre><code>n1,ok := &lt;-intChan//ok用于保存错误值
+</code></pre><p>但是假设没有关闭就再次读，会发生<code>deadlock</code>，与下面的<code>for- range</code>遍历类似</p>
+<ul>
+<li>未关闭管道一直读会发生<code>deadlock</code>，但是关闭后读就只会返回正确与否，不会产生<code>deadlock</code>。可以理解为留下一个标志位，读到这个标志位就停止</li>
+<li>在没有关闭管道前也可以读取管道中的内容</li>
+</ul>
+<p>管道遍历：</p>
+<p>channel支持<code>for- range</code>的方式进行遍历，请注意两个细节</p>
+<ul>
+<li>
+<p>1）在遍历时，如果 channel没有关闭，则会出现</p>
+<pre><code>deadlock
+</code></pre><p>的错误</p>
+<ul>
+<li>因为所有数据全部取出后，仍会再次取数据，此时会产生<code>deadlock</code>的错误</li>
+<li>如果写的快，读得慢，写满后写入方会阻塞，但是只要有读取就不会发生<code>deadlock</code>。反之，编译器底层发现一直在写而没有读取就会发生<code>deadlock</code></li>
+<li>总之，只要管道有流动就不会发生<code>deadlock</code></li>
+</ul>
+</li>
+<li>
+<p>2）在遍历时，如果 channel已经关闭，则会正常遍历数据，遍历完后，就会退出遍历</p>
+</li>
+</ul>
+<p>Go</p>
+<pre><code>intChan2 := make(chan int, 100)
+for i := 0; i &lt; 100; i++ {
+    intChan2&lt;- i * 2  //放入100个数据到管道
+}
+close(intChan2)
+for v := range intChan2 {
+    fmt.Println(&quot;v=&quot;, v)
+}
+</code></pre><h3 id="goroutine协程channel管道">Goroutine协程＋channel管道</h3>
+<blockquote>
+<p>协程＋管道例子：</p>
+<p>同时读写协作问题</p>
+<p>Go</p>
+<pre><code>//write Data
+func writeData(intChan chan int) {
+    for i := 1; i &lt;= 50; i++ {
+        //放入数据
+        intChan&lt;- i //
+        fmt.Println(&quot;writeData &quot;, i)
+        //time.Sleep(time.Second)
+    }
+    close(intChan) //关闭
+}
+
+//read data
+func readData(intChan chan int, exitChan chan bool) {
+    for {
+        v, ok := &lt;-intChan
+        if !ok {
+            break
+        }
+        time.Sleep(time.Second)
+        fmt.Printf(&quot;readData 读到数据=%v\n&quot;, v) 
+    }
+    //readData 读取完数据后，即任务完成
+    exitChan&lt;- true
+    close(exitChan)
+}
+
+func main() {
+    //创建两个管道
+    intChan := make(chan int, 10)
+    exitChan := make(chan bool, 1)
+
+    go writeData(intChan)
+    go readData(intChan, exitChan)
+
+    //time.Sleep(time.Second * 10)
+    for {
+        _, ok := &lt;-exitChan
+        if !ok {
+            break
+        }
+    }
+}
+</code></pre><p>阻塞问题</p>
+<p>上述例子，如果只有写入数据而没有读取，就会出现阻塞而deadlock，原因是 intChan容量是10，而代码 writeData会写入50个数据阻塞在 writeData的ch&lt;-i</p>
+<p>Go</p>
+<pre><code>func main() {
+    //创建两个管道
+    intChan := make(chan int, 10)
+    exitChan := make(chan bool, 1)
+
+    go writeData(intChan)
+    //go readData(intChan, exitChan)
+
+    //等待readData协程完成
+    for {
+        _, ok := &lt;-exitChan
+        if !ok {
+            break
+        }
+    }
+}
+</code></pre></blockquote>
+<p>写管道和读管道的<strong>频率不一致</strong>，<strong>无所谓</strong></p>
+<p>注意细节：</p>
+<ul>
+<li>
+<p>channel可以声明为只读或只写（默认为双向，可读可写）</p>
+<p>Go</p>
+<pre><code>//声明为只写
+var chan2 chan&lt;- int//chan&lt;-可以理解为属性，稍微修饰下，并不能通过make(chan&lt;- int)创建，下面同理
+chan2 = make(chan int, 3)
+chan2&lt;- 20
+//num := &lt;-chan2 //error
+fmt.Println(&quot;chan2=&quot;, chan2)
+  
+//声明为只读
+var chan3 &lt;-chan int
+num2 := &lt;-chan3
+//chan3&lt;- 30 //err
+fmt.Println(&quot;num2&quot;, num2)
+</code></pre></li>
+<li>
+<p>使用select可以解决从管道取数据的阻塞问题</p>
+<ul>
+<li>
+<p>传统方法在遍历时，如果不关闭会因为阻塞而导致deadlock</p>
+<p>Go</p>
+<pre><code>intChan := make(chan int, 10)
+for i := 0; i &lt; 10; i++ {
+    intChan&lt;- i
+}
+//定义一个管道 5个数据string
+stringChan := make(chan string, 5)
+for i := 0; i &lt; 5; i++ {
+    stringChan &lt;- &quot;hello&quot; + fmt.Sprintf(&quot;%d&quot;, i)
+}
+//在实际开发中，可能我们不好确定什么关闭该管道.
+//可以使用select 方式可以解决
+for {
+    select {
+        //注意: 这里，如果intChan一直没有关闭，不会一直阻塞而deadlock
+        //会自动到下一个case匹配
+        case v := &lt;-intChan : 
+        fmt.Printf(&quot;从intChan读取的数据%d\n&quot;, v)
+        time.Sleep(time.Second)
+        case v := &lt;-stringChan :
+        fmt.Printf(&quot;从stringChan读取的数据%s\n&quot;, v)
+        time.Sleep(time.Second)
+        default :
+        fmt.Printf(&quot;都取不到了，不玩了, 程序员可以加入逻辑\n&quot;)
+        time.Sleep(time.Second)
+        return
+    }
+}
+</code></pre></li>
+<li>
+<p>协程中使用recover，可以解决因协程中出现panic而导致整个程序崩溃的问题</p>
+<p>Go</p>
+<pre><code>func sayHello() {
+    for i := 0; i &lt; 10; i++ {
+        time.Sleep(time.Second)
+        fmt.Println(&quot;hello,world&quot;)
+    }
+}
+func test() {
+    //这里我们可以使用defer + recover
+    defer func() {
+        //捕获test抛出的panic
+        if err := recover(); err != nil {
+            fmt.Println(&quot;test() 发生错误&quot;, err)
+        }
+    }()
+    //定义了一个map
+    var myMap map[int]string
+    myMap[0] = &quot;golang&quot; //error
+}
+    
+func main() {
+    go sayHello()
+    go test()
+    for i := 0; i &lt; 10; i++ {
+        fmt.Println(&quot;main() ok=&quot;, i)
+        time.Sleep(time.Second)
+    }
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h2 id="十一面向对象编程">十一、面向对象编程</h2>
+<h3 id="1构造函数工厂模式间接实现">1.构造函数（工厂模式间接实现）</h3>
+<p>Golang的结构体没有构造函数,通常可以使用<strong>工厂模式</strong>来解决这个问题</p>
+<p>使用工厂模式实现跨包创建结构体实例(变量):</p>
+<ul>
+<li>
+<p>如果 modle包的结构体变量首字母大写,引入后,直接使用,没有问题</p>
+</li>
+<li>
+<p>如果mode包的结构体变量首字母小写,引入后,不能直接使用,可以工厂模式解决</p>
+<p>Go</p>
+<pre><code>//main.go
+func main() {
+  //创建要给Student实例
+  // var stu = model.Student{
+  // 	Name :&quot;tom&quot;,
+  // 	Score : 78.9,
+  // }
+  //定student结构体是首字母小写，我们可以通过工厂模式来解决
+  var stu = model.NewStudent(&quot;tom~&quot;, 98.8)
+  fmt.Println(*stu) //&amp;{....}
+  fmt.Println(&quot;name=&quot;, stu.Name, &quot; score=&quot;, stu.GetScore())
+}
+//student.go
+package model
+//定义一个结构体
+type student struct{
+  Name string
+  score float64
+}
+//因为student结构体首字母是小写，因此是只能在model使用
+//我们通过工厂模式来解决
+func NewStudent(n string, s float64) *student {
+  return &amp;student{
+      Name : n,
+      score : s,
+  }
+}
+//如果score字段首字母小写，则，在其它包不可以直接方法，我们可以提供一个方法
+func (s *student) GetScore() float64{
+  return s.score //ok
+}
+</code></pre></li>
+</ul>
+<h3 id="2封装">2.封装</h3>
+<p>封装( encapsulation)就是把抽象出的字段和对字段的操作封装在一起，数据被保护在内部，程序的其它包只有通过被授权的操作(方法)，才能对字段进行操作</p>
+<p>如何体现封装：</p>
+<ul>
+<li>对结构体中的属性进行封装</li>
+<li>通过方法,包 实现封装</li>
+</ul>
+<p>步骤：</p>
+<ul>
+<li>
+<p>将结构体、字段(属性)的<strong>首字母小写</strong>(不能导出了,其它包不能使用,类似 private)</p>
+</li>
+<li>
+<p>结构体所在包提供一个工厂模式的函数,首字母大写。类似一个构造函数</p>
+</li>
+<li>
+<p>提供一个首字母大写的Set方法(类似其它语言的 public),用于对属性判断并赋值</p>
+<p>Go</p>
+<pre><code>func (var 结构体类型名) SetXxx(参数列表)(返回值列表){
+    //加入数据验证的业务逻辑
+}
+</code></pre></li>
+<li>
+<p>提供一个首字母大写的Get方法(类似其它语言的public,用于获取属性的值</p>
+<p>Go</p>
+<pre><code>func (var 结构体类型名) GetXxx(){
+    return var.字段
+}
+</code></pre></li>
+<li>
+<p>特别说明:在 Golang开发中并没有特别强调封装,Galang本身对面向对象的特性做了简化</p>
+</li>
+</ul>
+<h3 id="3继承">3.继承</h3>
+<p>继承可以解决<strong>代码复用</strong>，让我们的编程更加靠近人类思维。</p>
+<p>当多个结构体存在相同的属性(字段)和方法时,可以从这些结构体中抽象出结构体，在该结构体中定义这些相同的属性和方法</p>
+<p>其它的结构体不需要重新定义这些属性和方法,只需嵌套一个<strong>匿名结构体</strong>即可。</p>
+<p>在 Golang中,如果一个 struct<strong>嵌套</strong>了另一个匿名结构体,那么这个结构体可以<strong>直接访问</strong>匿名结构体的<strong>字段和方法</strong>,从而实现了继承特性</p>
+<p>Go</p>
+<pre><code>type Student struct {
+    Name string
+    Age int
+    Score int
+}
+//将Pupil 和 Graduate 共有的方法也绑定到 *Student
+func (stu *Student) ShowInfo() {
+    fmt.Printf(&quot;学生名=%v 年龄=%v 成绩=%v\n&quot;, stu.Name, stu.Age, stu.Score)
+}
+func (stu *Student) SetScore(score int) {
+    //业务判断
+    stu.Score = score
+}
+//给 *Student 增加一个方法，那么 Pupil 和 Graduate都可以使用该方法
+func (stu *Student) GetSum(n1 int, n2 int) int {
+    return n1 + n2
+}
+
+//小学生
+type Pupil struct {
+    Student //嵌入了Student匿名结构体
+}
+//显示他的成绩
+//这时Pupil结构体特有的方法，保留
+func (p *Pupil) testing() {
+    fmt.Println(&quot;小学生正在考试中.....&quot;)
+}
+
+//大学生
+type Graduate struct {
+    Student //嵌入了Student匿名结构体
+}
+//显示他的成绩
+//这时Graduate结构体特有的方法，保留
+func (p *Graduate) testing() {
+    fmt.Println(&quot;大学生正在考试中.....&quot;)
+}
+
+func main() {
+    //当我们对结构体嵌入了匿名结构体使用方法会发生变化
+    pupil := &amp;Pupil{}
+    pupil.Student.Name = &quot;tom~&quot;
+    pupil.Student.Age = 8
+    pupil.testing()
+    pupil.Student.SetScore(70)
+    pupil.Student.ShowInfo()
+    fmt.Println(&quot;res=&quot;, pupil.Student.GetSum(1, 2))
+
+    graduate := &amp;Graduate{}
+    graduate.Student.Name = &quot;mary~&quot;//可以简化为graduate.Name = &quot;mary~&quot;
+    graduate.Student.Age = 28
+    graduate.testing()
+    graduate.Student.SetScore(90)
+    graduate.Student.ShowInfo()
+    fmt.Println(&quot;res=&quot;, graduate.Student.GetSum(10, 20))
+}
+</code></pre><ul>
+<li>
+<p>结构体可以使用嵌套匿名结构体<strong>所有的字段和方法</strong>,即:首字母大写或者小写的字段、方法,都可以使用。</p>
+</li>
+<li>
+<p>匿名结构休字段访问可以简化：<code>变量名.匿名结构体名.成员</code>–&gt;<code>变量名.成员</code></p>
+</li>
+<li>
+<p>当结构体和匿名结构体有<strong>相同</strong>的字段或者方法时,编译器采用<strong>就近访问原则</strong>访问,如希望访问匿名结构体的字段和方法,可以通过匿名结构体名来区分</p>
+</li>
+<li>
+<p>结枃体嵌入两个(或多个)匿名结构体,如两个匿名结构体有相同的字段和方法(同时<strong>结构体本身没有同名的字段和方法</strong>),在访问时,就<strong>必须明确指定</strong>匿名结构体名字,否则编译报错。</p>
+</li>
+<li>
+<p>如果一个 struct嵌套了一个有名结构体,这种模式就是<strong>组合</strong>,如果是组合关系,那么在访问组合的结构体的字段或方式时,<strong>必须带上</strong>结构体的名字</p>
+</li>
+<li>
+<p>嵌套匿名结构体后,也可以在创建结构体变量(实例)时,直接指定各个匿名结构体字段的值</p>
+<p>Go</p>
+<pre><code>type Goods struct {
+    Name string
+    Price float64
+}
+type Brand struct {
+    Name string
+    Address string
+}
+type TV struct {
+    Goods
+    Brand
+}
+func main() {
+    //嵌套匿名结构体后，也可以在创建结构体变量(实例)时，直接指定各个匿名结构体字段的值
+    tv := TV{ Goods{&quot;电视机001&quot;, 5000.99},  Brand{&quot;海尔&quot;, &quot;山东&quot;}, }
+    tv2 := TV{
+        Goods{
+            Price : 5000.99,
+            Name : &quot;电视机002&quot;,
+        },  
+        Brand{
+            Name : &quot;夏普&quot;,
+            Address :&quot;北京&quot;,
+        },
+    }
+}
+</code></pre></li>
+<li>
+<p>结构体的匿名字段可以是基本数据类型</p>
+<p>Go</p>
+<pre><code>type Monster struct  {
+    Name string
+    Age int
+}
+type E struct {
+    Monster
+    int
+    n int
+}
+func main() {
+    var e E
+    e.Name = &quot;狐狸精&quot;
+    e.Age = 300
+    e.int = 20
+    e.n = 40
+    fmt.Println(&quot;e=&quot;, e)
+}
+</code></pre></li>
+</ul>
+<p>多重继承：</p>
+<ul>
+<li>如一个struct嵌套了多个匿名结构体,那么该结构体可以直接访问嵌套的匿名结构体的字段和方法,从而实现了多重继承
+<ul>
+<li>上上个例子中的TV，嵌套了Goods和Brand结构体</li>
+</ul>
+</li>
+<li>如嵌入的匿名结构体有<strong>相同的字段名或者方法名</strong>,则在访问时,需要通过<strong>匿名结构体类型名</strong>来区分</li>
+<li>为了保证代码的简洁性,建议大家<strong>尽量不使用</strong>多重继承</li>
+</ul>
+<h3 id="4接口">4.接口</h3>
+<p>interface类型可以定义一组方法,但是这些不需要实现。并且 <strong>interface不能包含任何变量</strong>。到自定义类型(比如结构体 Phone)要使用的时候,在根据具体情况把这些方法写出来</p>
+<p>基本语法：</p>
+<p>Go</p>
+<pre><code>type 接口名 interface{
+    method1(参数列表) 返回值列表
+    method1(参数列表) 返回值列表
+    ...
+}
+</code></pre><ul>
+<li>接口里的所有方法都没有方法体,即接口的方法都是没有实现的方法。接口体现了程序设计的多态和高内聚低偶合的思想</li>
+<li>Golang中的接口,不需要显式的实现。只要变量,含有接口类型中的<strong>所有方法</strong>,那变量就实现这个接口。因此, Galang中<strong>没有 implement</strong>这样的关键字</li>
+</ul>
+<p>注意事项：</p>
+<ul>
+<li>
+<p>接口本身不能创建实例,但是可以指向一个实现了该接口的自定义类型的变量(实例)</p>
+<p>Go</p>
+<pre><code>func (stu Stu) Say() {
+    fmt.Println(&quot;Stu Say()&quot;)
+}
+type AInterface interface {
+    Say()
+}
+func main() {
+    var stu Stu //结构体变量，实现了 Say() 实现了 AInterface
+    var a AInterface = stu
+    a.Say()
+}
+</code></pre></li>
+<li>
+<p>接口中所有的方法都没有方法体,即都是没有实现的方法。</p>
+</li>
+<li>
+<p>在 Golang中,一个自定义类型需要将某个接口的<strong>所有方法</strong>都实现,我们才说这个自定义类型实现了该接口。</p>
+</li>
+<li>
+<p>一个自定义类型只有实现了某个接口,才能将该自定义类型的实例(变量)赋给接囗类型</p>
+</li>
+<li>
+<p>只要是自定义数据类型,就可以实现接口,不仅仅是结构体类型</p>
+<p>Go</p>
+<pre><code>type AInterface interface {
+    Say()
+}
+type integer int
+func (i integer) Say() {
+    fmt.Println(&quot;integer Say i =&quot; ,i )
+}
+func main() {
+    var i integer = 10
+    var b AInterface = i
+    b.Say() // integer Say i = 10
+}
+</code></pre></li>
+<li>
+<p>一个自定义类型可以实现多个接口</p>
+</li>
+<li>
+<p>Golang接口中不能有任何变量</p>
+</li>
+<li>
+<p>一个接口(比如A接口)可以<strong>继承</strong>多个别的接口(比如B,C接口),这时如果要实现A接口,也必须将B、C接口的方法也全部实现，但是<strong>不能够有相同的接口</strong></p>
+</li>
+<li>
+<p>interface类型默认是一个指针（<strong>引用类型</strong>）,如果没有对 interface初始化就使用,那么会输出nil</p>
+</li>
+<li>
+<p>空接囗 <code>interface{}</code>没有任何方法,所以所有类型都实现了空接口，即可以将<strong>任何一个变量赋值给空接口</strong></p>
+</li>
+</ul>
+<h4 id="接口和继承的关系">接口和继承的关系</h4>
+<ul>
+<li>
+<p>接口是继承的补充</p>
+</li>
+<li>
+<p>当A结构体继承了B结构体,那么A结构就自动的继承了B结构体的字段和方法,并且可以直接使用</p>
+</li>
+<li>
+<p>当A结构体需要扩展功能,同时不希望去破坏继承关系,则可以去实现某个接口即可</p>
+<p><img src="https://nu-ll.github.io/2019/10/23/Go%E8%AF%AD%E8%A8%80/image-20200109151443437.png" alt="接口和继承的关系"></p>
+<p>接口和继承的关系</p>
+</li>
+<li>
+<p>接口和继承解决的问题不同</p>
+<ul>
+<li>继承的价值主要在于:解决代码的<strong>复用性</strong>和<strong>可维护性</strong></li>
+<li>接口的价值主要在于:<strong>设计</strong>,设计好各种规范(方法),让其它自定义类型去实现这些方法</li>
+</ul>
+</li>
+<li>
+<p>接口比继承更加灵活</p>
+<ul>
+<li>继承是满足<code>is-a</code>的关系,而接口只需满足<code>like-a</code>的关系。</li>
+</ul>
+</li>
+<li>
+<p>接口在一定程度上实现代码解耦</p>
+</li>
+</ul>
+<h3 id="5多态">5.多态</h3>
+<p>变量(实例)具有多种形态。面向对象的第三大特征,在Go语言,多态特征是<strong>通过接口实现</strong>的。可以按照统一的接口来调用不同的实现。这时接口变量就呈现不同的形态。</p>
+<p>接口体现多态特性：</p>
+<ul>
+<li>
+<p><strong>多态参数</strong>：在下面的Usb接口案例, Usb usb,即可以接收手机变量,又可以接收相机变量,就体现了Usb接口多态</p>
+<ul>
+<li>
+<p>例子：</p>
+<p>Go</p>
+<pre><code>//声明/定义一个接口
+type Usb interface {
+    //声明了两个没有实现的方法
+    Start()
+    Stop()
+}
+    
+type Phone struct {
+}  
+//让Phone 实现 Usb接口的方法
+func (p Phone) Start() {
+    fmt.Println(&quot;手机开始工作。。。&quot;)
+}
+func (p Phone) Stop() {
+    fmt.Println(&quot;手机停止工作。。。&quot;)
+}
+    
+type Camera struct {
+}
+//让Camera 实现   Usb接口的方法
+func (c Camera) Start() {
+    fmt.Println(&quot;相机开始工作~~~。。。&quot;)
+}
+func (c Camera) Stop() {
+    fmt.Println(&quot;相机停止工作。。。&quot;)
+}
+    
+//计算机
+type Computer struct {
+}
+//编写一个方法Working 方法，接收一个Usb接口类型变量
+//只要是实现了 Usb接口 （所谓实现Usb接口，就是指实现了 Usb接口声明所有方法）
+func (c Computer) Working(usb Usb) {
+    //通过usb接口变量来调用Start和Stop方法
+    usb.Start()
+    usb.Stop()
+}
+    
+func main() {
+    //先创建结构体变量
+    computer := Computer{}
+    phone := Phone{}
+    camera := Camera{}
+    //关键点
+    computer.Working(phone)
+    computer.Working(camera) //
+}
+</code></pre></li>
+</ul>
+</li>
+<li>
+<p><strong>多态数组</strong>：下面例子Usb数组中,存放 Phone结构体和 Camera结构体变量。Phone还有一个特有的方法call(),请遍历Usb数组,如果是 Phone变量,除了调用Usb接口声明的方法外,还需要调用 Phone特有方法call</p>
+<ul>
+<li>
+<p>例子：</p>
+<p>Go</p>
+<pre><code>//声明/定义一个接口
+type Usb interface {
+    //声明了两个没有实现的方法
+    Start()
+    Stop()
+}
+    
+type Phone struct {
+    name string
+}
+//让Phone 实现 Usb接口的方法
+func (p Phone) Start() {
+    fmt.Println(&quot;手机开始工作。。。&quot;)
+}
+func (p Phone) Stop() {
+    fmt.Println(&quot;手机停止工作。。。&quot;)
+}
+    
+type Camera struct {
+    name string
+}
+//让Camera 实现   Usb接口的方法
+func (c Camera) Start() {
+    fmt.Println(&quot;相机开始工作。。。&quot;)
+}
+func (c Camera) Stop() {
+    fmt.Println(&quot;相机停止工作。。。&quot;)
+}
+    
+func main() {
+    //定义一个Usb接口数组，可以存放Phone和Camera的结构体变量
+    //这里就体现出多态数组
+    var usbArr [3]Usb
+    usbArr[0] = Phone{&quot;vivo&quot;}
+    usbArr[1] = Phone{&quot;小米&quot;}
+    usbArr[2] = Camera{&quot;尼康&quot;}
+    fmt.Println(usbArr)
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h4 id="类型断言">类型断言</h4>
+<p>类型断言,由于接口是一般类型,不知道具体类型,如果要<strong>转成具体类型</strong>,就需要使用类型断言，如下：</p>
+<p>Go</p>
+<pre><code>var t float32
+var x interface{}
+x = t//空接口，可以接收任意类型
+y := x.(float32)//类型断言
+</code></pre><p>在进行类型断言时,如果类型不匹配,就会报 panic因此进行类型断言时,要确保原来的空接口指向的就是断言的类型</p>
+<p>带检测的类型断言：</p>
+<p>Go</p>
+<pre><code>var x interface{}
+var b2 float32 = 2.1
+x = b2  //空接口，可以接收任意类型
+// x=&gt;float32 [使用类型断言]
+//类型断言(带检测的)
+if y, ok := x.(float32); ok {
+    fmt.Println(&quot;convert success&quot;)
+    fmt.Printf(&quot;y 的类型是 %T 值是=%v&quot;, y, y)
+} else {
+    fmt.Println(&quot;convert fail&quot;)
+}
+fmt.Println(&quot;继续执行...&quot;)
+</code></pre><p>可以通过这种方法判断输入参数的类型：</p>
+<p>Go</p>
+<pre><code>type Student struct {
+}
+//编写一个函数，可以判断输入的参数是什么类型
+func TypeJudge(items... interface{}) {
+    for index, x := range items {
+        switch x.(type) {
+            case bool :
+            fmt.Printf(&quot;第%v个参数是 bool 类型，值是%v\n&quot;, index, x)
+            case float32 :
+            fmt.Printf(&quot;第%v个参数是 float32 类型，值是%v\n&quot;, index, x)
+            case float64 :
+            fmt.Printf(&quot;第%v个参数是 float64 类型，值是%v\n&quot;, index, x)
+            case int, int32, int64 :
+            fmt.Printf(&quot;第%v个参数是 整数 类型，值是%v\n&quot;, index, x)
+            case string :
+            fmt.Printf(&quot;第%v个参数是 string 类型，值是%v\n&quot;, index, x)
+            case Student :
+            fmt.Printf(&quot;第%v个参数是 Student 类型，值是%v\n&quot;, index, x)
+            case *Student :
+            fmt.Printf(&quot;第%v个参数是 *Student 类型，值是%v\n&quot;, index, x)
+            default :
+            fmt.Printf(&quot;第%v个参数是  类型 不确定，值是%v\n&quot;, index, x)
+        }
+    }
+}
+</code></pre><h2 id="十二文件操作">十二、文件操作</h2>
+<p>文件在程序中是以流的形式来操作的</p>
+<ul>
+<li>流:数据在数据源(文件)和程序(内存)之间经历的路径</li>
+<li>输入流:数据从数据源(文件)到程序(内存)的路径</li>
+<li>输出流:数据从程序(内存)到数据源(文件)的路径</li>
+</ul>
+<p><code>os.File</code>封装所有文件相关操作,<code>File</code>是一个结构体。</p>
+<h3 id="打开文件">打开文件</h3>
+<p>Go</p>
+<pre><code>func Open(name string) (file *File, err error)
+</code></pre><p>另外一种打开文件的方式：</p>
+<p>Go</p>
+<pre><code>func OpenFile(name string, flag int, perm FileMode) (file *File, err error)
+</code></pre><p>OpenFile是一个更一般性的文件打开函数，大多数调用者都应用Open或Create代替本函数。它会使用指定的选项（如O_RDONLY等）、指定的模式（如0666等）打开指定名称的文件。如果操作成功，返回的文件对象可用于I/O。如果出错，错误底层类型是*PathError。（一般用于文件写入时的打开函数）</p>
+<h3 id="关闭文件">关闭文件</h3>
+<p>Go</p>
+<pre><code>func (f *File) Close() error
+</code></pre><h3 id="读取文件">读取文件</h3>
+<ul>
+<li>
+<p>带缓冲的读取：</p>
+<ul>
+<li>采取<code>bufio.NewReader(file)</code>新建缓存，缓存大小默认为4096</li>
+</ul>
+<p>Go</p>
+<pre><code>//NewReader创建一个具有默认大小缓冲、从r读取的*Reader。
+func NewReader(rd io.Reader) *Reader
+//ReadString读取直到第一次遇到delim字节，返回一个包含已读取的数据和delim字节的字符串。如果ReadString方法在读取到delim之前遇到了错误，它会返回在错误之前读取的数据以及该错误（一般是io.EOF）。当且仅当ReadString方法返回的切片不以delim结尾时，会返回一个非nil的错误。
+func (b *Reader) ReadString(delim byte) (line string, err error)
+</code></pre><p>例子：</p>
+<p>Go</p>
+<pre><code>file , err := os.Open(&quot;d:/test.txt&quot;)
+if err != nil {
+    fmt.Println(&quot;open file err=&quot;, err)
+}
+  
+//当函数退出时，要及时的关闭file
+defer file.Close() //要及时关闭file句柄，否则会有内存泄漏.
+  
+// 创建一个 *Reader  ，是带缓冲的
+/*
+const (
+defaultBufSize = 4096 //默认的缓冲区为4096
+)
+*/
+reader := bufio.NewReader(file)
+//循环的读取文件的内容
+for {
+    str, err := reader.ReadString('\n') // 读到一个换行就结束
+    if err == io.EOF { // io.EOF表示文件的末尾
+        break
+    }
+    //输出内容
+    fmt.Printf(str)
+}
+  
+fmt.Println(&quot;文件读取结束...&quot;)
+</code></pre></li>
+<li>
+<p>一次性读取（适合文件不大的情况下，效率低）</p>
+<ul>
+<li>
+<p>利用函数<code>ioutil.ReadFile</code>一次性读取（无需打开文件，直接读取）</p>
+<p>Go</p>
+<pre><code>//使用ioutil.ReadFile一次性将文件读取到位
+file := &quot;d:/test.txt&quot;
+content, err := ioutil.ReadFile(file)
+if err != nil {
+    fmt.Printf(&quot;read file err=%v&quot;, err)
+}
+//把读取到的内容显示到终端
+//fmt.Printf(&quot;%v&quot;, content) // []byte
+fmt.Printf(&quot;%v&quot;, string(content)) // []byte
+    
+//我们没有显式的Open文件，因此也不需要显式的Close文件
+//因为，文件的Open和Close被封装到 ReadFile 函数内部
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="写文件">写文件</h3>
+<p>通过缓存，即<code>bufio</code>中的<code>bufio.NewWriter</code>写文件</p>
+<p>Go</p>
+<pre><code>//NewWriter创建一个具有默认大小缓冲、写入w的*Writer。
+func NewWriter(w io.Writer) *Writer
+</code></pre><p>例子：</p>
+<p>Go</p>
+<pre><code>//创建一个新文件，写入内容 5句 &quot;hello, Gardon&quot;
+//1 .打开文件 d:/abc.txt
+filePath := &quot;d:/abc.txt&quot;
+file, err := os.OpenFile(filePath, os.O_WRONLY | os.O_CREATE, 0666)
+if err != nil {
+    fmt.Printf(&quot;open file err=%v\n&quot;, err)
+    return
+}
+//及时关闭file句柄
+defer file.Close()
+//准备写入5句 &quot;hello, Gardon&quot;
+str := &quot;hello,Gardon\r\n&quot; // \r\n 表示换行
+//写入时，使用带缓存的 *Writer
+writer := bufio.NewWriter(file)
+for i := 0; i &lt; 5; i++ {
+    writer.WriteString(str)
+}
+//因为writer是带缓存，因此在调用WriterString方法时，其实
+//内容是先写入到缓存的,所以需要调用Flush方法，将缓冲的数据
+//真正写入到文件中， 否则文件中会没有数据!!!
+writer.Flush()
+</code></pre><p>通过<code>ioutil.WriteFile</code>写文件（无需打开文件，直接写入）：</p>
+<p>Go</p>
+<pre><code>func WriteFile(filename string, data []byte, perm os.FileMode) error
+</code></pre><p>函数向filename指定的文件中写入数据。如果文件不存在将按给出的权限创建文件，否则在写入数据之前清空文件。</p>
+<h3 id="判断文件是否存在">判断文件是否存在</h3>
+<p>golang判断文件或文件夹是否存在的方法为使用 os.Stat()函数返回的错误值进行判断</p>
+<ul>
+<li>1）如果返回的错误为nil，说明文件或文件夹存在</li>
+<li>2）如果返回的错误类型使用 os.IsNotExist()判断为true，说明文件或文件夹不存在</li>
+<li>3）如果返回的错误为其它类型则不确定是否在存在</li>
+</ul>
+<p>Go</p>
+<pre><code>func Stat(name string) (fi FileInfo, err error)
+</code></pre><p>Stat返回一个描述name指定的文件对象的FileInfo。如果指定的文件对象是一个符号链接，返回的FileInfo描述该符号链接指向的文件的信息，本函数会尝试跳转该链接。如果出错，返回的错误值为*PathError类型。</p>
+<h3 id="文件拷贝">文件拷贝</h3>
+<p>io包中的Copy函数：</p>
+<p>Go</p>
+<pre><code>func Copy(dst Writer, src Reader) (written int64, err error)
+</code></pre><p>将src的数据拷贝到dst，直到在src上到达EOF或发生错误。返回拷贝的字节数和遇到的第一个错误。</p>
+<p>对成功的调用，返回值err为nil而非EOF，因为Copy定义为从src读取直到EOF，它不会将读取到EOF视为应报告的错误。如果src实现了WriterTo接口，本函数会调用src.WriteTo(dst)进行拷贝；否则如果dst实现了ReaderFrom接口，本函数会调用dst.ReadFrom(src)进行拷贝。</p>
+<p>注意：dst为Writer类型，src为Reader类型，需要NewWriter和NewReader函数进行创建</p>
+<p>例子：</p>
+<p>Go</p>
+<pre><code>func CopyFile(dstFileName string, srcFileName string) (written int64, err error) {
+    srcFile, err := os.Open(srcFileName)
+    if err != nil {
+        fmt.Printf(&quot;open file err=%v\n&quot;, err)
+    }
+    defer srcFile.Close()
+    //通过srcfile ,获取到 Reader
+    reader := bufio.NewReader(srcFile)
+
+    //打开dstFileName
+    dstFile, err := os.OpenFile(dstFileName, os.O_WRONLY | os.O_CREATE, 0666)
+    if err != nil {
+        fmt.Printf(&quot;open file err=%v\n&quot;, err)
+        return
+    }
+    //通过dstFile, 获取到 Writer
+    writer := bufio.NewWriter(dstFile)
+    defer dstFile.Close()
+
+    return io.Copy(writer, reader)
+}
+func main() {
+    //将d:/flower.jpg 文件拷贝到 e:/abc.jpg
+    //调用CopyFile 完成文件拷贝
+    srcFile := &quot;d:/flower.jpg&quot;
+    dstFile := &quot;e:/abc.jpg&quot;
+    _, err := CopyFile(dstFile, srcFile)
+    if err == nil {
+        fmt.Printf(&quot;拷贝完成\n&quot;)
+    } else {
+        fmt.Printf(&quot;拷贝错误 err=%v\n&quot;, err)
+    }
+}
+</code></pre><h3 id="命令行参数">命令行参数</h3>
+<p><code>os.Args</code>是一Ar个 string的切片，用来存储所有的命令行参数</p>
+<p>Go</p>
+<pre><code>fmt.Println(&quot;命令行的参数有&quot;, len(os.Args))
+//遍历os.Args切片，就可以得到所有的命令行输入参数值
+for i, v := range os.Args {
+    fmt.Printf(&quot;args[%v]=%v\n&quot;, i, v)
+}
+//调用及结果
+test.exe tom d:/bbb/init.log 909
+命令行的参数有 4
+args[0]=test.exe
+args[1]=tom
+args[2]=d:/bbb/init.log
+args[3]=909
+</code></pre><p>用<strong>flag包</strong>解析命令行参数：</p>
+<p>Go</p>
+<pre><code>func (f *FlagSet) Int64(name string, value int64, usage string) *int64
+</code></pre><p>Int64用指定的名称、默认值、使用信息注册一个int64类型flag。返回一个保存了该flag的值的指针。</p>
+<p>Go</p>
+<pre><code>func (f *FlagSet) StringVar(p *string, name string, value string, usage string)
+</code></pre><p>StringVar用指定的名称、默认值、使用信息注册一个string类型flag，并将flag的值保存到p指向的变量。</p>
+<p>Go</p>
+<pre><code>func Parse()
+</code></pre><p>从os.Args[1:]中解析注册的flag。必须在所有flag都注册好而未访问其值时执行。未注册却使用flag -help时，会返回ErrHelp。</p>
+<p>例子：</p>
+<p>Go</p>
+<pre><code>//定义几个变量，用于接收命令行的参数值
+var user string
+var pwd string
+var host string
+var port int
+
+//&amp;user 就是接收用户命令行中输入的 -u 后面的参数值
+//&quot;u&quot; ,就是 -u 指定参数
+//&quot;&quot; , 默认值
+//&quot;用户名,默认为空&quot; 说明
+flag.StringVar(&amp;user, &quot;u&quot;, &quot;&quot;, &quot;用户名,默认为空&quot;)
+flag.StringVar(&amp;pwd, &quot;pwd&quot;, &quot;&quot;, &quot;密码,默认为空&quot;)
+flag.StringVar(&amp;host, &quot;h&quot;, &quot;localhost&quot;, &quot;主机名,默认为localhost&quot;)
+flag.IntVar(&amp;port, &quot;port&quot;, 3306, &quot;端口号，默认为3306&quot;)
+//这里有一个非常重要的操作,转换， 必须调用该方法
+flag.Parse()
+
+//go build -o main.exe main.go编译为exe可执行文件后：
+//执行命令：main.exe -u root -pwd 123456 -h 127.0.0.5 -port 8080
+//该处会输出对应的结果
+fmt.Printf(&quot;user=%v pwd=%v host=%v port=%v&quot;,
+           user, pwd, host, port)
+</code></pre><h3 id="json">JSON</h3>
+<p>JSON易于机器解析和生成，并有效地提升网络传输效率，通常程序在网络传输时会先将数据（结构体、map等）序列化成json字符串，到接收方得到json字符串时，在反序列化恢复成原来的数据类型（结构体、map等）。这种方式已然成为各个语言的标准。</p>
+<p>JSON键值对是用来保存数据一种方式，键/值对组合中的键名写在前面并用双引号&quot;&ldquo;包裹，使用冒号:分隔，然后紧接着值</p>
+<p>任何数据类型都可以转换成JSON格式（对基本数据类型（int、float64等）序列化一般意义不大）</p>
+<p><a href="https://www.json.cn/">https://www.json.cn/</a>网站可以验证一个json格式的数据是否正确</p>
+<h4 id="序列化">序列化</h4>
+<p><code>encoding/json</code>包中<code>Marshal</code>函数：</p>
+<p>Go</p>
+<pre><code>func Marshal(v interface{}) ([]byte, error)
+</code></pre><p>返回v的json编码。</p>
+<p>例子：</p>
+<p>Go</p>
+<pre><code>//序列化Struct
+type Monster struct {
+    Name string `json:&quot;monster_name&quot;` //反射机制
+    Age int `json:&quot;monster_age&quot;`
+    Birthday string //....
+    Sal float64
+    Skill string
+}
+monster := Monster{
+    Name :&quot;牛魔王&quot;,
+    Age : 500 ,
+    Birthday : &quot;2011-11-11&quot;,
+    Sal : 8000.0,
+    Skill : &quot;牛魔拳&quot;,
+}
+//将monster 序列化
+data, err := json.Marshal(&amp;monster) //..
+if err != nil {
+    fmt.Printf(&quot;序列号错误 err=%v\n&quot;, err)
+}
+//输出序列化后的结果
+fmt.Printf(&quot;monster序列化后=%v\n&quot;, string(data))
+</code></pre><p>Go</p>
+<pre><code>//序列化Map
+var a map[string]interface{}
+//使用map,需要make
+a = make(map[string]interface{})
+a[&quot;name&quot;] = &quot;红孩儿&quot;
+a[&quot;age&quot;] = 30
+a[&quot;address&quot;] = &quot;洪崖洞&quot;
+//将a这个map进行序列化
+//将monster 序列化
+data, err := json.Marshal(a)
+if err != nil {
+    fmt.Printf(&quot;序列化错误 err=%v\n&quot;, err)
+}
+//输出序列化后的结果
+fmt.Printf(&quot;a map 序列化后=%v\n&quot;, string(data))
+</code></pre><p>Go</p>
+<pre><code>//序列化slice
+var slice []map[string]interface{}
+var m1 map[string]interface{}
+//使用map前，需要先make
+m1 = make(map[string]interface{})
+m1[&quot;name&quot;] = &quot;jack&quot;
+m1[&quot;age&quot;] = &quot;7&quot;
+m1[&quot;address&quot;] = &quot;北京&quot;
+slice = append(slice, m1)
+var m2 map[string]interface{}
+//使用map前，需要先make
+m2 = make(map[string]interface{})
+m2[&quot;name&quot;] = &quot;tom&quot;
+m2[&quot;age&quot;] = &quot;20&quot;
+m2[&quot;address&quot;] = [2]string{&quot;墨西哥&quot;,&quot;夏威夷&quot;}
+slice = append(slice, m2)
+//将切片进行序列化操作
+data, err := json.Marshal(slice)
+if err != nil {
+    fmt.Printf(&quot;序列化错误 err=%v\n&quot;, err)
+}
+//输出序列化后的结果
+fmt.Printf(&quot;slice 序列化后=%v\n&quot;, string(data))
+</code></pre><ul>
+<li>对于结构体的序列化，如果我们希望序列化后的key的名字，由我们自己重新制定，那么可以给 struct指定一个tag标签</li>
+</ul>
+<h4 id="反序列化">反序列化</h4>
+<p><code>encoding/json</code>包中<code>Unmarshal</code>函数：</p>
+<p>Go</p>
+<pre><code>func Unmarshal(data []byte, v interface{}) error
+</code></pre><p>解析json编码的数据并将结果存入v指向的值</p>
+<p>例子：</p>
+<p>Go</p>
+<pre><code>//反序列化struct
+type Monster struct {
+    Name string  
+    Age int
+    Birthday string //....
+    Sal float64
+    Skill string
+}
+str := &quot;{\&quot;Name\&quot;:\&quot;牛魔王~~~\&quot;,\&quot;Age\&quot;:500,\&quot;Birthday\&quot;:\&quot;2011-11-11\&quot;,\&quot;Sal\&quot;:8000,\&quot;Skill\&quot;:\&quot;牛魔拳\&quot;}&quot;
+//定义一个Monster实例
+var monster Monster
+err := json.Unmarshal([]byte(str), &amp;monster)
+if err != nil {
+    fmt.Printf(&quot;unmarshal err=%v\n&quot;, err)
+}
+fmt.Printf(&quot;反序列化后 monster=%v monster.Name=%v \n&quot;, monster, monster.Name)
+</code></pre><p>Go</p>
+<pre><code>//反序列化map
+str := &quot;{\&quot;address\&quot;:\&quot;洪崖洞\&quot;,\&quot;age\&quot;:30,\&quot;name\&quot;:\&quot;红孩儿\&quot;}&quot;
+//定义一个map
+var a map[string]interface{}
+//反序列化
+//注意：反序列化map,不需要make,因为make操作被封装到 Unmarshal函数
+err := json.Unmarshal([]byte(str), &amp;a)
+if err != nil {
+    fmt.Printf(&quot;unmarshal err=%v\n&quot;, err)
+}
+fmt.Printf(&quot;反序列化后 a=%v\n&quot;, a)
+</code></pre><p>Go</p>
+<pre><code>//反序列化slice
+str := &quot;[{\&quot;address\&quot;:\&quot;北京\&quot;,\&quot;age\&quot;:\&quot;7\&quot;,\&quot;name\&quot;:\&quot;jack\&quot;},&quot; +
+&quot;{\&quot;address\&quot;:[\&quot;墨西哥\&quot;,\&quot;夏威夷\&quot;],\&quot;age\&quot;:\&quot;20\&quot;,\&quot;name\&quot;:\&quot;tom\&quot;}]&quot;
+//定义一个slice
+var slice []map[string]interface{}
+//反序列化，不需要make,因为make操作被封装到 Unmarshal函数
+err := json.Unmarshal([]byte(str), &amp;slice)
+if err != nil {
+    fmt.Printf(&quot;unmarshal err=%v\n&quot;, err)
+}
+fmt.Printf(&quot;反序列化后 slice=%v\n&quot;, slice)
+</code></pre><ul>
+<li>在反序列化串时，要确保<strong>反序列化后的数据类型</strong>和原来<strong>序列化前的数据类型</strong>一致</li>
+<li>如果json字符串是通过程序获取到的，则不需要再对json字符串转义处理</li>
+</ul>
+<h2 id="十三单元测试">十三、单元测试</h2>
+<p>Go语言中自带有一个轻量级的测试框架 testing和自带的 go test命令来实现单元测试和性能测试， testing框架和其他语言中的测试框架类似，可以基于这个框架写针对相应函数的测试用例，也可以基于该框架写相应的压力测试用例。通过单元测试可以解决如下问题</p>
+<ul>
+<li>1）确保每个函数是可运行，并且运行结果是正确的</li>
+<li>2）确保写出来的代码性能是好的</li>
+<li>3）单元测试能及时的发现程序设计或实现的逻辑错误，使问题及早暴露，便于问题的定位解决，而性能测试的重点在于发现程序设计上的一些问题，让程序能够在高并发的情况下还能保持稳定</li>
+</ul>
+<p>testing框架测试原理：</p>
+<p><img src="https://nu-ll.github.io/2019/10/23/Go%E8%AF%AD%E8%A8%80/image-20200114104332453.png" alt="testing框架测试原理"></p>
+<p>testing框架测试原理</p>
+<p>注意：</p>
+<ul>
+<li>
+<p>测试用例文件名_test.go结尾。比如 cal_test. go,cal不是固定的</p>
+</li>
+<li>
+<p>测试用例函数必须以Test开头，一般来说就是Test+被测试的函数名，比如TestAddUpper</p>
+<ul>
+<li>其中 Xxx 可以是任何字母数字字符串（但第一个字母不能是 [a-z]），用于识别测试例程</li>
+</ul>
+</li>
+<li>
+<p>TestAddUpper(t* tesing.T)的形参类型必须是<code>* testing.T</code>【看一下手册】</p>
+</li>
+<li>
+<p>测试用例文件中，可以有多个测试用例函数，如 TestAddUpper、 TestSub</p>
+</li>
+<li>
+<p>运行测试用例指令</p>
+<ul>
+<li>（1） <code>cmd&gt;go test</code>【如果运行正确，无日志，错误时，会输出日志】</li>
+<li>（2） <code>cmd&gt;go test -v</code>【运行正确或是错误，都输出日志】</li>
+</ul>
+</li>
+<li>
+<p>当出现错误时，可以使用 <code>t.Fatalf</code>来格式化输出错误信息，并退出程序</p>
+</li>
+<li>
+<p><code>t.Logf</code>方法可以输出相应的日志</p>
+</li>
+<li>
+<p>测试用例函数，并没有放在main函数中，也执行了，这就是测试用例的方便之处</p>
+</li>
+<li>
+<p>PASS表示测试用例运行成功，FAIL表示测试用例运行失败</p>
+</li>
+<li>
+<p>测试单个文件，一定要带上被测试的原文件：</p>
+<pre><code>go test -v cal_test.go(测试文件名) cal.go(测试文件所需要的函数)
+</code></pre><ul>
+<li>默认扫描整个目录下的所有测试文件</li>
+</ul>
+</li>
+<li>
+<p>测试单个方法：<code>go test -v -test.run TestAddUpper(待测试的方法名)</code></p>
+</li>
+</ul>
+<h2 id="十四反射">十四、反射</h2>
+<p>基本介绍：</p>
+<ul>
+<li>反射可以在<strong>运行时</strong>动态获取变量的各种信息，比如变量的类型（type），类别（kind），kind范围大于type</li>
+<li>如果是结构体变量，还可以获取到结构体本身的信息（包括结构体的字段、方法）</li>
+<li>通过反射，可以使修改变量的值，可以调用关联的方法</li>
+<li>使用反射需要<code>import (&quot;reflect&quot;)</code></li>
+</ul>
+<p>反射重要函数和概念：</p>
+<ul>
+<li><code>reflect.Type(变量名)</code>，获取变量的类型，返回 <code>reflect.Type</code>类型</li>
+<li><code>reflect.Valueof(变量名)</code>，获取变量的值，返回 <code>reflect.Value</code>类型， <code>reflect.Value</code>是一结构体类型。通过 <code>reflect.Value</code>，可以获取到关于该变量的很多信息</li>
+<li>变量、空接口<code>interface{}</code>、<code>reflect.Value</code>是可以相互转换的</li>
+</ul>
+<p>例子：</p>
+<p>对基本数据类型、<code>interface{}</code>、<code>reflect.Value</code>进行反射</p>
+<p>Go</p>
+<pre><code>func reflectTest01(b interface{}) {
+    //通过反射获取的传入的变量的 type类型 , kind类别, 值
+    //1. 先获取到 reflect.Type
+    rTyp := reflect.TypeOf(b)
+    fmt.Println(&quot;rType=&quot;, rTyp)//rType=int
+
+    //2. 获取到 reflect.Value
+    rVal := reflect.ValueOf(b)
+	fmt.Println(&quot;rVal=&quot;, rTyp)//rVal=100
+    
+    //此处需要转成int才能用于计算，上面能够直接输出是因为运行时存在值，为100。
+    //此处如果不转化，会因为interface{}类型和2相加 而在编译阶段报错
+    n2 := 2 + rVal.Int()
+    //n3 := rVal.Float()
+    fmt.Println(&quot;n2=&quot;, n2)//n2=102
+    //fmt.Println(&quot;n3=&quot;, n3)
+
+    fmt.Printf(&quot;rVal=%v rVal type=%T\n&quot;, rVal, rVal)//rVal=100 rVal type=reflect.Value
+
+    //下面我们将 rVal 转成 interface{}
+    iV := rVal.Interface()
+    //将 interface{} 通过断言转成需要的类型
+    num2 := iV.(int)
+    fmt.Println(&quot;num2=&quot;, num2)//num2=100
+}
+
+func main() {
+    //定义一个int
+    var num int = 100
+    reflectTest01(num)
+}
+</code></pre><p>对结构体、<code>interface{}</code>、<code>reflect.Value</code>进行反射</p>
+<p>Go</p>
+<pre><code>func reflectTest02(b interface{}) {
+    //通过反射获取的传入的变量的 type , kind, 值
+    //1. 先获取到 reflect.Type 类型
+    rTyp := reflect.TypeOf(b)
+    fmt.Println(&quot;rType=&quot;, rTyp)//rType=main.Student
+
+    //2. 获取到 reflect.Value
+    rVal := reflect.ValueOf(b)
+
+    //3. 获取 变量对应的Kind 类别
+    //(1) rVal.Kind() ==&gt; 返回的就是一个常量
+    kind1 := rVal.Kind()
+    //(2) rTyp.Kind() ==&gt; 返回的也是常量，和上述方法一致
+    kind2 := rTyp.Kind()
+    fmt.Printf(&quot;kind =%v kind=%v\n&quot;, kind1, kind2)//kind =struct kind=struct
+
+
+    //下面我们将 rVal 转成 interface{}
+    iV := rVal.Interface()
+    fmt.Printf(&quot;iv=%v iv type=%T \n&quot;, iV, iV)//iv=&lt;tom 20&gt; iv type=main.Student
+    //和上述例子一样，这里能够通过%v在运行时取出值，但是在编译时会因为类型问题不能够通过iV.Name或iV.Age取出变量值
+    //将 interface{} 通过断言转成需要的类型可以解决上述问题
+    //可以使用 swtich 的断言形式来做的更加的灵活
+    stu, ok := iV.(Student)//防止同字段的别的结构体干扰，如Monster
+    if ok {
+        fmt.Printf(&quot;stu.Name=%v\n&quot;, stu.Name)//stu.Name=tom
+    }
+}
+
+type Student struct {
+    Name string
+    Age int
+}
+
+type Monster struct {
+    Name string
+    Age int
+}
+
+func main() {
+    //定义一个Student的实例
+    stu := Student{
+        Name : &quot;tom&quot;,
+        Age : 20,
+    }
+    reflectTest02(stu)
+}
+</code></pre><p>注意事项和细节：</p>
+<ul>
+<li>
+<p><code>reflect.Value.Kind</code>，获取变量的类别，返回的是一个常量</p>
+</li>
+<li>
+<p>Type是类型，Kind是类别，Type和Kind</p>
+<p>可能是相同的</p>
+<p>，也可能是不同的</p>
+<ul>
+<li>比如：var num int=10 num的Type是int,Kind也是int</li>
+<li>比如：var stu Student stu的type是 包名.Student , Kind是 struct</li>
+</ul>
+</li>
+</ul>
+
+</div>
+
+
+  </main>
+
+  <footer>
+  <div class="copyright">
+    &copy; Antonio.D.C 2020 · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+  <script src="https://antoniodc-aaa.github.io/js/blog.js"></script>
+
+  
+</body>
+</html>

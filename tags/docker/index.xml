@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on Blog</title>
+    <link>https://antoniodc-aaa.github.io/tags/docker/</link>
+    <description>Recent content in Docker on Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 18 Jun 2020 18:02:14 +0800</lastBuildDate>
+    
+	<atom:link href="https://antoniodc-aaa.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker具体</title>
+      <link>https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/2020-06-18-docker%E5%85%B7%E4%BD%93/</link>
+      <pubDate>Thu, 18 Jun 2020 18:02:14 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/2020-06-18-docker%E5%85%B7%E4%BD%93/</guid>
+      <description>一、环境搭建（Ubuntu 18.04） 本文前期Docker环境为：Windows10 1809 企业版 + VMware Workstation 15 Pro + Ubuntu 18.</description>
+    </item>
+    
+  </channel>
+</rss>

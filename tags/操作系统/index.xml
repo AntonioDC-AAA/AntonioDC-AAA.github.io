@@ -23,7 +23,7 @@
     <item>
       <title>Linux命令</title>
       <link>https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/linux%E5%91%BD%E4%BB%A4/</link>
-      <pubDate>Mon, 23 Mar 2020 12:58:03 +0800</pubDate>
+      <pubDate>Sun, 08 Mar 2020 12:58:03 +0800</pubDate>
       
       <guid>https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/linux%E5%91%BD%E4%BB%A4/</guid>
       <description>Linux命令    Task Commands     进程控制 fork(); exit(); wait();   进程通信 pipe(); shmget(); mmap();   文件操作 open(); read(); write();   设备操作 ioctl(); read(); write();   信息维护 getpid(); alarm(); sleep();   安全 chmod(); umask(); chown();    进程之间的通信方式以及优缺点</description>

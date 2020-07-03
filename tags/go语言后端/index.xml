@@ -6,25 +6,15 @@
     <description>Recent content in Go语言后端 on Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Thu, 28 Nov 2019 16:07:30 +0800</lastBuildDate>
     
 	<atom:link href="https://antoniodc-aaa.github.io/tags/go%E8%AF%AD%E8%A8%80%E5%90%8E%E7%AB%AF/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Go语言中TCP Server</title>
-      <link>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80tcpserver/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80tcpserver/</guid>
-      <description>Go语言中TCP Server 参考博客 https://blog.csdn.net/kenkao/article/details/94715207
-go tcp server的四种处理机制 由于go语言协程的特性，比线程更小。执行goroutine只需要极少的栈内存（大约只有4-5KB）。所以常规的监听socket并执行为如下代码。这也是书中或其他博客常见的场景
-//CAD::监听端口ln, err := net.</description>
-    </item>
-    
-    <item>
       <title>Go语言后端基础</title>
       <link>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80%E5%90%8E%E7%AB%AF%E5%9F%BA%E7%A1%80/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 28 Nov 2019 16:07:30 +0800</pubDate>
       
       <guid>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80%E5%90%8E%E7%AB%AF%E5%9F%BA%E7%A1%80/</guid>
       <description>Go语言后端基础 Go语言不需要nginx、apache服务器，因为他直接就监听tcp端口，做了nginx的事情，因为go语言的socket底层也是epoll模型
@@ -36,7 +26,7 @@ Web工作方式的几个概念   Request：用户请求的信息，用来解析�
     <item>
       <title>Go语言后端基础</title>
       <link>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/soap%E4%B8%8Erest/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 28 Nov 2019 16:07:30 +0800</pubDate>
       
       <guid>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/soap%E4%B8%8Erest/</guid>
       <description>基于SOAP是功能驱动
@@ -51,13 +41,24 @@ REST（Representational State Transfer）具象状态传输</description>
     <item>
       <title>前后端交互</title>
       <link>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80%E5%90%8E%E7%AB%AF%E4%B8%8E%E5%89%8D%E7%AB%AF%E7%9A%84%E9%A1%B5%E9%9D%A2%E4%BA%A4%E4%BA%92/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 28 Nov 2019 16:07:30 +0800</pubDate>
       
       <guid>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80%E5%90%8E%E7%AB%AF%E4%B8%8E%E5%89%8D%E7%AB%AF%E7%9A%84%E9%A1%B5%E9%9D%A2%E4%BA%A4%E4%BA%92/</guid>
       <description>Go语言后端与前端的页面交互 通过表单 ​	GET与POST的区别
 ​	1&amp;gt;GET请求消息体为空，POST请求带有消息体、
 ​	2&amp;gt;GET提交的数据会放在URL之后，以？分割URL和传输数据，参数之间以&amp;amp;相连
 ​	3&amp;gt;GET提交的数据大小有限制（因为浏览器对URL的长度有限制），而POST对提交的数据没有限制</description>
+    </item>
+    
+    <item>
+      <title>Go语言中TCP Server</title>
+      <link>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80tcpserver/</link>
+      <pubDate>Mon, 28 Oct 2019 16:07:30 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80tcpserver/</guid>
+      <description>Go语言中TCP Server 参考博客 https://blog.csdn.net/kenkao/article/details/94715207
+go tcp server的四种处理机制 由于go语言协程的特性，比线程更小。执行goroutine只需要极少的栈内存（大约只有4-5KB）。所以常规的监听socket并执行为如下代码。这也是书中或其他博客常见的场景
+//CAD::监听端口ln, err := net.</description>
     </item>
     
   </channel>
