@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.65.0-DEV" />
+
+  <title>C/C&#43;&#43; &middot; Blog</title>
+
+  <meta name="description" content="" />
+
+  
+  <meta property="og:locale" content="en-us"/>
+
+  
+  <meta property="og:image" content="https://antoniodc-aaa.github.io/images/name.jpg">
+
+  
+  <meta property="og:site_name" content="Blog"/>
+  <meta property="og:title" content="C/C&#43;&#43;"/>
+  <meta property="og:description" content="C/C&#43;&#43; const
+作用：1 修饰变量
+​ 2 修饰指针
+​ 3 修饰引用，指向常量的引用，用于形参类型，避免拷贝，又避免了函数对值的修改"/>
+  <meta property="og:url" content="https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/cc&#43;&#43;/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2020-03-24T12:58:03&#43;0800"/>
+  <meta property="article:modified_time" content="2020-03-24T12:58:03&#43;0800"/>
+  <meta property="article:author" content="Antonio.D.C">
+  
+  
+  
+
+  <script type="application/ld+json">
+  {
+    "@context" : "http://schema.org",
+    "@type" : "Blog",
+    "name": "Blog",
+    "url" : "https://antoniodc-aaa.github.io/",
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "description": "You only live once !"
+  }
+  </script>
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "name": "C\/C\x2b\x2b",
+    "headline": "C\/C\x2b\x2b",
+    "datePublished": "2020-03-24T12:58:03\x2b0800",
+    "dateModified": "2020-03-24T12:58:03\x2b0800",
+    "author": {
+      "@type": "Person",
+      "name": "Antonio.D.C",
+      "url": "https://antoniodc-aaa.github.io/"
+    },
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "url": "https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/cc++/",
+    "description": "C\/C\x2b\x2b const\n作用：1 修饰变量\n​ 2 修饰指针\n​ 3 修饰引用，指向常量的引用，用于形参类型，避免拷贝，又避免了函数对值的修改"
+  }
+  </script>
+  
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/hyde.css">
+
+  
+<style type="text/css">
+  .sidebar {
+    background-color: #fc21803;
+  }
+
+  .read-more-link a {
+    border-color: #fc21803;
+  }
+
+  footer a,
+  .content a,
+  .related-posts li a:hover {
+    color: #fc21803;
+  }
+</style>
+
+
+
+  <link type="text/css" rel="stylesheet" href="https://antoniodc-aaa.github.io/css/blog.css">
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+        
+        <div class="author-image">
+          <img src="https://antoniodc-aaa.github.io/images/name.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+        </div>
+        
+      
+
+      <h1>Blog</h1>
+
+      
+      <p class="lead">You only live once !</p>
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://antoniodc-aaa.github.io/">Home</a>
+        </li>
+        <li>
+          <a href="/post/"> Posts </a>
+        </li><li>
+          <a href="/tags/"> Tags </a>
+        </li><li>
+          <a href="/about/"> About </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="https://github.com/" rel="me" title="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+      <a href="#" rel="me" title="Twitter">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1>C/C&#43;&#43;</h1>
+
+  <div class="post-date">
+    <time datetime="2020-03-24T12:58:03&#43;0800">Mar 24, 2020</time> · 2 min read
+  </div>
+
+  <h1 id="cc">C/C++</h1>
+<p>const</p>
+<p>作用：1 修饰变量</p>
+<p>​            2 修饰指针</p>
+<p>​            3 修饰引用，指向常量的引用，用于形参类型，避免拷贝，又避免了函数对值的修改</p>
+<p>​            4 修饰成员函数，说明该成员函数内不能修改成员变量</p>
+<p>this 被隐含的声明为classname * const name   常量指针，本质时常量，不能赋值</p>
+<h2 id="inline-内联函数">inline 内联函数</h2>
+<h3 id="特征">特征</h3>
+<p>相当于把内联函数里面的内容写在调用内联函数处</p>
+<p>相当于不用执行进入函数的步骤，直接执行函数题</p>
+<p>相当于宏，却比宏多了类型检查，真正具有函数特性</p>
+<p>编译器一般不内敛包括循环、递归、switch等复杂操作的内联函数</p>
+<p>在类声明中定义的函数，除了虚函数的其他函数都自动隐式的转换为内联函数</p>
+<h4 id="编译器对inline函数的处理步骤">编译器对inline函数的处理步骤</h4>
+<p>1.将inline函数体复制到inline函数调用处</p>
+<p>2.为所用inline函数中的局部变量分配内存空间</p>
+<p>3.将inline函数的输入参数和返回值映射到调用方法的局部变量空间中</p>
+<p>4.如果inline函数有多个返回点，将其转变为inline函数代码块末尾的分支（使用goto）</p>
+<p>缺点：代码膨胀内联是以代码膨胀（复制）为代价，消除函数调用带来的开销，如果执行函数体内代码的时间，相比于函数调用的开销较大，那么效率的收获会很少。另一方面，每一处内联函数的调用 都要复制代码，使得程序的总代码量增大，消耗更多的内存空间</p>
+<p>inline函数无法随着函数库的升级而升级。inline函数的改变需要重新编译，不像non-inline可以直接连接</p>
+<p>是否内联，程序不可控，内联函数只是对编译器的建议，是否对函数内联，决定权在于编译器</p>
+<p>虚函数可以是内联的，内联可以修饰虚函数，但是当虚函数表现为多态性质的时候不能内联</p>
+<p>内联是编译器建议编译器内联，而虚函数的多态性发生在运行期，编译器无法知道运行期调用哪个代码，因此虚函数表现为多态性时不能内联</p>
+<p>inline virtual唯一可以内联的时候是：编译器知道调用的对象是哪个类，这只有在编译器具有实际对象而不是对象的指针或引用才发生</p>
+<ul>
+<li>volatile 关键字是一种类型修饰符，用它声明的类型变量表示可以被某些编译器未知的因素（操作系统、硬件、其它线程等）更改。所以使用 volatile 告诉编译器不应对这样的对象进行优化。</li>
+<li>volatile 关键字声明的变量，每次访问时都必须从内存中取出值（没有被 volatile 修饰的变量，可能由于编译器的优化，从 CPU 寄存器中取值）</li>
+<li>const 可以是 volatile （如只读的状态寄存器）</li>
+<li>指针可以是 volatile</li>
+</ul>
+<p>sizeof() 对数组，得到整个数组所占空间的大小</p>
+<p>sizeof()对指针，得到指针本身所占的空间大小  4</p>
+<p>extern &ldquo;c&rdquo; 的作用是让C++编译器将extern “c&quot;声明的代码当作c语言处理，可以避免C++因符号修饰导致代码不能和C语言库中的符号进行链接的问题</p>
+<p>​</p>
+<p>C++中struct和class本质的一个区别就是默认的访问控制</p>
+<ol>
+<li>默认的继承访问权限，struct 是public ，class是private</li>
+<li>struct 作为数据结构的实现体,他的默认数据访问控制是public,而class作为对象的实现体,他的默认成员变量访问控制是private</li>
+</ol>
+<p>C实现C++面向对象的特性</p>
+<p>封装:使用函数指针把属性与方法封装到结构体中</p>
+<p>继承:结构体嵌套</p>
+<p>多态: 父类与子类方法的函数指针不同</p>
+<p>explicit(显式)关键字</p>
+<p>explicit修饰函数时,可以防止隐式转换和复制初始化</p>
+<p>explicit修饰函数时,可以防止隐式转换,但按语境转换除外</p>
+<h3 id="friend-友元类和友元函数">friend 友元类和友元函数</h3>
+<ul>
+<li>能访问私有成员</li>
+<li>破坏封装性</li>
+<li>友元关系不可传递</li>
+<li>友元关系的单向性</li>
+<li>友元声明的形式及数量不受限制</li>
+</ul>
+<h3 id="-范围解析运算符">:: 范围解析运算符</h3>
+<p>1.全局作用域符(::name) 用于类型名称(类 . 类成员 . 成员函数. 变量等)前,表示作用域为全局命名空间</p>
+<p>2.类作用域符(classname::name)用于表示指定类型的作用域范围是具体某个类的</p>
+<p>3.命名空间作用域符( namespace::name) 用于表示只顶你类型的作用域范围是那个具体的命名空间</p>
+<p>decltype 关键字用于检查实体的声明类型或表达式的类型及值分类</p>
+<h3 id="引用">引用</h3>
+<p>左值引用,一般表示对象的身份</p>
+<p>右值引用是必须绑定到右值(一个临时对象,将要销毁的对象)的引用,一般表示对象的值</p>
+<p>右值引用可以实现转移语义(Move Sementics)和精确传递</p>
+<ul>
+<li>消除两个对象交互时不必要的对象拷贝,节省运算存储资源,提高效率</li>
+<li>能够简洁明确的定义泛型函数</li>
+</ul>
+<h4 id="成员初始化列表">成员初始化列表</h4>
+<h5 id="好处">好处</h5>
+<p>更高效:少了一次调用默认构造函数的过程</p>
+<p>有些场合必须用初始化列表:</p>
+<p>​		i,常量成员,因为常量只能初始化,不能赋值,所以必须放在初始化列表里面</p>
+<p>​       ii,引用类型,引用必须在定义的时候初始化,并且不能重新赋值,所以也要写在初始化列表里面</p>
+<p>​      iii,没有默认构造函数的类类型,因为使用初始化列表可以不必调用构造默认函数来初始化</p>
+<h4 id="面向对象程序设计">面向对象程序设计</h4>
+<p>三大特征&ndash;封装 继承 多态</p>
+<h5 id="封装">封装</h5>
+<p>public 成员:可以被任意实体访问</p>
+<p>protected: 只允许被子类及本类的成员函数访问</p>
+<p>private : 只允许被本类的成员函数 友元类或友元函数访问</p>
+<h5 id="多态">多态</h5>
+<p>多态是以封装和继承为基础的</p>
+<p>C++多态分类及实现:</p>
+<p>i 重载多态(编译期) :函数重载 运算符重载</p>
+<p>ii 子类型多态(运行期) 虚函数</p>
+<p>iii参数多态性(编译期) 类模板 函数模板</p>
+<p>iv 强制多态(编译期/ 运行期) 基本类型转换, 自定义类型转换</p>
+<p>虚函数</p>
+<ul>
+<li>普通函数(非成员函数)不能是虚函数</li>
+<li>静态函数(static)不能是虚函数</li>
+<li>构造函数不能是虚函数(因为在调用构造函数时,虚表指针并没有在对象的内存空间中,必须要构造函数调用完成才会形成虚表指针)</li>
+<li>内联函数不能是表现多态性时的虚函数</li>
+</ul>
+<p>虚析构函数</p>
+<p>虚析构函数是为了解决基类的指针指向派生类对象,并用基类的指针删除派生类对象</p>
+<p>纯虚函数</p>
+<p>纯虚函数是一种特殊的虚函数,在基类中不能对虚函数给出有意义的实现,而把他声明为纯虚函数,他的实现留给该基类的派生类去实现</p>
+<p>virtual int A() = 0;</p>
+<p>虚函数、纯虚函数</p>
+<ul>
+<li>类中如果申明了虚函数，这个函数是可以实现的，哪怕空实现，它的作用是为了能让这个函数再他的子类里面可以被覆盖。这样的话，编译器就可以使用后期绑定来达到多态。纯虚函数只是一个接口，是函数的声明而已，它要留到子类里面去实现</li>
+<li>虚函数再子类里面可以不重写，但是纯虚函数必须在子类实现才可以实例化子类</li>
+<li>虚函数的类用于“实体继承”，继承接口的同时也可以继承父类的实现。纯虚函数关注的是接口的统一性，实现由子类完成</li>
+<li>带纯虚函数的抽象类叫抽象类，这种类不能直接生成对象，而只有被继承，并重写其虚函数后，才能使用。抽象类被继承后，子类可以继续是抽象类，也可以是普通类</li>
+<li>虚基类是虚继承中的基类</li>
+</ul>
+<p><strong>虚函数指针、虚函数表</strong></p>
+<p>虚函数指针：在含有虚函数类的对象中，指向虚函数表，在运行时确定</p>
+<p>虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚表中覆盖原本基类的虚函数指针，在编译时根据类的声明创建</p>
+<p>虚继承</p>
+<p>虚继承用于解决多继承条件下的菱形继承问题（浪费存储空间、存在二义性）</p>
+<p>底层实现原理与编译器相关，一般通过虚基类指针和虚基类表实现，每个虚继承的子类都有一个虚基类指针（占用一个指针的存储空间）和虚基类表（不占用 类对象的存储空间）当虚继承的子类被当作父类继承时，虚基类指针也会被继承</p>
+<p>vbptr 指的是虚基类指针，该指针指向一个虚基类表，虚表中记录了虚基类与本类的偏移地址，通过偏移地址，就可以找到虚基类成员，而虚继承也不用像普通多继承那样维持着公共基类的两份同样的拷贝，节省了存储空间</p>
+<p>虚继承、虚函数</p>
+<p>相同之处：都利用了虚指针（均占用类的存储空间）和虚表（均不占用类的存储空间）</p>
+<p>不同之处：</p>
+<ul>
+<li>
+<p>虚继承：</p>
+<p>虚基类依旧存在继承类中，只占用存储空间</p>
+<p>虚基类表存储的是虚基类相对直接继承类的偏移</p>
+</li>
+<li>
+<p>虚函数：</p>
+<p>虚函数不占用存储空间</p>
+<p>虚函数表存储的是虚函数地址</p>
+</li>
+</ul>
+<p>模板类中可以使用虚函数</p>
+<p>一个类（无论是普通类还是模板类）的成员模板不能是虚函数</p>
+<p>抽象类：含有纯虚函数的类</p>
+<p>接口类：仅含有纯虚函数的抽象类</p>
+<p>聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式</p>
+<ul>
+<li>所有的成员都是public</li>
+<li>没有定义任何构造函数</li>
+<li>没有类内初始化</li>
+<li>没有基类，也没有virtual函数</li>
+</ul>
+<ol>
+<li>realloc：更改以前分配的内存长度（增加或减少）。当增加长度时，可能需将以前分配区的内容移到另一个足够大的区域，而新增区域内的初始值则不确定。</li>
+<li>alloca：在栈上申请内存。程序在出栈的时候，会自动释放内存。但是需要注意的是，alloca 不具可移植性, 而且在没有传统堆栈的机器上很难实现。alloca 不宜使用在必须广泛移植的程序中。C99 中支持变长数组 (VLA)，可以用来替代 alloca。</li>
+</ol>
+<p>new 在申请内存时会自动计算所需的字节数，而malloc则需要我们自己输入申请内存的字节数</p>
+<h5 id="delete-this合法吗">delete this合法吗？</h5>
+<p>合法，但是</p>
+<p>1.必须保证this对象通过new（不是new[]、不是placement new、不是栈上、不是全局、不是其他对象成员）分配的</p>
+<p>2.必须保证调用delete this的成员函数是最后一个调用this的成员函数</p>
+<p>3.必须保证成员函数的delete this 后面没有调用this了</p>
+<p>4.必须保证delete this之后没有人使用了</p>
+<h4 id="只能在堆上">只能在堆上</h4>
+<p>方法：将析构函数设置为私有</p>
+<p>原因：C++ 是静态绑定语言，编译器管理栈上对象的生命周期，编译器在为类对象分配栈空间时，会先检查类的析构函数的访问性。若析构函数不可访问，则不能在栈上创建对象。</p>
+<h4 id="只能在栈上">只能在栈上</h4>
+<p>方法：将 new 和 delete 重载为私有</p>
+<p>原因：在堆上生成对象，使用 new 关键词操作，其过程分为两阶段：第一阶段，使用 new 在堆上寻找可用内存，分配给对象；第二阶段，调用构造函数生成对象。将 new 操作设置为私有，那么第一阶段就无法完成，就不能够在堆上生成对象。</p>
+<p>Class shared_ptr 实现共享式拥有概念，多个智能指针指向相同对象，该对象和其相关资料会在“最后一个refence被销毁”时释放。为了在结构复杂的情境中执行上述工作，标准库提供了weak_ptr、bad_ptr和enable_shared_from_this等辅助类</p>
+<p>Class unique_ptr实现独占式拥有，或严格拥有概念，保证同一时间只有一个智能指针可以指向该对象，你可以移交拥有权，他对于避免内存泄漏特别有用</p>
+<p>weak_ptr 允许你共享但不拥有某对象，一旦最末一个拥有该对象的智能指针失去了所有权，任何 weak_ptr 都会自动成空（empty）。因此，在 default 和 copy 构造函数之外，weak_ptr 只提供 “接受一个 shared_ptr” 的构造函数。</p>
+<h5 id="强制类型转换运算符">强制类型转换运算符</h5>
+<p>static_cast</p>
+<ul>
+<li>用于非多态类型的转换</li>
+<li>不执行运行时类型检查</li>
+<li>通常用于转换数值数据类型</li>
+<li>可以在整个类层次结构中移动指针，子类转换为父类安全（向上转换），父类转换为子类不安全（因为子类可能又不在父类的字段或方法）</li>
+</ul>
+<p>dynamic_cast</p>
+<ul>
+<li>用于多态类型的转换</li>
+<li>执行运行时类型检查</li>
+<li>只适用于指针或引用</li>
+<li>对不明确的指针的转换将失败（返回nullptr） 但不引发异常</li>
+<li>可以在整个类层次结构中移动指针，包括向上转换、向下转换</li>
+</ul>
+<p>const_cast</p>
+<p>用于删除const、volatile和__unaligned特性</p>
+<p>reinterpret_cast</p>
+<ul>
+<li>
+<p>用于位的简单重新解释</p>
+</li>
+<li>
+<p>滥用reinterpret_cast运算符可能带来风险，除非所需转换本身是低级别的，否则应使用其他强制转换运算符之一</p>
+</li>
+<li>
+<p>允许将任何指针转换为其他指针类型</p>
+</li>
+<li>
+<p>也允许将任何整数类型转换为任何指针类型及反向转换</p>
+</li>
+<li>
+<p>reinterpret_cast运算符不能丢掉const、volatile或__unaligned特性</p>
+</li>
+<li>
+<p>reinterpret_cast的一个实际用途是在哈希函数中，通过两种不同的值几乎不以相同的索引结尾的方式将值映射到索引</p>
+</li>
+</ul>
+<p>bad_cast</p>
+<p>由于强制转换为引用类型失败，dynamic_cast运算符引发bad_cast异常</p>
+<h5 id="运行时类型信息rtti">运行时类型信息RTTI</h5>
+<p>dynamic_cast 用于多态类型的转换</p>
+<p>typeid 允许在运行时确定对象的类型；返回一个type_info对象的引用； 如果想通过基类的指针获得派生类的数据类型，基类必须带虚函数，只能获取对象的实际类型</p>
+<p>type_info 类描述编译器在程序中生成的类型信息，此类的对象可以有效存储指向类型 的名称指针</p>
+
+</div>
+
+
+  </main>
+
+  <footer>
+  <div class="copyright">
+    &copy; Antonio.D.C 2020 · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+  <script src="https://antoniodc-aaa.github.io/js/blog.js"></script>
+
+  
+</body>
+</html>

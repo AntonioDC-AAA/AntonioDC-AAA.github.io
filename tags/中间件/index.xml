@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>中间件 on Blog</title>
+    <link>https://antoniodc-aaa.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
+    <description>Recent content in 中间件 on Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://antoniodc-aaa.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kafka</title>
+      <link>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/kafka/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/kafka/</guid>
+      <description>kafka Kafka是一个分布式、分区的、多副本的、多订阅者，基于zookeeper协调的分布式日至系统，常见可用于web/nginx日志，访问日志、消息服务等
+Kafka主要设计目标如下：
+ 以时间复杂度为O(1)的方式提供消息持久化能力，即使对TB级以上数据也能保证常数时间的访问性能。 高吞吐率。即使在非常廉价的商用机器上也能做到单机支持每秒100K条消息的传输。 支持Kafka Server间的消息分区，及分布式消费，同时保证每个partition内的消息顺序传输。 同时支持离线数据处理和实时数据处理。 Scale out:支持在线水平扩展  消息系统介绍 ​	有两种消息传递模式：点对点传递模式、发布-订阅模式</description>
+    </item>
+    
+  </channel>
+</rss>

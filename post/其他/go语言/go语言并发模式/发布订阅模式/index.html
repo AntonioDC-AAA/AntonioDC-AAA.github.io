@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.65.0-DEV" />
+
+  <title>发布订阅模式 &middot; Blog</title>
+
+  <meta name="description" content="" />
+
+  
+  <meta property="og:locale" content="en-us"/>
+
+  
+  <meta property="og:image" content="https://antoniodc-aaa.github.io/images/name.jpg">
+
+  
+  <meta property="og:site_name" content="Blog"/>
+  <meta property="og:title" content="发布订阅模式"/>
+  <meta property="og:description" content="发布订阅模式 观察者模式又叫作发布订阅模式，属于设计模式中行为模式中的一种。
+发布订阅（publish-and-subscribe）模型同城被简写为pub/sub模型。在这个模型中，消息生产者成为发布者（publisher），二消息消费者则成为订阅者（subscriber），生产者和消费者是M:N的关系。在传统生产者和消费者模型中，是将消息发送到一个队列中，二发布订阅模型则是将消息发布给一个主题。
+​	为此，我们构建一个名为pubsub	的发布订阅模型支持包：
+import ( &#34;sync&#34; &#34;time&#34; ) type ( subscriber chan interface{} //订阅者为一个管道 	topicFunc func(v interface{}) bool //主题为一个过滤器 ) //发布者对象 type Publisher struct { m sync."/>
+  <meta property="og:url" content="https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="0001-01-01T00:00:00Z"/>
+  <meta property="article:modified_time" content="0001-01-01T00:00:00Z"/>
+  <meta property="article:author" content="Antonio.D.C">
+  
+  
+  
+
+  <script type="application/ld+json">
+  {
+    "@context" : "http://schema.org",
+    "@type" : "Blog",
+    "name": "Blog",
+    "url" : "https://antoniodc-aaa.github.io/",
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "description": "You only live once !"
+  }
+  </script>
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "name": "发布订阅模式",
+    "headline": "发布订阅模式",
+    "datePublished": "0001-01-01T00:00:00Z",
+    "dateModified": "0001-01-01T00:00:00Z",
+    "author": {
+      "@type": "Person",
+      "name": "Antonio.D.C",
+      "url": "https://antoniodc-aaa.github.io/"
+    },
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "url": "https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%BC%8F/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/",
+    "description": "发布订阅模式 观察者模式又叫作发布订阅模式，属于设计模式中行为模式中的一种。\n发布订阅（publish-and-subscribe）模型同城被简写为pub\/sub模型。在这个模型中，消息生产者成为发布者（publisher），二消息消费者则成为订阅者（subscriber），生产者和消费者是M:N的关系。在传统生产者和消费者模型中，是将消息发送到一个队列中，二发布订阅模型则是将消息发布给一个主题。\n​\t为此，我们构建一个名为pubsub\t的发布订阅模型支持包：\nimport ( \x26#34;sync\x26#34; \x26#34;time\x26#34; ) type ( subscriber chan interface{} \/\/订阅者为一个管道 \ttopicFunc func(v interface{}) bool \/\/主题为一个过滤器 ) \/\/发布者对象 type Publisher struct { m sync."
+  }
+  </script>
+  
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/hyde.css">
+
+  
+<style type="text/css">
+  .sidebar {
+    background-color: #fc21803;
+  }
+
+  .read-more-link a {
+    border-color: #fc21803;
+  }
+
+  footer a,
+  .content a,
+  .related-posts li a:hover {
+    color: #fc21803;
+  }
+</style>
+
+
+
+  <link type="text/css" rel="stylesheet" href="https://antoniodc-aaa.github.io/css/blog.css">
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+        
+        <div class="author-image">
+          <img src="https://antoniodc-aaa.github.io/images/name.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+        </div>
+        
+      
+
+      <h1>Blog</h1>
+
+      
+      <p class="lead">You only live once !</p>
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://antoniodc-aaa.github.io/">Home</a>
+        </li>
+        <li>
+          <a href="/post/"> Posts </a>
+        </li><li>
+          <a href="/tags/"> Tags </a>
+        </li><li>
+          <a href="/about/"> About </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="https://github.com/" rel="me" title="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+      <a href="#" rel="me" title="Twitter">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1>发布订阅模式</h1>
+
+  <div class="post-date">
+    <time datetime="0001-01-01T00:00:00Z">Jan 1, 0001</time> · 2 min read
+  </div>
+
+  <h1 id="发布订阅模式">发布订阅模式</h1>
+<p>观察者模式又叫作发布订阅模式，属于设计模式中行为模式中的一种。</p>
+<p>发布订阅（publish-and-subscribe）模型同城被简写为pub/sub模型。在这个模型中，消息生产者成为发布者（publisher），二消息消费者则成为订阅者（subscriber），生产者和消费者是M:N的关系。在传统生产者和消费者模型中，是将消息发送到一个队列中，二发布订阅模型则是将消息发布给一个主题。</p>
+<p>​	为此，我们构建一个名为pubsub	的发布订阅模型支持包：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;sync&#34;</span>
+	<span style="color:#e6db74">&#34;time&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> (
+	<span style="color:#a6e22e">subscriber</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">interface</span>{}         <span style="color:#75715e">//订阅者为一个管道
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">topicFunc</span>  <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">v</span> <span style="color:#66d9ef">interface</span>{}) <span style="color:#66d9ef">bool</span> <span style="color:#75715e">//主题为一个过滤器
+</span><span style="color:#75715e"></span>)
+
+<span style="color:#75715e">//发布者对象
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Publisher</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">m</span>           <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">RWMutex</span>		
+	<span style="color:#a6e22e">buffer</span>      <span style="color:#66d9ef">int</span>
+	<span style="color:#a6e22e">timeout</span>     <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>
+	<span style="color:#a6e22e">subscribers</span> <span style="color:#66d9ef">map</span>[<span style="color:#a6e22e">subscriber</span>]<span style="color:#a6e22e">topicFunc</span> <span style="color:#75715e">//订阅者信息
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#75715e">//构建一个发布对象，可以设置发布超市时间和缓存队列的长度
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">NewPublisher</span>(<span style="color:#a6e22e">publishTimeout</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>, <span style="color:#a6e22e">buffer</span> <span style="color:#66d9ef">int</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">Publisher</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">Publisher</span>{
+		<span style="color:#a6e22e">buffer</span>:      <span style="color:#a6e22e">buffer</span>,
+		<span style="color:#a6e22e">timeout</span>:     <span style="color:#a6e22e">publishTimeout</span>,
+		<span style="color:#a6e22e">subscribers</span>: make(<span style="color:#66d9ef">map</span>[<span style="color:#a6e22e">subscriber</span>]<span style="color:#a6e22e">topicFunc</span>),
+	}
+}
+<span style="color:#75715e">//添加一个新的订阅者，订阅全部主题
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Publisher</span>)<span style="color:#a6e22e">Subscribe</span>() <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">interface</span>{}{
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">SubscriberTopic</span>(<span style="color:#66d9ef">nil</span>)
+}
+
+<span style="color:#75715e">//添加一个新的订阅者，订阅过滤器筛选后的主题
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Publisher</span>) <span style="color:#a6e22e">SubscriberTopic</span>(<span style="color:#a6e22e">topic</span> <span style="color:#a6e22e">topicFunc</span>) <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">interface</span>{} {
+	<span style="color:#a6e22e">ch</span> <span style="color:#f92672">:=</span> make(<span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">interface</span>{}, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">buffer</span>)
+	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">Lock</span>()
+    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">subscribers</span>[<span style="color:#a6e22e">ch</span>] = <span style="color:#a6e22e">topic</span>					<span style="color:#75715e">//CAD::Add SubscriberTipic
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">Unlock</span>()
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ch</span>
+}
+
+<span style="color:#75715e">//退出订阅
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Publisher</span>) <span style="color:#a6e22e">Evict</span>(<span style="color:#a6e22e">sub</span> <span style="color:#66d9ef">chan</span> <span style="color:#66d9ef">interface</span>{}) {
+	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">Lock</span>()
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">Unlock</span>()
+	delete(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">subscribers</span>, <span style="color:#a6e22e">sub</span>)
+    close(<span style="color:#a6e22e">sub</span>)				<span style="color:#75715e">//CAD::Remark：Remember Close sub chan
+</span><span style="color:#75715e"></span>}	
+
+<span style="color:#75715e">//发布一个主题
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Publisher</span>) <span style="color:#a6e22e">Publish</span>(<span style="color:#a6e22e">v</span> <span style="color:#66d9ef">interface</span>{}) {
+	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">Lock</span>()
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">Unlock</span>()
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">wg</span> <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>					
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">sub</span>, <span style="color:#a6e22e">topic</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">subscribers</span> {
+		<span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Add</span>(<span style="color:#ae81ff">1</span>)
+		<span style="color:#66d9ef">go</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">sendTopic</span>(<span style="color:#a6e22e">sub</span>, <span style="color:#a6e22e">topic</span>, <span style="color:#a6e22e">v</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">wg</span>)
+	}
+	<span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Wait</span>()
+}
+
+<span style="color:#75715e">//关闭发布者对象，同是关闭所有的订阅者管道
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Publisher</span>) <span style="color:#a6e22e">Close</span>() {
+	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">Lock</span>()
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">m</span>.<span style="color:#a6e22e">Unlock</span>()
+	<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">sub</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">subscribers</span> {
+		delete(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">subscribers</span>, <span style="color:#a6e22e">sub</span>)
+		close(<span style="color:#a6e22e">sub</span>)
+	}
+}
+
+<span style="color:#75715e">//发送主题，可以容忍一定的超市
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Publisher</span>) <span style="color:#a6e22e">sendTopic</span>(<span style="color:#a6e22e">sub</span> <span style="color:#a6e22e">subscriber</span>, <span style="color:#a6e22e">topic</span> <span style="color:#a6e22e">topicFunc</span>, <span style="color:#a6e22e">v</span> <span style="color:#66d9ef">interface</span>{}, <span style="color:#a6e22e">wg</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">WaitGroup</span>) {
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">wg</span>.<span style="color:#a6e22e">Done</span>()
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">topic</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> <span style="color:#f92672">&amp;&amp;</span> !<span style="color:#a6e22e">topic</span>(<span style="color:#a6e22e">v</span>) {
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#66d9ef">select</span> {
+	<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">sub</span> <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">v</span>:
+	<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">After</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">timeout</span>):
+
+	}
+
+}
+</code></pre></div><p>下面的例子中，有两个订阅者分别订阅了全部主题和含有“golang”的主题：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">import</span> (
+	<span style="color:#a6e22e">pubsub</span> <span style="color:#e6db74">&#34;demo/senior/sub_and_sub&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;strings&#34;</span>
+	<span style="color:#e6db74">&#34;time&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">p</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">pubsub</span>.<span style="color:#a6e22e">NewPublisher</span>(<span style="color:#ae81ff">100</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Millisecond</span>, <span style="color:#ae81ff">10</span>)
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Close</span>()
+	<span style="color:#a6e22e">all</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Subscribe</span>()
+	<span style="color:#a6e22e">golang</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">SubscriberTopic</span>(<span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">v</span> <span style="color:#66d9ef">interface</span>{}) <span style="color:#66d9ef">bool</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">s</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">v</span>.(<span style="color:#66d9ef">string</span>); <span style="color:#a6e22e">ok</span> {
+			<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Contains</span>(<span style="color:#a6e22e">s</span>, <span style="color:#e6db74">&#34;golang&#34;</span>)
+		}
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>
+	})
+	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Publish</span>(<span style="color:#e6db74">&#34;hello ,world!&#34;</span>)
+	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Publish</span>(<span style="color:#e6db74">&#34;hello ,golang!&#34;</span>)
+	<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">all</span> {
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;all :&#34;</span>, <span style="color:#a6e22e">msg</span>)
+		}
+	}()
+	<span style="color:#66d9ef">go</span> <span style="color:#66d9ef">func</span>() {
+		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">msg</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">golang</span> {
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;golang :&#34;</span>, <span style="color:#a6e22e">msg</span>)
+		}
+	}()
+	<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Sleep</span>(<span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
+}
+</code></pre></div>
+</div>
+
+
+  </main>
+
+  <footer>
+  <div class="copyright">
+    &copy; Antonio.D.C 2020 · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+  <script src="https://antoniodc-aaa.github.io/js/blog.js"></script>
+
+  
+</body>
+</html>

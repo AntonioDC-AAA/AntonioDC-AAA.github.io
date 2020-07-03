@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.65.0-DEV" />
+
+  <title>Go语言后端基础 &middot; Blog</title>
+
+  <meta name="description" content="" />
+
+  
+  <meta property="og:locale" content="en-us"/>
+
+  
+  <meta property="og:image" content="https://antoniodc-aaa.github.io/images/name.jpg">
+
+  
+  <meta property="og:site_name" content="Blog"/>
+  <meta property="og:title" content="Go语言后端基础"/>
+  <meta property="og:description" content="Go语言后端基础 Go语言不需要nginx、apache服务器，因为他直接就监听tcp端口，做了nginx的事情，因为go语言的socket底层也是epoll模型
+Web工作方式的几个概念   Request：用户请求的信息，用来解析用户的请求信息，包括post、get、cookie、url等信息
+  Response：服务器需要反馈给客户端的信息
+  Conn：用户的每次请求链接"/>
+  <meta property="og:url" content="https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80%E5%90%8E%E7%AB%AF%E5%9F%BA%E7%A1%80/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="0001-01-01T00:00:00Z"/>
+  <meta property="article:modified_time" content="0001-01-01T00:00:00Z"/>
+  <meta property="article:author" content="Antonio.D.C">
+  
+  
+  
+
+  <script type="application/ld+json">
+  {
+    "@context" : "http://schema.org",
+    "@type" : "Blog",
+    "name": "Blog",
+    "url" : "https://antoniodc-aaa.github.io/",
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "description": "You only live once !"
+  }
+  </script>
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "name": "Go语言后端基础",
+    "headline": "Go语言后端基础",
+    "datePublished": "0001-01-01T00:00:00Z",
+    "dateModified": "0001-01-01T00:00:00Z",
+    "author": {
+      "@type": "Person",
+      "name": "Antonio.D.C",
+      "url": "https://antoniodc-aaa.github.io/"
+    },
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "url": "https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80%E5%90%8E%E7%AB%AF%E5%9F%BA%E7%A1%80/",
+    "description": "Go语言后端基础 Go语言不需要nginx、apache服务器，因为他直接就监听tcp端口，做了nginx的事情，因为go语言的socket底层也是epoll模型\nWeb工作方式的几个概念   Request：用户请求的信息，用来解析用户的请求信息，包括post、get、cookie、url等信息\n  Response：服务器需要反馈给客户端的信息\n  Conn：用户的每次请求链接"
+  }
+  </script>
+  
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/hyde.css">
+
+  
+<style type="text/css">
+  .sidebar {
+    background-color: #fc21803;
+  }
+
+  .read-more-link a {
+    border-color: #fc21803;
+  }
+
+  footer a,
+  .content a,
+  .related-posts li a:hover {
+    color: #fc21803;
+  }
+</style>
+
+
+
+  <link type="text/css" rel="stylesheet" href="https://antoniodc-aaa.github.io/css/blog.css">
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+        
+        <div class="author-image">
+          <img src="https://antoniodc-aaa.github.io/images/name.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+        </div>
+        
+      
+
+      <h1>Blog</h1>
+
+      
+      <p class="lead">You only live once !</p>
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://antoniodc-aaa.github.io/">Home</a>
+        </li>
+        <li>
+          <a href="/post/"> Posts </a>
+        </li><li>
+          <a href="/tags/"> Tags </a>
+        </li><li>
+          <a href="/about/"> About </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="https://github.com/" rel="me" title="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+      <a href="#" rel="me" title="Twitter">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1>Go语言后端基础</h1>
+
+  <div class="post-date">
+    <time datetime="0001-01-01T00:00:00Z">Jan 1, 0001</time> · 1 min read
+  </div>
+
+  <h1 id="go语言后端基础">Go语言后端基础</h1>
+<p>Go语言不需要nginx、apache服务器，因为他直接就监听tcp端口，做了nginx的事情，因为go语言的socket底层也是epoll模型</p>
+<h4 id="web工作方式的几个概念">Web工作方式的几个概念</h4>
+<ul>
+<li>
+<p>Request：用户请求的信息，用来解析用户的请求信息，包括post、get、cookie、url等信息</p>
+</li>
+<li>
+<p>Response：服务器需要反馈给客户端的信息</p>
+</li>
+<li>
+<p>Conn：用户的每次请求链接</p>
+</li>
+<li>
+<p>Handler：处理请求和生成返回信息的处理逻辑</p>
+<p><img src="https://img-blog.csdn.net/20180722192222808?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0Nzc3NjAw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdn.net/20180722193037454?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0Nzc3NjAw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img">多路复用器</p>
+<p>ListenAndServe接受到的第二参数是处理器，它的默认值是DefalutServeMux</p>
+<p>因为DefaultServeMux多路复用器是ServeMux结构的一个实例，后者也拥有ServeHTTP（这个地方是处理函数）方法，并且这个方法的签名与成为处理器所需要的签名完全一致。</p>
+<p>DefaultServeMux不仅是一个多路复用器，还是一个处理器。DefaultServeMux处理器与其他的一般处理器不同，DefaultServeMux处理器和其他的一般处理器不同，唯一要做的就是根据请求的URL将请求重定向到不同的处理器</p>
+<p>串联多个函数可以让程序执行更多的动作，这种做法称为管道处理</p>
+<p>WriteHeader方法接一个代表HTTP响应状态码的整数作为参数，并将这个整数用作HTTP响应的返回状态码，在write方法之前执行</p>
+<p>Cookie实现闪现消息(在某个条件被满足时，在页面上显示一条临时出现的消息，用户在刷新页面之后就不会再看到相同的消息)</p>
+<p>MVVM 是Model-View-ViewMode的缩写，本质上是MVC的改进版</p>
+<p>MVVM将其中的View的状态和行为抽象化，将视图UI和业务逻辑分开。MVVM框架是把MVP（Model-View-Prese nter）模式与WPF结合的应用方式时发展演变过来的一种新型架构框架</p>
+<h3 id="websocket">WebSocket</h3>
+<p>WebSocket是HTML5的重要特性，它使得浏览器和服务器可以进行全双工通信</p>
+<p><a href="https://blog.csdn.net/qq_34777600/article/details/81158871">https://blog.csdn.net/qq_34777600/article/details/81158871</a></p>
+<p>Go语言标准包没有提供对WebSocket的支持，但是在官方维护的go.net包中对WebSocket的支持</p>
+<h3 id="rest">REST</h3>
+<p>REST（REpresentational  State Transfer）指的是一组架构约束条件和原则</p>
+<p>资源（Resources） REST是&quot;表现层状态转化&rdquo;，其实它省略了主语。&ldquo;表现层&quot;其实指的是&quot;资源&quot;的&quot;表现层&rdquo;。那么什么是资源呢？就是我们平常上网访问的一张图片、一个文档、一个视频等。这些资源我们通过URI来定位，也就是一个URI表示一个资源。
+表现层（Representation）资源是做一个具体的实体信息，他可以有多种的展现方式。而把实体展现出来就是表现层，例如一个txt文本信息，他可以输出成html、json、xml等格式，一个图片他可以jpg、png等方式展现，这个就是表现层的意思。URI确定一个资源，但是如何确定它的具体表现形式呢？应该在HTTP请求的头信息中用Accept和Content-Type字段指定，这两个字段才是对&quot;表现层&quot;的描述。
+状态转化（State Transfer）访问一个网站，就代表了客户端和服务器的一个互动过程。在这个过程中，肯定涉及到数据和状态的变化。而HTTP协议是无状态的，那么这些状态肯定保存在服务器端，所以如果客户端想要通知服务器端改变数据和状态的变化，肯定要通过某种方式来通知它。客户端能通知服务器端的手段，只能是HTTP协议。具体来说，就是HTTP协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：GET用来获取资源，POST用来新建资源（也可以用于更新资源），PUT用来更新资源，DELETE用来删除资源。</p>
+<p>RESTful架构（资源表现层状态转化）</p>
+<p>1&gt;每一个URL代表一种资源</p>
+<p>2&gt;客户端和服务器之间，传递这种资源的某种表现层</p>
+<p>3&gt;客户端通过四个HTTP动态，对服务器资源进行操作，实现“表现层状态转化”</p>
+<p>Web应用要满足REST最重要的原则是:客户端和服务器之间的交互在请求之间是无状态的,即从客户端到服务器的每个请求都必须包含理解请求所必需的信息。如果服务器在请求之间的任何时间点重启，客户端不会得到通知。此外此请求可以由任何可用服务器回答，这十分适合云计算之类的环境。因为是无状态的，所以客户端可以缓存数据以改进性能。</p>
+<p>另一个重要的REST原则是系统分层，这表示组件无法了解除了与它直接交互的层次以外的组件。通过将系统知识限制在单个层，可以限制整个系统的复杂性，从而促进了底层的独立性。</p>
+<p><img src="https://img-blog.csdn.net/20180722213351905?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0Nzc3NjAw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+<h3 id="rpc">RPC</h3>
+<p>RPC想实现函数调用模式的网络化，客户端像调用本地函数一样，然后客户端把这些参数打包之后通过网络传递到服务端，服务端解包到处理执行过程中执行，然后执行的结果反馈给客户端。</p>
+<p>RPC（Remote Procedure Call Protocol）远程过程调用协议<img src="https://img-blog.csdn.net/20180722215155792?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0Nzc3NjAw/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img"></p>
+<p>1.调用客户端句柄；执行传送参数
+2.调用本地系统内核发送网络消息
+3.消息传送到远程主机
+4.服务器句柄得到消息并取得参数
+5.执行远程过程
+6.执行的过程将结果返回服务器句柄
+7.服务器句柄返回结果，调用远程系统内核
+8.消息传回本地主机
+9.客户句柄由内核接收消息
+10.客户接收句柄返回的数据</p>
+<h2 id="go的模板">Go的模板</h2>
+<p>![Go模板引擎在Web应用中的作用示意图](/home/antoniodc/图片/2019-11-11 21-24-04 的屏幕截图.png)</p>
+<p>持久性XSS漏洞（persistent XSS vulnerability）是一种常见的XSS攻击方式，这种攻击是由服务器将攻击者存储的数据原原本本地显示给其他的用户所导致的</p>
+<p>go语言的上下文感知功能不仅能够 自动对HTML进行转义，还能够防止基于Javascript、CSS甚至是URL的XSS攻击</p>
+
+</div>
+
+
+  </main>
+
+  <footer>
+  <div class="copyright">
+    &copy; Antonio.D.C 2020 · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+  <script src="https://antoniodc-aaa.github.io/js/blog.js"></script>
+
+  
+</body>
+</html>

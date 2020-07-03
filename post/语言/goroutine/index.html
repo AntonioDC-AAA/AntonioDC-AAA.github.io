@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.65.0-DEV" />
+
+  <title>协程 &middot; Blog</title>
+
+  <meta name="description" content="" />
+
+  
+  <meta property="og:locale" content="en-us"/>
+
+  
+  <meta property="og:image" content="https://antoniodc-aaa.github.io/images/name.jpg">
+
+  
+  <meta property="og:site_name" content="Blog"/>
+  <meta property="og:title" content="协程"/>
+  <meta property="og:description" content="协程Goroutine 轻量级“线程”
+非抢占式多任务处理，由协程主动交出控制权
+编译器/解释器/虚拟机层面的多任务
+多个协程可能在一个或多个线程上运行
+抢占式多任务会造成卡死的情况，这时需要：
+1.做IO操作会交出控制权
+2.runtime.Gosched()手动交出控制权
+goroutine可能的切换点
+ I/O ,select Channel 等待锁 函数调用（有时候） runtime."/>
+  <meta property="og:url" content="https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/goroutine/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="0001-01-01T00:00:00Z"/>
+  <meta property="article:modified_time" content="0001-01-01T00:00:00Z"/>
+  <meta property="article:author" content="Antonio.D.C">
+  
+  
+  
+
+  <script type="application/ld+json">
+  {
+    "@context" : "http://schema.org",
+    "@type" : "Blog",
+    "name": "Blog",
+    "url" : "https://antoniodc-aaa.github.io/",
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "description": "You only live once !"
+  }
+  </script>
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "name": "协程",
+    "headline": "协程",
+    "datePublished": "0001-01-01T00:00:00Z",
+    "dateModified": "0001-01-01T00:00:00Z",
+    "author": {
+      "@type": "Person",
+      "name": "Antonio.D.C",
+      "url": "https://antoniodc-aaa.github.io/"
+    },
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "url": "https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/goroutine/",
+    "description": "协程Goroutine 轻量级“线程”\n非抢占式多任务处理，由协程主动交出控制权\n编译器\/解释器\/虚拟机层面的多任务\n多个协程可能在一个或多个线程上运行\n抢占式多任务会造成卡死的情况，这时需要：\n1.做IO操作会交出控制权\n2.runtime.Gosched()手动交出控制权\ngoroutine可能的切换点\n I\/O ,select Channel 等待锁 函数调用（有时候） runtime."
+  }
+  </script>
+  
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/hyde.css">
+
+  
+<style type="text/css">
+  .sidebar {
+    background-color: #fc21803;
+  }
+
+  .read-more-link a {
+    border-color: #fc21803;
+  }
+
+  footer a,
+  .content a,
+  .related-posts li a:hover {
+    color: #fc21803;
+  }
+</style>
+
+
+
+  <link type="text/css" rel="stylesheet" href="https://antoniodc-aaa.github.io/css/blog.css">
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+        
+        <div class="author-image">
+          <img src="https://antoniodc-aaa.github.io/images/name.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+        </div>
+        
+      
+
+      <h1>Blog</h1>
+
+      
+      <p class="lead">You only live once !</p>
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://antoniodc-aaa.github.io/">Home</a>
+        </li>
+        <li>
+          <a href="/post/"> Posts </a>
+        </li><li>
+          <a href="/tags/"> Tags </a>
+        </li><li>
+          <a href="/about/"> About </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="https://github.com/" rel="me" title="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+      <a href="#" rel="me" title="Twitter">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1>协程</h1>
+
+  <div class="post-date">
+    <time datetime="0001-01-01T00:00:00Z">Jan 1, 0001</time> · 1 min read
+  </div>
+
+  <h1 id="协程goroutine">协程Goroutine</h1>
+<p>轻量级“线程”</p>
+<p>非抢占式多任务处理，由协程主动交出控制权</p>
+<p>编译器/解释器/虚拟机层面的多任务</p>
+<p>多个协程可能在一个或多个线程上运行</p>
+<p>抢占式多任务会造成卡死的情况，这时需要：</p>
+<p>1.做IO操作会交出控制权</p>
+<p>2.runtime.Gosched()手动交出控制权</p>
+<p>goroutine可能的切换点</p>
+<ul>
+<li>I/O ,select</li>
+<li>Channel</li>
+<li>等待锁</li>
+<li>函数调用（有时候）</li>
+<li>runtime.Gosched()</li>
+</ul>
+<p>只是参考，不能保证切换，不能保证在其他地方不切换</p>
+<p>go run -race [name.go]	//查看数据冲突的方法</p>
+<blockquote>
+<p>”子程序是协程的一个特例“</p>
+</blockquote>
+<p>![2019-11-19 10-09-47 的屏幕截图](/home/antoniodc/图片/2019-11-19 10-09-47 的屏幕截图.png)</p>
+<p>C++：Boost.Goroutine这个库实现的</p>
+<p>Java：不支持</p>
+<p>Python:使用yield关键字实现协程，Python3.5加入了async def对协程原生支持</p>
+<p>![2019-11-19 10-12-54 的屏幕截图](/home/antoniodc/图片/2019-11-19 10-12-54 的屏幕截图.png)</p>
+<p>任何函数只需要加上go就能发送给调度器运行</p>
+<p>不需要在定义时区分是否是异步函数</p>
+<p>调度器在合适的点进行切换</p>
+<p>使用-race来检测数据访问冲突</p>
+
+</div>
+
+
+  </main>
+
+  <footer>
+  <div class="copyright">
+    &copy; Antonio.D.C 2020 · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+  <script src="https://antoniodc-aaa.github.io/js/blog.js"></script>
+
+  
+</body>
+</html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go on Blog</title>
+    <link>https://antoniodc-aaa.github.io/tags/go/</link>
+    <description>Recent content in Go on Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://antoniodc-aaa.github.io/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Test</title>
+      <link>https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80test/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80test/</guid>
+      <description>Go语言Test t.Errorf为打印错误信息，并且当前test case 会被跳过
+go的test不会保证多个testXxx会顺序执行
+如果要顺序执行，使用t.Run来执行subtests可以做到控制test输出以及test的顺序
+TestMain作为初始化test，并且使用m.Run()来调用其他tests金额以完成一些需要初始化操作的testing，比如数据库连接，文件打开，REST服务登陆等
+如果没有在TestMain中调用m.Run()，则除了TestMain意外的其他tests都不会被执行
+go test遇到的一些问题-command-line-arguments undefined: xxxxx</description>
+    </item>
+    
+    <item>
+      <title>切片</title>
+      <link>https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/%E5%88%87%E7%89%87/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/%E5%88%87%E7%89%87/</guid>
+      <description>Slice slice的内部结构 其实slice在Go的运行时库中就是一个C语言动态数组的实现，在$GOROOT/src/pkg/runtime/runtime.h中可以看到它的定义：
+struct Slice { // must not move anything byte* array; // actual data uintgo len; // number of elements uintgo cap; // allocated number of elements }; 这个结构有3个字段，第一个字段表示array的指针，就是真实数据的指针（这个一定要注意），所以才经常说slice是数组的引用，第二个是表示slice的长度，第三个是表示slice的容量，注意：*len和cap都不是指针*。</description>
+    </item>
+    
+    <item>
+      <title>协程</title>
+      <link>https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/goroutine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/goroutine/</guid>
+      <description>协程Goroutine 轻量级“线程”
+非抢占式多任务处理，由协程主动交出控制权
+编译器/解释器/虚拟机层面的多任务
+多个协程可能在一个或多个线程上运行
+抢占式多任务会造成卡死的情况，这时需要：
+1.做IO操作会交出控制权
+2.runtime.Gosched()手动交出控制权
+goroutine可能的切换点
+ I/O ,select Channel 等待锁 函数调用（有时候） runtime.</description>
+    </item>
+    
+    <item>
+      <title>接口</title>
+      <link>https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80%E6%8E%A5%E5%8F%A3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80%E6%8E%A5%E5%8F%A3/</guid>
+      <description>Go语言接口 Go语言中，接口类型具体描述了一系列方法的集合，一个实现了接口所包含的方法的具体类型是这个接口的实例
+与传统的面向对象不同，接口是由使用者定义的
+接口的动态类型：接口绑定的具体实例的类型称为接口的动态类型。接口可以绑定不同类型的势力，所以接口的动态类型是随着绑定的不同类型示例代码而发生变化的
+接口值由两部分组成，一个具体的类型是那个类型的值。他们称为接口的动态 类型和动态值。对于Go这种静态类型的语言，类型是编译期的概念；因此一个类型不是一个值。在概念模型中，提供类型信息的值被称为 类型描述符，比如类型的名称和方法。在一个接口值中，类型部分代表与之相关类型的描述符
+接口值是可以用==和!=来进行比较的
+接口赋值在GO语言中有两种情况
+将对象实例赋值给接口</description>
+    </item>
+    
+  </channel>
+</rss>

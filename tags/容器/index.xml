@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>容器 on Blog</title>
+    <link>https://antoniodc-aaa.github.io/tags/%E5%AE%B9%E5%99%A8/</link>
+    <description>Recent content in 容器 on Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 12 Aug 2019 08:08:30 +0800</lastBuildDate>
+    
+	<atom:link href="https://antoniodc-aaa.github.io/tags/%E5%AE%B9%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Docker简介</title>
+      <link>https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/docker%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Mon, 12 Aug 2019 08:08:30 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/docker%E7%AE%80%E4%BB%8B/</guid>
+      <description>Docker Docker时一个开源的应用容器引擎它让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到安装了任何Linux发行版本的机器上。
+Docker时直接运行在宿主操作系统上的一个容器，使用沙箱机制完全虚拟出一个完整的操作，容器之间不会有任何接口，从而让容器与宿主机之间、容器与容器之间的隔离更加彻底。每个容器都有自己的权限管理，独立的网络与存储栈，以及自己的资源管理能，使同一台宿主机上可以友好的共存多个容器
+1.从传统观点上看，容器不是虚拟机，虚拟机中包含完整的操作系统，运行在宿主操作系统之上，虚拟机的优点在于在一台宿主机中，可以使用虚拟机运行多个完全不同的操作系统。对于容器来说，宿主机和容器共用一个内核，容器使用的系统资源更少，但是必须基于相同的底层操作系统 Docker只能在已经安装Ｄocker的宿主机器上部署、运行和管理容器，不能创建新的宿主系统（实例）、对象存储器和块存储器，以及通常与云平台有关的很多其他资源 虽然Docker 能提升组织管理应用和应用依赖的能力，但是不能完全取代更为传统的配置管理工具。Ｄockerfile文件用于定义构建时容器里的内容，但是不能持续管理容器的状态，也不能用于管理Ｄocker宿主系统
+Ｄｏｃｋｅｒ架构 基础架构是简单的客户端－服务器模型。ｄｏｃｋｅｒ只提供一个可执行文件，既可以用作客户端，也可以用作服务器。具体是那个，取决于执行ｄｏｃｋｅｒ命令的方式。
+Docker基本上有两部分组成，客户端和服务器（守护进程），还有一个可选的注册处，用于存储ｄｏｃｋｅｒ映像和映像的元数据，服务器用作持续运行和管理容器，客户端的作用是告诉服务器要做什么事。 Ｄｏｃｋｅｒ服务器可以直接连接映像注册处，客户端的职责是控制服务器做什么事情，而服务器则专注于存储容器化应用</description>
+    </item>
+    
+  </channel>
+</rss>

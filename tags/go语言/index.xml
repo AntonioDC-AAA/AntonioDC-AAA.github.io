@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go语言 on Blog</title>
+    <link>https://antoniodc-aaa.github.io/tags/go%E8%AF%AD%E8%A8%80/</link>
+    <description>Recent content in Go语言 on Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Mar 2020 12:58:03 +0800</lastBuildDate>
+    
+	<atom:link href="https://antoniodc-aaa.github.io/tags/go%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Go tips</title>
+      <link>https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/go_tips/</link>
+      <pubDate>Mon, 23 Mar 2020 12:58:03 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E8%AF%AD%E8%A8%80/go_tips/</guid>
+      <description>1.Go语言中
+垃圾回收器知道一个变量 是否应该被回收。基本思路是每一个包级别的变量，以及每一个当前执行函数的局部变量，可以作为追溯变量的路径源头，通过指针和其他方式的引用可以找到变量。如果变量的路径不存在，那么变量变得不可访问，因此它不会影响任何其他的计算过程
+2.多重赋值
+思路上的转变
+Go 常用的命令
+build
+install 与build最大的区别是编译后将输出文件打包库放在pkg下</description>
+    </item>
+    
+    <item>
+      <title>Effective Go</title>
+      <link>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/effective-go/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/effective-go/</guid>
+      <description>Effective Go 1.长命名并不会使其更具有可读性。一份有用的说明文档通常比额外的长命更有价值
+2.Go并不对获取器（getter）和设置器（setter）提供自动支持。Get放在获取器的名字中，既不符合习惯，也不必要。如果有个名为ower的字段，获取器应为Ower（大写，可导出），而非GetOwer
+若要提供设置器的方法，SetOwer是个不错的选择
+3.和C一样，Go的正式语法使用分号来结束语句；和C不同的时，这些分号并不出现在源码中。取而代之，词法分析器会使用一条简单的规则来自动插入分号，因此源码中基本就不用分号了。
+4.Go语言只有for swtich，if ，此外还有一个包含类型选择和多路复用通信复用器的新结构：select
+5.</description>
+    </item>
+    
+    <item>
+      <title>Go语言</title>
+      <link>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go/</guid>
+      <description>Go 当内置的panic()函数调用时，外围函数或方法的执行会立即终止。然后，任何延迟执行(defer)的函数或方法都会被调用，就像其外围函数正常返回一样。最后，调用返回到该外围函数的调用者，就像该外围调用函数或方法调用了panic()一样，因此该过程一直在调用栈中重复发生：函数停止执行，调用延迟执行函数等。当到达main()函数时不再有可以返回的调用者，因此这个过程会终止，并将包含传入原始panic()函数中的值的调用栈信息输出到os.Stderr。
+panic需要等defer结束后才会向上传递。出现panic的时候，会先按照defer的后入先出的顺序执行，最后才会执行panic。
+全局变量要定义在函数之外，而在函数之外定义的变量只****能用var定义。
+go语言编译器会自动在以标识符、数字字面量、字母字面量、字符串字面量、特定的关键字（break、continue、fallthrough和return）、增减操作符（++和&amp;ndash;）、或者一个右括号、右方括号和右大括号（即)、]、}）结束的非空行的末尾自动加上分号。
+/*
+func isCycle(head *ListNode)*ListNode{
+if head == nil || head.</description>
+    </item>
+    
+  </channel>
+</rss>

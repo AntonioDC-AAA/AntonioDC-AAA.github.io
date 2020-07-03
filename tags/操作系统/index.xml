@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>操作系统 on Blog</title>
+    <link>https://antoniodc-aaa.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
+    <description>Recent content in 操作系统 on Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Mar 2020 12:58:03 +0800</lastBuildDate>
+    
+	<atom:link href="https://antoniodc-aaa.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DLL</title>
+      <link>https://antoniodc-aaa.github.io/post/%E9%A1%B9%E7%9B%AE/dll/</link>
+      <pubDate>Mon, 23 Mar 2020 12:58:03 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E9%A1%B9%E7%9B%AE/dll/</guid>
+      <description>先测试测试呢</description>
+    </item>
+    
+    <item>
+      <title>Linux命令</title>
+      <link>https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/linux%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Mon, 23 Mar 2020 12:58:03 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/linux%E5%91%BD%E4%BB%A4/</guid>
+      <description>Linux命令    Task Commands     进程控制 fork(); exit(); wait();   进程通信 pipe(); shmget(); mmap();   文件操作 open(); read(); write();   设备操作 ioctl(); read(); write();   信息维护 getpid(); alarm(); sleep();   安全 chmod(); umask(); chown();    进程之间的通信方式以及优缺点</description>
+    </item>
+    
+    <item>
+      <title>Linux Points</title>
+      <link>https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/linux-points/</link>
+      <pubDate>Thu, 15 Aug 2019 08:08:30 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8F%8A%E5%AE%B9%E5%99%A8/linux-points/</guid>
+      <description>Linux Points  能够简单使用cat，grep，cut等命令进行一些操作； 文件系统相关的原理，inode 和block等概念，数据恢复； 硬链接与软链接 进程管理相关，僵尸进程与孤儿进程，SIGCHLD  文件系统 分区与文件系统 对分区进行格式化是为了在分区上建立文件系统。一个分区通常只能格式化一个文件系统，但是磁盘阵列技术可以将一个分区格式化多个文件系统</description>
+    </item>
+    
+  </channel>
+</rss>

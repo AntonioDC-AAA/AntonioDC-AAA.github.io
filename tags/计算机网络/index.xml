@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>计算机网络 on Blog</title>
+    <link>https://antoniodc-aaa.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
+    <description>Recent content in 计算机网络 on Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Jun 2020 10:27:22 +0800</lastBuildDate>
+    
+	<atom:link href="https://antoniodc-aaa.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Http与Https区别</title>
+      <link>https://antoniodc-aaa.github.io/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/httpandhttps/</link>
+      <pubDate>Thu, 11 Jun 2020 10:27:22 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/httpandhttps/</guid>
+      <description>HTTP&amp;amp;HTTPS简介 HTTP（超文本传送协议）是一种用于分布式、协作式和超媒体信息的应用层协议。HTTP是万维网的数据通信的基础。
+HTTP有以下安全性问题：
+ 使用明文进行通信，内容可能会被窃听； 不验证通信方的身份，通信方的身份有可能遭遇伪装； 无法证明报文的完整性，报文有可能遭到篡改。  HTTPS并不是新协议，而是让HTTP和SSL（secure sockets layer）通信，再由SSL和TCP通信，也就是说HTTPS使用了隧道进行通信</description>
+    </item>
+    
+    <item>
+      <title>Http</title>
+      <link>https://antoniodc-aaa.github.io/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/http/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/http/</guid>
+      <description>1.URL中?,#,&amp;amp; URL中#代表网页中出现的一个位置。右边的字符就是该位置的标识符，这些字符不会发送到服务器端,浏览器只会滚动到相应的位置，不会重新夹在网页
+#URL是用来知道浏览器动作的，对服务器端完全无用
+?连接作用，通过？带来参数和连接域名
+清除缓存
+&amp;amp;连接不同的参数
+Session会话控制 Session对象存储特定用户会话所需要的属性及配置信息，当用户在应用程序的Web页之间跳转时，存储在Session对象的变量将不会丢失，在整个用户会话中一直存在下去
+会话Session跟踪；会话指的是用户登陆网站后的一系列动作，会话跟踪是Web程序常用的技术，用来跟踪用户的整个会话，常用的会话跟踪技术是Cookie与Session，Cookie通过在客户端记录信息确定用户身份，Session通过在服务器端记录确定用户身份
+Cookie是一小段的文本信息，客户端请求服务器，如果服务器需要记录该用户状态，使用reponse向客户端浏览器颁发一个Cookie。客户端会把Cookie保存起来，当浏览器再次请求该网站时，浏览器把请求的网址连同该Cookie一同提交给服务器。服务器检查该Cookie，以据此来辨认用户状态。服务器还可以根据需要修改Cookie的内容</description>
+    </item>
+    
+    <item>
+      <title>Http</title>
+      <link>https://antoniodc-aaa.github.io/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/http%E7%AE%80%E4%BB%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/http%E7%AE%80%E4%BB%8B/</guid>
+      <description>输入URL执行过程（一次完整的http请求过程） DHCP配置主机信息 假设主机最开始没有IP地址以及其他信息，需要先使用DHCP来获取
+ 主机生成一个DHCP请求报文，并将这个报文放具有目的端口67和68的UDP报文端中 该报文段会被放入一个具有广播IP目地址（255.255.255.255）和源地址（0.0.0.0）的IP数据报中 该数据报则被放置在MAC帧中，该帧具有目的地址FF:FF:FF:FF:FF:FF，将广播到与交换机连接的所有设备 连接在交换机的DHCP服务器收到广播帧之后，不断向上分解得到IP数据报，UDP报文端，DHCP请求报文，之后生成DHCP ACK报文，该报文包含以下信息：IP地址、DNS服务器的IP地址、默认网关路由器的IP地址和子网掩码 。该报文被放入UDP报文段中，UDP报文段有被放入IP数据报中年，最后放入MAC帧中 该帧的目的地址式请求主机的MAC地址，因为交换机具有自主学习能力，之前主机发送了广播帧之后就记录了MAC地址到转发接口的交换表项，因此现在交换机就可以直接知道应该向哪个接口发送该帧 主机收到该帧之后，不断分解得到DHCP报文。之后配置它的IP地址、子网掩码和DNS服务器的IP地址，并在其IP转发表中安装默认网关。  ARP解析MAC地址 主机通过浏览器生成一个TCP套接字，套接字向HTTP服务器发送HTTP请求，为了生成套接字，主机需要知道网站域名对应的IP地址。因为DHCP只是知道DNS服务器的IP地址，对应的需要先知道网关路由器的MAC地址。</description>
+    </item>
+    
+  </channel>
+</rss>

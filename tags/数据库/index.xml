@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据库 on Blog</title>
+    <link>https://antoniodc-aaa.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <description>Recent content in 数据库 on Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Apr 2020 08:08:30 +0800</lastBuildDate>
+    
+	<atom:link href="https://antoniodc-aaa.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>数据库锁机制</title>
+      <link>https://antoniodc-aaa.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E9%94%81/</link>
+      <pubDate>Sun, 19 Apr 2020 08:08:30 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E9%94%81/</guid>
+      <description>数据库锁机制 锁的种类 1.共享锁 ：共享锁不组织其他session同时读资源，但阻塞其他session update
+2.更新锁： 我现在只想读，你们别人也可以读，但是我将来可能做更新操作，我已经获取了从共享锁到排他锁的资格。一个事物只能有一个更新锁获得资格
+3.排他锁：（独占锁）其他事务既不能读，又不能排他锁定的资源
+4.意向锁: 就是再屋(比如代表一个表)门口设置一个表示,说明屋子里有人(比如代表某些记录)被锁住了,另一个人想知道屋里是否有人被锁,不用一个个屋子去检查,直接看门口标识就行.</description>
+    </item>
+    
+    <item>
+      <title>Mysql</title>
+      <link>https://antoniodc-aaa.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/</link>
+      <pubDate>Thu, 12 Dec 2019 10:07:12 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql/</guid>
+      <description>Mysql 当连接数据库时   管理器首先检查你的验证信息（用户名和密码），然后检查你 是否有访问数据库的授权。这些权限由DBA分配
+  然后，管理器检查是否由空闲进程（或线程）来处理你的查询
+  管理器还会检查数据库是否负载很重</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="Hugo 0.65.0-DEV" />
+
+  <title>前后端交互 &middot; Blog</title>
+
+  <meta name="description" content="" />
+
+  
+  <meta property="og:locale" content="en-us"/>
+
+  
+  <meta property="og:image" content="https://antoniodc-aaa.github.io/images/name.jpg">
+
+  
+  <meta property="og:site_name" content="Blog"/>
+  <meta property="og:title" content="前后端交互"/>
+  <meta property="og:description" content="Go语言后端与前端的页面交互 通过表单 ​	GET与POST的区别
+​	1&gt;GET请求消息体为空，POST请求带有消息体、
+​	2&gt;GET提交的数据会放在URL之后，以？分割URL和传输数据，参数之间以&amp;相连
+​	3&gt;GET提交的数据大小有限制（因为浏览器对URL的长度有限制），而POST对提交的数据没有限制"/>
+  <meta property="og:url" content="https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80%E5%90%8E%E7%AB%AF%E4%B8%8E%E5%89%8D%E7%AB%AF%E7%9A%84%E9%A1%B5%E9%9D%A2%E4%BA%A4%E4%BA%92/"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="0001-01-01T00:00:00Z"/>
+  <meta property="article:modified_time" content="0001-01-01T00:00:00Z"/>
+  <meta property="article:author" content="Antonio.D.C">
+  
+  
+  
+
+  <script type="application/ld+json">
+  {
+    "@context" : "http://schema.org",
+    "@type" : "Blog",
+    "name": "Blog",
+    "url" : "https://antoniodc-aaa.github.io/",
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "description": "You only live once !"
+  }
+  </script>
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "name": "前后端交互",
+    "headline": "前后端交互",
+    "datePublished": "0001-01-01T00:00:00Z",
+    "dateModified": "0001-01-01T00:00:00Z",
+    "author": {
+      "@type": "Person",
+      "name": "Antonio.D.C",
+      "url": "https://antoniodc-aaa.github.io/"
+    },
+    "image": "https://antoniodc-aaa.github.io/images/name.jpg",
+    "url": "https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/go%E8%AF%AD%E8%A8%80/go%E8%AF%AD%E8%A8%80%E5%90%8E%E7%AB%AF%E4%B8%8E%E5%89%8D%E7%AB%AF%E7%9A%84%E9%A1%B5%E9%9D%A2%E4%BA%A4%E4%BA%92/",
+    "description": "Go语言后端与前端的页面交互 通过表单 ​\tGET与POST的区别\n​\t1\x26gt;GET请求消息体为空，POST请求带有消息体、\n​\t2\x26gt;GET提交的数据会放在URL之后，以？分割URL和传输数据，参数之间以\x26amp;相连\n​\t3\x26gt;GET提交的数据大小有限制（因为浏览器对URL的长度有限制），而POST对提交的数据没有限制"
+  }
+  </script>
+  
+
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/print.css"
+        media="print">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/poole.css">
+
+  <link type="text/css"
+        rel="stylesheet"
+        href="https://antoniodc-aaa.github.io/css/hyde.css">
+
+  
+<style type="text/css">
+  .sidebar {
+    background-color: #fc21803;
+  }
+
+  .read-more-link a {
+    border-color: #fc21803;
+  }
+
+  footer a,
+  .content a,
+  .related-posts li a:hover {
+    color: #fc21803;
+  }
+</style>
+
+
+
+  <link type="text/css" rel="stylesheet" href="https://antoniodc-aaa.github.io/css/blog.css">
+
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+        crossorigin="anonymous" />
+
+  <link rel="apple-touch-icon-precomposed"
+        sizes="144x144"
+        href="/apple-touch-icon-144-precomposed.png">
+
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  </head>
+<body>
+  <aside class="sidebar">
+  <div class="container">
+    <div class="sidebar-about">
+      
+        
+        <div class="author-image">
+          <img src="https://antoniodc-aaa.github.io/images/name.jpg" class="img-circle img-headshot center" alt="Profile Picture">
+        </div>
+        
+      
+
+      <h1>Blog</h1>
+
+      
+      <p class="lead">You only live once !</p>
+      
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="https://antoniodc-aaa.github.io/">Home</a>
+        </li>
+        <li>
+          <a href="/post/"> Posts </a>
+        </li><li>
+          <a href="/tags/"> Tags </a>
+        </li><li>
+          <a href="/about/"> About </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="social-icons">
+      
+      <a href="https://github.com/" rel="me" title="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      
+      <a href="#" rel="me" title="Twitter">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      
+    </section>
+  </div>
+</aside>
+
+
+  <main class="content container">
+  <div class="post">
+  <h1>前后端交互</h1>
+
+  <div class="post-date">
+    <time datetime="0001-01-01T00:00:00Z">Jan 1, 0001</time> · 2 min read
+  </div>
+
+  <h1 id="go语言后端与前端的页面交互">Go语言后端与前端的页面交互</h1>
+<h2 id="通过表单">通过表单</h2>
+<p>​	GET与POST的区别</p>
+<p>​		1&gt;GET请求消息体为空，POST请求带有消息体、</p>
+<p>​		2&gt;GET提交的数据会放在URL之后，以？分割URL和传输数据，参数之间以&amp;相连</p>
+<p>​		3&gt;GET提交的数据大小有限制（因为浏览器对URL的长度有限制），而POST对提交的数据没有限制</p>
+<p>​		4&gt;GET方式提交的数据，会带来安全问题</p>
+<p>在前端的代码</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://localhost:9090/Index/&#34;</span><span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span>&gt; 
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;radio&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;workMode&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#a6e22e">checked</span>  /&gt;手动模式 
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;radio&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;workMode&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2&#34;</span>          /&gt;自动模式  
+    &lt;<span style="color:#f92672">p</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;  
+    &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span> <span style="color:#a6e22e">value</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;确认&#34;</span>/&gt;
+&lt;/<span style="color:#f92672">form</span>&gt;
+</code></pre></div><p>form action=&quot;http://localhost:9090/Index/&ldquo;method=&quot;post&rdquo;   这个地方很关键，action指定了处理函数的路径</p>
+<p>method制定了提交方式</p>
+<p>在net/http包中含有</p>
+<p>type Request结构体</p>
+<p>其中有两个关键字，其中包含了表单交互方式的关键</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">   <span style="color:#75715e">// Form是解析好的表单数据，包括URL字段的query参数和POST或PUT的表单数据。
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 本字段只有在调用ParseForm后才有效。在客户端，会忽略请求中的本字段而使用Body替代。
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Form</span> <span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">Values</span>
+<span style="color:#75715e">// Body是请求的主体。
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 在客户端，如果Body是nil表示该请求没有主体买入GET请求。
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Client的Transport字段会负责调用Body的Close方法。
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 在服务端，Body字段总是非nil的；但在没有主体时，读取Body会立刻返回EOF。
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Server会关闭请求的主体，ServeHTTP处理器不需要关闭Body字段。
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">Body</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">ReadCloser</span>
+</code></pre></div><p>如果前端是get方式提交的数据，后台通过解析URL获取数据</p>
+<p>如果是post方式提交的数据，通过ParseForm()的方式解析表单，然后在FormValue(&quot;&quot;)获取表单的数据</p>
+<h2 id="ajax技术">Ajax技术</h2>
+<p>ajax是一种从页面向服务器请求数据的技术</p>
+<p>Ajax受到同源策略的限制</p>
+<p>三种解决ajax跨域</p>
+<h3 id="jsonp方式">JSONP方式</h3>
+<p>​	Web页面上调用JS文件不受跨域的影响，在远程服务器上设法把数据装进js格式的文件里，供客户端调用和进一步处理。为了便于客户端使用数据，逐渐形成了一种非正式传输协议，称为JSONP，该协议的一个要点是允许客户传递一个callback参数给服务端，然后服务端返回数据时将这个callback参数作为函数名来包裹JSON数据，这样客户端就可以随意定制自己的函数来自动处理返回数据了</p>
+<p><a href="https://blog.csdn.net/hansexploration/article/details/80314948">https://blog.csdn.net/hansexploration/article/details/80314948</a></p>
+<p><img src="https://segmentfault.com/img/remote/1460000012469724?w=901&amp;h=701" alt="img"></p>
+<h3 id="cors方式跨域资源共享">CORS方式（跨域资源共享）</h3>
+<p>​	背后思想是：使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应能够应该成功。CORS需要浏览器和服务器同时支持。整个CORS通信过程，浏览器是自动完成的，而服务器需要手动配置</p>
+<p>（<strong>在实际的项目中我采用</strong> <strong>此方法解决</strong>）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Cdata</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">ScreenID</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;S001&#34;</span>,
+    <span style="color:#a6e22e">TimeStamp</span><span style="color:#f92672">:</span><span style="color:#ae81ff">51236542</span>,
+    <span style="color:#a6e22e">ScreenStatus</span><span style="color:#f92672">:</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>],
+    <span style="color:#a6e22e">DE</span><span style="color:#f92672">:</span><span style="color:#a6e22e">x</span>
+}
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">callAjax</span>(){
+<span style="color:#a6e22e">$</span>.<span style="color:#a6e22e">ajax</span>({
+      <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;Post&#34;</span>,									<span style="color:#75715e">//这个地方注意
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;http://localhost:9090/ajax/&#34;</span>,
+      <span style="color:#75715e">//data:{XYZ:987},
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span><span style="color:#a6e22e">Cdata</span>,					
+      <span style="color:#a6e22e">dataType</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#39;json&#39;</span>,								<span style="color:#75715e">//如果不加限制，则默认为string类型
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">async</span><span style="color:#f92672">:</span><span style="color:#66d9ef">true</span>,									<span style="color:#75715e">//async为True时代表了是异步请求，这样不会锁死浏览器，但是为False时代表了同步请求会锁住浏览器
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span><span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">msg</span>) {
+          <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">msg</span>);
+          <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;wowowowow&#34;</span>);
+      },
+      <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span><span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">XMLHttpRequest</span>, <span style="color:#a6e22e">textStatus</span>, <span style="color:#a6e22e">errorThrown</span>) {	
+          <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;接受错误&#34;</span>)
+          <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">XMLHttpRequest</span>.<span style="color:#a6e22e">status</span>);
+          <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">XMLHttpRequest</span>.<span style="color:#a6e22e">readyState</span>);
+          <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">textStatus</span>);
+      }<span style="color:#75715e">//同源问题时   statues = 0 ；readyState = 0;textStatus = error
+</span><span style="color:#75715e"></span>       <span style="color:#75715e">//解析字符串时 statues = 200；readyState= 4;textStatus = parseError
+</span><span style="color:#75715e"></span>  })
+}
+</code></pre></div><h4 id="go语言后端">Go语言后端</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">AjaxServer</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>){
+	<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Header</span>().<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;Access-Control-Allow-Origin&#34;</span>, <span style="color:#e6db74">&#34;*&#34;</span>)
+	<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Header</span>().<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;Access-Control-Allow-Headers&#34;</span>, <span style="color:#e6db74">&#34;Content-Type&#34;</span>) <span style="color:#75715e">//header的类型
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Header</span>().<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;content-type&#34;</span>, <span style="color:#e6db74">&#34;application/json&#34;</span>)             <span style="color:#75715e">//返回数据格式是json
+</span><span style="color:#75715e"></span>
+	<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">ParseForm</span>()
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;解析表单数据失败!&#34;</span>)
+	}
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%+v\n&#34;</span>,<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Form</span>)
+    
+    
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;发送数据&#34;</span>)
+	<span style="color:#a6e22e">msg</span>,<span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span><span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">S</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span><span style="color:#f92672">!=</span><span style="color:#66d9ef">nil</span>{
+		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">err</span>)
+	}
+	<span style="color:#75715e">//w.Header().Set(&#34;Content-Length&#34;, strconv.Itoa(len(msg)))
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">msg</span>)			<span style="color:#75715e">//当用这个函数时，前端无论get/post都能解析到数据，且数据类型为json
+</span><span style="color:#75715e"></span>    
+    <span style="color:#75715e">//io.WriteString(w, &#34;这是从后台发送的数据&#34;)			
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//fmt.Fprint(w,msg)		//当这两个函数时，get不成功，post成功，数据类型为string类型
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//ajax的dataType:&#39;json&#39;,不填写	
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="代理请求方式">代理请求方式</h3>
+<p>CORS是后端解决，代理请求主要是前端对接口进行代理</p>
+<p>​	前端ajax请求的本地接口</p>
+<p>​	本地接口接受到请求后向实际的接口请求数据，然后再将信息返回给前端</p>
+<p>​	 一般用node.js即可代理</p>
+<h2 id="sse">SSE</h2>
+<p><em>额外的</em>  DOM 文档对象节点</p>
+<p>SSE(Server-Sent Events 服务器发送事件)围绕只读Comet交互推出的API或者模式</p>
+<p>Comet</p>
+<p>是一种从服务器向页面推送数据的技术。Comet能够让信息近乎实时地退送到页面上</p>
+<p>有：长查询和流两周方式。</p>
+<p>长轮询是浏览器定时向服务器发送请求，看有没有更新的数据</p>
+<p>HTTP流。流不同于长轮询、短轮询，它在页面的整个生命周期内只使用一个HTTP连接。浏览器向服务器发送一个请求，而服务器保持连接打开，然后周期性地向浏览器发送数据。</p>
+<h2 id="web-sockets">Web Sockets</h2>
+<p>Web Sockets的目标是在一个单独的持久连接上提供全双工，双向通信。</p>
+<p>URL模式：ws://     			加密：wss://</p>
+<p>使用自定义协议非HTTP协议的好处是，能够在客户端和服务器端之间发送少量的数据，不用担心像HTTP那样字节级的开销</p>
+<p>传递的数据包非常小，适合移动应用</p>
+<p>面对具体的用例，考虑是使用SSE还是Web Sockets时，可以考虑</p>
+<p>1.是否自由度建立和维护Web sockets服务器，因为Web sockets不同与HTTP，所以现有的服务器调用Web socket通信。SSE是通过常规HTTP通信，因此现有服务器就可以满足需求</p>
+<p>2.需不需要双向通信，。如果用例只要读取服务器数据，那么SSE比较容易实现，如果用例双向通信，那么WebSockets显然更好。在Web Sockets不支持的情况下，组合XHR和SSE也是能够实现双向通信的</p>
+<p>前端</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">WebSocketTest</span>()
+{
+    <span style="color:#66d9ef">if</span> (<span style="color:#e6db74">&#34;WebSocket&#34;</span> <span style="color:#66d9ef">in</span> window)
+    {
+        <span style="color:#75715e">//alert(&#34;您的浏览器支持 WebSocket!&#34;);
+</span><span style="color:#75715e"></span>
+        <span style="color:#75715e">// 打开一个 web socket
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ws</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">WebSocket</span>(<span style="color:#e6db74">&#34;ws://localhost:9090/WebSocket&#34;</span>);
+
+        <span style="color:#a6e22e">ws</span>.<span style="color:#a6e22e">onopen</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>()
+        {
+            <span style="color:#75715e">// Web Socket 已连接上，使用 send() 方法发送数据
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">ws</span>.<span style="color:#a6e22e">send</span>(<span style="color:#e6db74">&#34;发送数据&#34;</span>);
+            <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;数据发送中...&#34;</span>);
+        };
+
+        <span style="color:#a6e22e">ws</span>.<span style="color:#a6e22e">onmessage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">evt</span>)
+        {
+            <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">received_msg</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">evt</span>.<span style="color:#a6e22e">data</span>;
+            <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">received_msg</span>)
+            <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;数据已接收...&#34;</span>);
+        };
+
+        <span style="color:#a6e22e">ws</span>.<span style="color:#a6e22e">onclose</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>()
+        {
+            <span style="color:#75715e">// 关闭 websocket
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;连接已关闭...&#34;</span>);
+        };
+    }
+
+    <span style="color:#66d9ef">else</span>
+    {
+        <span style="color:#75715e">// 浏览器不支持 WebSocket
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;您的浏览器不支持 WebSocket!&#34;</span>);
+    }
+}
+
+
+</code></pre></div><p>后端</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">WebSocket</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>){
+	<span style="color:#a6e22e">c</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">upgrader</span>.<span style="color:#a6e22e">Upgrade</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>, <span style="color:#66d9ef">nil</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Print</span>(<span style="color:#e6db74">&#34;upgrade:&#34;</span>, <span style="color:#a6e22e">err</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">Close</span>()
+	<span style="color:#66d9ef">for</span> {
+		<span style="color:#a6e22e">mt</span>, <span style="color:#a6e22e">message</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">ReadMessage</span>()
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;read:&#34;</span>, <span style="color:#a6e22e">err</span>)
+			<span style="color:#66d9ef">break</span>
+		}
+
+		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;recv: %s&#34;</span>, <span style="color:#a6e22e">message</span>)
+		<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">WriteMessage</span>(<span style="color:#a6e22e">mt</span>, <span style="color:#a6e22e">message</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#e6db74">&#34;write:&#34;</span>, <span style="color:#a6e22e">err</span>)
+			<span style="color:#66d9ef">break</span>
+		}
+	}
+}
+</code></pre></div>
+</div>
+
+
+  </main>
+
+  <footer>
+  <div class="copyright">
+    &copy; Antonio.D.C 2020 · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>
+  </div>
+</footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"
+          integrity="sha256-MAgcygDRahs+F/Nk5Vz387whB4kSK9NXlDN3w58LLq0="
+          crossorigin="anonymous"></script>
+
+  <script src="https://antoniodc-aaa.github.io/js/blog.js"></script>
+
+  
+</body>
+</html>

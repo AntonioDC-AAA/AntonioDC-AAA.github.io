@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>算法 on Blog</title>
+    <link>https://antoniodc-aaa.github.io/tags/%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 算法 on Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Mar 2020 12:58:03 +0800</lastBuildDate>
+    
+	<atom:link href="https://antoniodc-aaa.github.io/tags/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DP与贪心</title>
+      <link>https://antoniodc-aaa.github.io/post/%E7%AE%97%E6%B3%95/%E9%9A%8F%E7%AC%94/</link>
+      <pubDate>Mon, 23 Mar 2020 12:58:03 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E7%AE%97%E6%B3%95/%E9%9A%8F%E7%AC%94/</guid>
+      <description>DP与贪心 question 1
+哈夫曼编码
+堆实现
+question 2
+做项目，获得利润
+question 3</description>
+    </item>
+    
+    <item>
+      <title>哈希表与B&#43;树</title>
+      <link>https://antoniodc-aaa.github.io/post/%E7%AE%97%E6%B3%95/c&#43;&#43;%E5%BA%95%E5%B1%82/</link>
+      <pubDate>Mon, 23 Mar 2020 12:58:03 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E7%AE%97%E6%B3%95/c&#43;&#43;%E5%BA%95%E5%B1%82/</guid>
+      <description>1.算法 哈希表 构造方法
+ 直接定值法 除留余数法 数字分析法 折叠法 平方取中法  冲突处理方法</description>
+    </item>
+    
+    <item>
+      <title>大数据</title>
+      <link>https://antoniodc-aaa.github.io/post/%E7%AE%97%E6%B3%95/%E5%A4%A7%E6%95%B0%E6%8D%AE/</link>
+      <pubDate>Mon, 23 Mar 2020 12:58:03 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E7%AE%97%E6%B3%95/%E5%A4%A7%E6%95%B0%E6%8D%AE/</guid>
+      <description>大数据 Map-Reduce 和Hadoop逐渐成为面试热门
+哈希函数的性质
+1.典型的哈希函数都有无限的输入值域
+2.输入值相同时，返回值一样
+3.输入值不同时，返回值可能一样，也可能不一样
+4.不同输入值的哈希值，整体均匀的分布在输入域s上（重要）
+1-3性质是哈希函数的基础，第四点是评价一个哈希函数优劣的关键
+MD5和SH1的算法都是经典的哈希算法</description>
+    </item>
+    
+    <item>
+      <title>左神的视频</title>
+      <link>https://antoniodc-aaa.github.io/post/%E7%AE%97%E6%B3%95/%E5%B7%A6%E7%A5%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+      <pubDate>Mon, 23 Mar 2020 12:58:03 +0800</pubDate>
+      
+      <guid>https://antoniodc-aaa.github.io/post/%E7%AE%97%E6%B3%95/%E5%B7%A6%E7%A5%9E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+      <description>最小栈问题 准备 两个栈
+一个放data元素
+一个放data值的当前最小值
+如何仅用队列结构实现栈结构 准备两个队列
+其余元素放在data 队列中，剩下的哪一个元素放在head队列中
+如何仅用栈结构实现队列结构 准备两个栈</description>
+    </item>
+    
+  </channel>
+</rss>

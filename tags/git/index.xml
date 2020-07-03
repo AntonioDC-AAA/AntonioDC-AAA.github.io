@@ -13,10 +13,10 @@
     
     <item>
       <title>Git instructions</title>
-      <link>https://antoniodc-aaa.github.io/post/git/</link>
+      <link>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/git/</link>
       <pubDate>Tue, 18 Feb 2020 18:02:14 +0800</pubDate>
       
-      <guid>https://antoniodc-aaa.github.io/post/git/</guid>
+      <guid>https://antoniodc-aaa.github.io/post/%E5%85%B6%E4%BB%96/git/</guid>
       <description>Git 集中式版本控制系统与分布式版本控制系统 集中式版本控制系统
 ​	有一个包含文件所有修订版本的单一服务器，多个客户端可以从这个中心位置检索出文件
 优点：所有人都可以在一定程度上掌握其他人在项目中做了什么，管理员可以精细的掌控每个人的权限，
